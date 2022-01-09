@@ -95,7 +95,7 @@ export const GET_USER = gql`
                 currentFunding
                 cryptoAddress {
                   address
-                  chainIds
+                  chainId
                 }
               }
             }
@@ -145,7 +145,7 @@ export const ADD_USER_WITH_WALLET = gql`
             name: $walletName
             address: $walletAddress
             protocol: $protocol
-            chainIds: $chainId
+            chainId: $chainId
             type: WALLET
           }
           organizations: { organization: { fullLegalName: $fullName, type: "Individual" } }
@@ -161,7 +161,7 @@ export const ADD_USER_WITH_WALLET = gql`
           name
           address
           protocol
-          chainIds
+          chainId
           type
         }
       }
@@ -265,11 +265,20 @@ export const UPDATE_USER_SOCIAL_ACCOUNTS = gql`
 `;
 
 export const UPDATE_USER_WALLETS = gql`
-  mutation UpdateUserWallets($userId: [ID!], $name: String, $walletAddress: String!) {
+  mutation UpdateUserWallets(
+    $userId: [ID!]
+    $name: String
+    $walletAddress: String!
+    $protocol: CryptoAddressProtocol!
+    $type: CryptoAddressType!
+    $chainId: Int
+  ) {
     updateUser(
       input: {
         filter: { id: $userId }
-        set: { walletAddresses: { name: $name, address: $walletAddress, protocol: ETH, type: WALLET } }
+        set: {
+          walletAddresses: { name: $name, address: $walletAddress, protocol: $protocol, type: $type, chainId: $chainId }
+        }
       }
     ) {
       user {

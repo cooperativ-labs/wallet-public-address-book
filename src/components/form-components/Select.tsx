@@ -9,6 +9,7 @@ export interface SelectProps {
   children: ReactNodeLike;
   required?: boolean;
   multiple?: boolean;
+  disabled?: boolean;
 }
 export interface CustomSelectProps extends SelectProps {
   labelText?: string;
@@ -25,6 +26,7 @@ const Select: React.FC<CustomSelectProps> = ({
   multiple,
   className,
   fieldClass,
+  disabled,
   fieldLabelClass,
   children,
 }) => {
@@ -42,6 +44,7 @@ const Select: React.FC<CustomSelectProps> = ({
       <Field
         as="select"
         id={id}
+        disabled={disabled}
         name={name}
         multiple={multiple}
         required={required}

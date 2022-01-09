@@ -18,13 +18,13 @@ export const SupportedChainIds = [
     faucet: 'https://faucet.dimensions.network/',
     protocol: CryptoAddressProtocol.Eth,
   },
-  { id: 137, name: 'Polygon', blockExplorer: 'https://polygonscan.com', protocol: CryptoAddressProtocol.Matic },
+  { id: 137, name: 'Polygon', blockExplorer: 'https://polygonscan.com', protocol: CryptoAddressProtocol.Eth },
   {
     id: 80001,
     name: 'Polygon Mumbai',
     blockExplorer: 'https://mumbai.polygonscan.com/',
     faucet: 'https://faucet.matic.network/',
-    protocol: CryptoAddressProtocol.Matic,
+    protocol: CryptoAddressProtocol.Eth,
   },
 ];
 

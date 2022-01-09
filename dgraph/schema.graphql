@@ -96,7 +96,6 @@ enum CryptoAddressProtocol {
 	ETH
 	BTC
 	ADA
-	MATIC
 }
 
 enum CryptoAddressType {
@@ -108,8 +107,9 @@ type CryptoAddress  {
 	id: ID!
 	name: String 
 	address: String! @id
+	description: String
 	protocol: CryptoAddressProtocol 
-	chainIds: [Int]
+	chainId: Int
 	type: CryptoAddressType 
 	user: User @hasInverse(field:walletAddresses) 
 	project: Project @hasInverse(field:walletAddresses) 

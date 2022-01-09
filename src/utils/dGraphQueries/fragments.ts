@@ -17,7 +17,7 @@ export const CORE_PAYMENT_FIELDS = gql`
           id
           address
           protocol
-          chainIds
+          chainId
         }
       }
     }
@@ -39,7 +39,7 @@ export const CORE_AGREEMENT_FIELDS = gql`
         id
         address
         protocol
-        chainIds
+        chainId
       }
       backingCurrency
       description

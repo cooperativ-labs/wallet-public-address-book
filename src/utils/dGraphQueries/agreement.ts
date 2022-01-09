@@ -38,7 +38,7 @@ export const ADD_CC_AGREEMENT = gql`
             cryptoAddress: {
               address: $availableContractAddress
               protocol: $protocol
-              chainIds: $chainId
+              chainId: $chainId
               type: CONTRACT
             }
           }

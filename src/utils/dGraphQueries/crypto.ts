@@ -42,7 +42,7 @@ export const GET_CONTRIBUTOR_CREDITS = gql`
         protocol
         type
         name
-        chainIds
+        chainId
         address
       }
       backingCurrency
@@ -84,7 +84,7 @@ export const GET_AVAILABLE_CONTRACT = gql`
       cryptoAddress {
         address
         protocol
-        chainIds
+        chainId
       }
       type
       project {
@@ -122,7 +122,7 @@ export const CREATE_UNESTABLISHED_SMART_CONTRACT = gql`
     addSmartContractUnestablished(
       input: [
         {
-          cryptoAddress: { address: $cryptoAddress, type: CONTRACT, chainIds: $chainId, protocol: $protocol }
+          cryptoAddress: { address: $cryptoAddress, type: CONTRACT, chainId: $chainId, protocol: $protocol }
           project: { id: $projectId }
           owner: { id: $owner }
           type: $type
@@ -140,7 +140,7 @@ export const CREATE_UNESTABLISHED_SMART_CONTRACT = gql`
         }
         cryptoAddress {
           address
-          chainIds
+          chainId
         }
       }
     }
