@@ -95,7 +95,7 @@ export const GET_USER = gql`
                 currentFunding
                 cryptoAddress {
                   address
-                  chainId
+                  chainIds
                 }
               }
             }
@@ -145,7 +145,7 @@ export const ADD_USER_WITH_WALLET = gql`
             name: $walletName
             address: $walletAddress
             protocol: $protocol
-            chainId: $chainId
+            chainIds: $chainId
             type: WALLET
           }
           organizations: { organization: { fullLegalName: $fullName, type: "Individual" } }
@@ -161,7 +161,7 @@ export const ADD_USER_WITH_WALLET = gql`
           name
           address
           protocol
-          chainId
+          chainIds
           type
         }
       }

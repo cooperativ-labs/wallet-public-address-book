@@ -109,7 +109,7 @@ type CryptoAddress  {
 	name: String 
 	address: String! @id
 	protocol: CryptoAddressProtocol 
-	chainId: Int 
+	chainIds: [Int]
 	type: CryptoAddressType 
 	user: User @hasInverse(field:walletAddresses) 
 	project: Project @hasInverse(field:walletAddresses) 

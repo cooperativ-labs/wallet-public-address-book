@@ -74,7 +74,7 @@ export const GET_PROJECT = gql`
         cryptoAddress {
           address
           protocol
-          chainId
+          chainIds
         }
       }
     }

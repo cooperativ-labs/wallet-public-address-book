@@ -116,7 +116,7 @@ export const currencyOptions = [
   { type: currencyType.CRYP, value: 'BTC', symbol: 'BTC', protocol: CryptoAddressProtocol.Btc, chainId: 1 },
   { type: currencyType.CRYP, value: 'ETH', symbol: 'ETH', protocol: CryptoAddressProtocol.Eth, chainId: 1 },
   { type: currencyType.CRYP, value: 'ADA', symbol: 'ADA', protocol: CryptoAddressProtocol.Ada, chainId: 1 },
-  { type: currencyType.CRYP, value: 'MATIC', symbol: 'MATIC', protocol: CryptoAddressProtocol.Matic, chainId: 1 },
+  { type: currencyType.CRYP, value: 'MATIC', symbol: 'MATIC', protocol: CryptoAddressProtocol.Eth, chainId: 137 },
   {
     type: currencyType.CRYP,
     value: 'USDC',
@@ -141,7 +141,7 @@ export const currencyOptions = [
     symbol: 'Matic USDC',
     address: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
     website: 'https://www.centre.io/',
-    protocol: CryptoAddressProtocol.Matic,
+    protocol: CryptoAddressProtocol.Eth,
     chainId: 137,
   },
   {
@@ -150,7 +150,7 @@ export const currencyOptions = [
     symbol: 'Matic DAI',
     address: '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
     website: 'https://makerdao.com/',
-    protocol: CryptoAddressProtocol.Matic,
+    protocol: CryptoAddressProtocol.Eth,
     chainId: 137,
   },
   {
@@ -177,7 +177,7 @@ export const currencyOptions = [
     symbol: 'Matic USDC*',
     address: 'NEED ADDRESS',
     website: 'https://www.centre.io/',
-    protocol: CryptoAddressProtocol.Matic,
+    protocol: CryptoAddressProtocol.Eth,
     chainId: 80001,
   },
   {
@@ -186,15 +186,11 @@ export const currencyOptions = [
     symbol: 'Matic DAI*',
     address: 'NEED ADDRESS',
     website: 'https://makerdao.com/',
-    protocol: CryptoAddressProtocol.Matic,
+    protocol: CryptoAddressProtocol.Eth,
     chainId: 80001,
   },
 ];
-export const bacOptions = currencyOptions.filter(
-  (option) =>
-    option.type === currencyType.CRYP &&
-    (option.protocol === CryptoAddressProtocol.Eth || option.protocol === CryptoAddressProtocol.Matic)
-);
+
 export const currencyOptionsExcludeCredits = currencyOptions.filter(
   (option) => option.type !== currencyType.COOP && option.chainId !== 3
 );
