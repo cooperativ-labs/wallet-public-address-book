@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { ADD_USER_WITH_WALLET } from '@src/utils/dGraphQueries/user';
 import { currentDate } from '@src/utils/dGraphQueries/gqlUtils';
 import { Form, Formik } from 'formik';
@@ -11,10 +11,11 @@ import FormattedCryptoAddress from '../FormattedCryptoAddress';
 import ChooseConnectorButton from '@src/containers/ChooseConnectorButton';
 import Input from '../form-components/Inputs';
 import MajorActionButton from '../buttons/MajorActionButton';
+import { MatchSupportedChains } from '@src/web3/connectors';
 
 const fieldDiv = 'pt-3 my-2 bg-opacity-0';
 
-const CreateAccount = () => {
+const CreateAccount: FC = () => {
   const { account: walletAddress, chainId } = useWeb3React<Web3Provider>();
   const router = useRouter();
   // const conditionalMutation = walletAddress ? ADD_USER_WITH_WALLET : ADD_USER_WITHOUT_WALLET;
@@ -33,6 +34,8 @@ const CreateAccount = () => {
     <Formik
       initialValues={{
         email: '',
+        fullName: '',
+        walletName: '',
       }}
       validate={(values) => {
         const errors: any = {}; /** @TODO : Shape */
@@ -44,6 +47,12 @@ const CreateAccount = () => {
         } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
           errors.email = 'Invalid email address';
         }
+        if (!values.fullName) {
+          errors.fullName = 'Please include a first name';
+        }
+        if (!values.walletName) {
+          errors.walletName = 'Please give this wallet a name';
+        }
         return errors;
       }}
       onSubmit={async (values, { setSubmitting }) => {
@@ -54,8 +63,11 @@ const CreateAccount = () => {
             variables: {
               currentDate: currentDate,
               email: values.email,
+              fullName: values.fullName,
               walletAddress: walletAddress,
+              walletName: values.walletName,
               chainId: chainId,
+              protocol: MatchSupportedChains(chainId).protocol,
             },
           });
 
@@ -67,25 +79,53 @@ const CreateAccount = () => {
     >
       {({ isSubmitting }) => (
         <Form className="flex flex-col gap relative">
-          <div className="mt-5">
+          <div className="mt-5 md:p-10 md:rounded-lg md:bg-white md:shadow-xl">
             {walletAddress ? (
               <div>
                 <div className="text-sm">Linked wallet address:</div>
-                <div className="hidden md:flex md:text-lg font-bold text-gray-600">{walletAddress} </div>
+                <div className="hidden md:flex font-bold text-gray-600">{walletAddress} </div>
                 <div className="md:hidden">
                   <FormattedCryptoAddress chainId={chainId} address={walletAddress} className="text-large font-bold" />
                 </div>
+                <Input
+                  className={fieldDiv}
+                  required
+                  labelText="Wallet name"
+                  name="walletName"
+                  type="text"
+                  placeholder="e.g. Primary Wallet"
+                />
               </div>
             ) : (
               <ChooseConnectorButton buttonText="Connect your Ethereum wallet" large />
             )}
           </div>
-
-          <Input className={fieldDiv} required labelText="Email" name="email" type="email" placeholder="" />
-
-          <MajorActionButton type="submit" disabled={isSubmitting || !walletAddress}>
-            {!walletAddress ? <> To create an account, you must connect a wallet </> : <>Create account</>}
-          </MajorActionButton>
+          {walletAddress && (
+            <div className="mt-10 md:p-10 md:rounded-lg md:bg-white md:shadow-xl">
+              <div className="font-semibold text-gray-700">
+                If you are logging in for the first time, we will also need:
+              </div>
+              <Input
+                className={fieldDiv}
+                required
+                labelText="Email"
+                name="email"
+                type="email"
+                placeholder="e.g. moe@bonuslife.com"
+              />
+              <Input
+                className={fieldDiv}
+                required
+                labelText="Full name"
+                name="fullName"
+                type="text"
+                placeholder="e.g. Moritz Zimmermann"
+              />
+              <MajorActionButton type="submit" disabled={isSubmitting || !walletAddress}>
+                {!walletAddress ? <> To create an account, you must connect a wallet </> : <>Create account</>}
+              </MajorActionButton>
+            </div>
+          )}
         </Form>
       )}
     </Formik>

@@ -130,9 +130,10 @@ export const ADD_USER_WITH_WALLET = gql`
     $currentDate: DateTime!
     $email: String!
     $fullName: String!
-    $displayName: String!
     $walletAddress: String!
+    $walletName: String!
     $chainId: Int!
+    $protocol: CryptoAddressProtocol
   ) {
     addUser(
       input: [
@@ -140,11 +141,10 @@ export const ADD_USER_WITH_WALLET = gql`
           creationDate: $currentDate
           email: $email
           fullName: $fullName
-          displayName: $displayName
           walletAddresses: {
-            name: "Primary wallet"
+            name: $walletName
             address: $walletAddress
-            protocol: ETH
+            protocol: $protocol
             chainId: $chainId
             type: WALLET
           }
@@ -164,29 +164,6 @@ export const ADD_USER_WITH_WALLET = gql`
           chainId
           type
         }
-      }
-    }
-  }
-`;
-
-export const ADD_USER_WITHOUT_WALLET = gql`
-  mutation AddUser($currentDate: DateTime!, $email: String!, $fullName: String!, $displayName: String!) {
-    addUser(
-      input: [
-        {
-          creationDate: $currentDate
-          email: $email
-          fullName: $fullName
-          displayName: $displayName
-          organizations: { organization: { fullLegalName: $fullName, type: "Individual" } }
-        }
-      ]
-    ) {
-      user {
-        id
-        fullName
-        email
-        profileImage
       }
     }
   }

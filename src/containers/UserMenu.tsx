@@ -33,7 +33,7 @@ const UserMenu: FC<UserMenuProps> = ({}) => {
           onClick={() => setOpen(!open)}
         >
           <div className="overflow-hidden items-center rounded-full h-10 w-10 md:h-12 md:w-12">
-            <img src={user?.profileImage ?? '/assets/images/UserImages/placeholder.png'} />
+            <img src={user?.profileImage ?? '/assets/images/user-images/placeholder.png'} />
           </div>
           <div className="flex justify-end -mt-3 -mr-1">
             <NetworkIndicatorDot chainId={chainId} walletAddress={walletAddress} />

@@ -36,11 +36,7 @@ export const NavBar: FC<NavBarProps> = () => {
 
         <Link href="/app">
           <img
-            src={
-              windowSize.width < 768
-                ? '/assets/images/branding/stamp_dark_blue.svg'
-                : '/assets/images/branding/stamp_dark_blue.svg'
-            }
+            src={windowSize.width < 768 ? '/site-icon.png' : '/site-icon.png'}
             alt="logo"
             width={windowSize.width < 768 ? '30' : '50'}
           />
