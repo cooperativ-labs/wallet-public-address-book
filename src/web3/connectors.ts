@@ -1,7 +1,7 @@
 import { InjectedConnector } from '@web3-react/injected-connector';
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector';
 import { WalletLinkConnector } from '@web3-react/walletlink-connector';
-import { CryptoAddressProtocol } from 'types';
+import { CryptoAddressProtocol } from '/types/';
 
 export const liveChain = (chainId) => {
   if (chainId === 1 || chainId === 137) {

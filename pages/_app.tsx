@@ -1,10 +1,10 @@
-import "../styles/tailwind.css";
-import "@styles/main.css";
-import "tailwindcss/tailwind.css";
-import AnalyticsContext from "@context/analytics";
-import React, { ReactElement } from "react";
+import '../styles/tailwind.css';
+import '@styles/main.css';
+import 'tailwindcss/tailwind.css';
+import AnalyticsContext from '@context/analytics';
+import React, { ReactElement } from 'react';
 
-import { ApolloProvider } from "@apollo/client";
+import { ApolloProvider } from '@apollo/client';
 import {
   faArrowRight,
   faBrain,
@@ -32,21 +32,14 @@ import {
   faStar,
   faTimes,
   faUser,
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  fab,
-  faGithub,
-  faLinkedin,
-  faPython,
-  faReact,
-  faSlackHash,
-} from "@fortawesome/free-brands-svg-icons";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { StateProvider } from "@context/store";
-import { useAnalytics } from "hooks/analytics";
-import { useApollo } from "@src/utils/apolloClient";
-import { Web3Provider } from "@ethersproject/providers";
-import { Web3ReactProvider } from "@web3-react/core";
+} from '@fortawesome/free-solid-svg-icons';
+import { fab, faGithub, faLinkedin, faPython, faReact, faSlackHash } from '@fortawesome/free-brands-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { StateProvider } from '@context/store';
+import { useAnalytics } from 'hooks/analytics';
+import { useApollo } from '@src/utils/apolloClient';
+import { Web3Provider } from '@ethersproject/providers';
+import { Web3ReactProvider } from '@web3-react/core';
 
 library.add(fas, faCog);
 library.add(fas, faCommentDots);

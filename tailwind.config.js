@@ -3,8 +3,7 @@ module.exports = {
     // removeDeprecatedGapUtilities: true,
     // purgeLayersByDefault: true,
   },
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './src/**/*.{js,ts,jsx,tsx}'],
-  darkMode: 'media',
+  content: ['./pages/**/*.{js,ts,jsx,tsx}', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       typography: {
@@ -53,6 +52,6 @@ module.exports = {
       shareButton: '0 7px 10px 5px rgba(0, 0, 0, 0.1), 0 3px 5px 3px rgba(0, 0, 0, 0.07)',
     },
   },
-  variants: {},
+
   plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
 };
