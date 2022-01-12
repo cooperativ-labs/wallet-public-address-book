@@ -59,6 +59,8 @@ export const GET_USER = gql`
       walletAddresses {
         name
         address
+        type
+        chainId
       }
       organizations {
         organization {
@@ -286,6 +288,9 @@ export const UPDATE_USER_WALLETS = gql`
         displayName
         walletAddresses {
           name
+          type
+          address
+          chainId
         }
       }
     }

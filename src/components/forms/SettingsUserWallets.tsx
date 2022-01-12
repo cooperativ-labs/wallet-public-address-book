@@ -4,13 +4,11 @@ import { Form, Formik } from 'formik';
 import { UPDATE_USER_WALLETS } from '@src/utils/dGraphQueries/user';
 import { useMutation } from '@apollo/client';
 import Input from '../form-components/Inputs';
-import WalletAddressListItem from '../WalletAddressListItem';
 import Select from '../form-components/Select';
 import Checkbox from '../form-components/Checkbox';
-import { CryptoAddressProtocol } from 'types/';
 import { Web3Provider } from '@ethersproject/providers';
 import { useWeb3React } from '@web3-react/core';
-import { CryptoAddressType } from 'types/';
+import { CryptoAddressType, CryptoAddressProtocol } from '/types';
 
 const fieldDiv = 'pt-3 my-2 bg-opacity-0';
 
@@ -32,11 +30,12 @@ const SettingsUserWallets = ({ user }) => {
       initialValues={{
         name: '',
         address: '',
-        chainId: chainId,
+        chainId: `${chainId}`,
         isContractAddress: false,
       }}
       validate={async (values) => {
         const errors: any = {}; /** @TODO : Shape */
+        console.log(values);
         if (!values.name && values.address) {
           errors.name = 'Please include a name';
         }
@@ -51,6 +50,7 @@ const SettingsUserWallets = ({ user }) => {
       }}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(true);
+
         updateUserWallets({
           variables: {
             userId: user.id,
@@ -58,7 +58,7 @@ const SettingsUserWallets = ({ user }) => {
             walletAddress: values.address,
             protocol: CryptoAddressProtocol.Eth,
             type: values.isContractAddress ? CryptoAddressType.Contract : CryptoAddressType.Wallet,
-            chainId: values.chainId,
+            chainId: parseInt(values.chainId),
           },
         });
 
@@ -67,14 +67,6 @@ const SettingsUserWallets = ({ user }) => {
     >
       {({ values, isSubmitting }) => (
         <Form className="flex flex-col">
-          <h2 className="text-xl text-blue-900 font-semibold mb-4">Wallet Addresses</h2>
-          {user.walletAddresses.map((wallet) => {
-            return (
-              <div className="mb-3">
-                <WalletAddressListItem name={wallet.name} address={wallet.address} />
-              </div>
-            );
-          })}
           <div className="grid md:grid-cols-4 gap-4">
             <Input
               className={`${fieldDiv} w-full md:col-span-1`}
@@ -106,15 +98,15 @@ const SettingsUserWallets = ({ user }) => {
                 labelText="This address is only active on:"
               >
                 <option value="">Select chain</option>
-                <option value={1}>Ethereum Mainnet</option>
-                <option value={43114}>Avalanche Mainnet</option>
-                <option value={56}>Binance Smart Chain</option>
-                <option value={10}>Optimism</option>
-                <option value={100}>xDAI</option>
-                <option value={137}>Polygon</option>
-                <option value={3}>Ropsten Testnet</option>
-                <option value={4}>Rinkeby Testnet</option>
-                <option value={5}>Görli Testnet</option>
+                <option value="1">Ethereum Mainnet</option>
+                <option value="43114">Avalanche Mainnet</option>
+                <option value="56">Binance Smart Chain</option>
+                <option value="10">Optimism</option>
+                <option value="100">xDAI</option>
+                <option value="137">Polygon</option>
+                <option value="3">Ropsten Testnet</option>
+                <option value="4">Rinkeby Testnet</option>
+                <option value="5">Görli Testnet</option>
               </Select>
             )}
           </div>

@@ -8,6 +8,7 @@ import FormCard from '@src/components/cards/FormCard';
 import SettingsUserPersonalInfo from '@src/components/forms/SettingsUserPersonalInfo';
 import SettingsUserWallets from '@src/components/forms/SettingsUserWallets';
 import SettingsUserSocial from '@src/components/forms/SettingsUserSocial';
+import WalletAddressList from '@src/components/WalletAddressList';
 
 const UserSettings: FC = () => {
   const { userId } = useContext(UserContext);
@@ -22,6 +23,7 @@ const UserSettings: FC = () => {
     <div data-test="component-landing" className="flex flex-col w-full h-full">
       <div>
         <FormCard center>
+          <WalletAddressList walletAddresses={user.walletAddresses} />
           <SettingsUserWallets user={user} />
         </FormCard>
         <FormCard center>

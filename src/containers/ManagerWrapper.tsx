@@ -33,7 +33,7 @@ const Manager: FC<ManagerProps> = ({ children }) => {
         <div className="flex-grow h-full z-10">
           <div className="h-full px-4 md:px-8 py-2 md:my-12">
             <div className={'mx-auto min-h-full'} style={{ maxWidth: '1580px' }}>
-              <EnsureCompatibleNetwork>{children}</EnsureCompatibleNetwork>
+              {children}
             </div>
             <div className={'mx-auto min-h-full p-10'} style={{ maxWidth: '1580px' }}>
               We would love to hear your questions and suggestions. Please email us at{' '}

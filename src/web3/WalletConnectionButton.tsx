@@ -31,7 +31,7 @@ export const WalletConnectButton: FC<WalletConnectButtonProps> = ({ children, cl
 
   function TestAndActivateWallet() {
     if (walletExists) {
-      if (MatchSupportedChains(chainId)) {
+      if (MatchSupportedChains(chainId).contractsSupported) {
         activate(selectedConnector).catch((err) => {
           alert(WalletErrorCodes(err));
         });
