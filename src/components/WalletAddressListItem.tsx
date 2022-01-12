@@ -1,13 +1,13 @@
-import { CryptoAddressType } from '/types';
+import { CryptoAddress, CryptoAddressType } from '/types';
 import React, { FC } from 'react';
 import { MatchSupportedChains } from '@src/web3/connectors';
 
 interface WalletAddressListItemProps {
-  wallet: CryptoAddressType;
+  wallet: CryptoAddress;
 }
 
 const WalletAddressListItem: FC<WalletAddressListItemProps> = ({ wallet }) => {
-  const { name, type, chainId, address } = wallet;
+  const { name, type, chainId, address, description } = wallet;
 
   const getChainLogo = (chainId) => {
     return (
@@ -31,6 +31,7 @@ const WalletAddressListItem: FC<WalletAddressListItemProps> = ({ wallet }) => {
       <div className="w-72 md:w-auto">
         <div className="truncate md:ext-lg font-bold text-gray-600">{address} </div>
       </div>
+      {description && <div className="mt-1 text-sm text-gray-700">{description}</div>}
     </div>
   );
 };
