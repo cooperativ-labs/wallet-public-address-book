@@ -1,5 +1,4 @@
 import Button from '@src/components/Buttons/Button';
-import Link from 'next/link';
 import React, { FC, useContext } from 'react';
 import UserMenu from './UserMenu';
 import useWindowSize from '@hooks/useWindowSize';
@@ -19,7 +18,7 @@ export const NavBar: FC<NavBarProps> = () => {
   const windowSize = useWindowSize();
   return (
     <div
-      className="py-2 px-2 pr-4 pt-1 md:pt-14 h-14 z-30 flex mx-auto justify-between self-center items-center "
+      className="py-2 px-2 pr-4 mt-1 md:mt-4 z-30 flex mx-auto justify-between self-center items-center "
       style={{ maxWidth: '1580px' }}
     >
       <div className="ml-1 justify-start flex items-center">
@@ -33,14 +32,6 @@ export const NavBar: FC<NavBarProps> = () => {
           </Button>
           <div className="m-2" />
         </div>
-
-        <Link href="/app">
-          <img
-            src={windowSize.width < 768 ? '/site-icon.png' : '/site-icon.png'}
-            alt="logo"
-            width={windowSize.width < 768 ? '30' : '50'}
-          />
-        </Link>
       </div>
       <div className="flex justify-end">
         <span className="hidden md:flex items-center mr-3">

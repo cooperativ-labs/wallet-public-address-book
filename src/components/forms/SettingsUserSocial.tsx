@@ -61,83 +61,17 @@ const SettingsUserSocial = ({ user }) => {
       {({ isSubmitting }) => (
         <Form className="flex flex-col relative">
           <h2 className="text-xl text-blue-900 font-semibold">Social Accounts</h2>
-          <Input
-            className={fieldDiv}
-            type="url"
-            labelText="LinkedIn"
-            name="linkedin"
-            placeholder="https://linkedin.com/in/username"
-          />
-          <Input
-            className={fieldDiv}
-            type="url"
-            labelText="Github"
-            name="github"
-            placeholder="https://github.com/username"
-          />
-          <Input
-            className={fieldDiv}
-            type="url"
-            labelText="Dribbble"
-            name="dribbble"
-            placeholder="https://dribbble.com/username"
-          />
-          <Input
-            className={fieldDiv}
-            type="url"
-            labelText="Discord"
-            name="discord"
-            placeholder="https://discordapp.com/users/username"
-          />
-          <Input
-            className={fieldDiv}
-            type="url"
-            labelText="Youtube"
-            name="youtube"
-            placeholder="https://youtube.com/channel/2jdkHFKS2838Fwdd923"
-          />
-          <Input
-            className={fieldDiv}
-            type="url"
-            labelText="Soundcloud"
-            name="soundcloud"
-            placeholder="https://soundcloud.com/username"
-          />
-          <Input
-            className={fieldDiv}
-            type="url"
-            labelText="Twitter"
-            name="twitter"
-            placeholder="https://twitter.com/username"
-          />
-          <Input
-            className={fieldDiv}
-            type="url"
-            labelText="Facebook"
-            name="facebook"
-            placeholder="https://facebook.com/username"
-          />
-          <Input
-            className={fieldDiv}
-            type="url"
-            labelText="Instagram"
-            name="instagram"
-            placeholder="https://www.instagram.com/username"
-          />
-          <Input
-            className={fieldDiv}
-            type="url"
-            labelText="Medium"
-            name="medium"
-            placeholder="https://www.medium.com/username"
-          />
-          <Input
-            className={fieldDiv}
-            type="url"
-            labelText="Substack"
-            name="substack"
-            placeholder="https://username.substack.com"
-          />
+          <Input className={fieldDiv} type="text" labelText="LinkedIn" name="linkedin" placeholder="username" />
+          <Input className={fieldDiv} type="text" labelText="Github" name="github" placeholder="username" />
+          <Input className={fieldDiv} type="text" labelText="Dribbble" name="dribbble" placeholder="username" />
+          <Input className={fieldDiv} type="text" labelText="Discord" name="discord" placeholder="username" />
+          <Input className={fieldDiv} type="text" labelText="Youtube" name="youtube" placeholder="username" />
+          <Input className={fieldDiv} type="text" labelText="Soundcloud" name="soundcloud" placeholder="username" />
+          <Input className={fieldDiv} type="text" labelText="Twitter" name="twitter" placeholder="username" />
+          <Input className={fieldDiv} type="text" labelText="Facebook" name="facebook" placeholder="username" />
+          <Input className={fieldDiv} type="text" labelText="Instagram" name="instagram" placeholder="username" />
+          <Input className={fieldDiv} type="text" labelText="Medium" name="medium" placeholder="username" />
+          <Input className={fieldDiv} type="text" labelText="Substack" name="substack" placeholder="username" />
           <button
             type="submit"
             disabled={isSubmitting}

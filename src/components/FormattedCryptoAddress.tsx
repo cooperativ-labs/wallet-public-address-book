@@ -2,6 +2,7 @@ import cn from 'classnames';
 import React, { FC, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MatchSupportedChains } from '@src/web3/connectors';
+import useWindowSize from '@hooks/useWindowSize';
 
 type FormattedCryptoAddressProps = {
   chainId: number;
@@ -9,7 +10,7 @@ type FormattedCryptoAddressProps = {
   label?: string;
   withCopy?: boolean;
   className?: string;
-  light?: boolean;
+  showFull?: boolean;
 };
 
 const FormattedCryptoAddress: FC<FormattedCryptoAddressProps> = ({
@@ -18,20 +19,27 @@ const FormattedCryptoAddress: FC<FormattedCryptoAddressProps> = ({
   address,
   withCopy,
   className,
-  light,
+  showFull,
 }) => {
   const [copied, setCopied] = useState<boolean>(false);
   const blockExplorer = MatchSupportedChains(chainId).blockExplorer;
+  const windowSize = useWindowSize();
+  const isDesktop = windowSize.width > 768;
   return (
     <span className={cn('flex', [className ? className : 'text-sm text-gray-700'])}>
       <a target="_blank" rel="noreferrer" href={`${blockExplorer}/address/${address}`}>
         {label}{' '}
-        <span className="hover:underline mr-2">
-          {address.slice(0, 7)}...{address.slice(-4)}
-        </span>
+        {showFull && isDesktop ? (
+          address
+        ) : (
+          <span className="hover:underline">
+            {address.slice(0, 7)}...{address.slice(-4)}
+          </span>
+        )}
       </a>
       {withCopy && (
         <button
+          className="ml-2"
           onClick={() => {
             navigator.clipboard.writeText(address);
             setCopied(true);

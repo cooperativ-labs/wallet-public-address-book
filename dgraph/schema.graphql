@@ -443,8 +443,8 @@ type UserSocial  {
 type User  {
 	id: ID! 
 	email: String! @id
-	displayName: String @search(by:[fulltext]) 
-	fullName: String! @search(by:[fulltext]) 
+	displayName: String @search(by:[term]) 
+	fullName: String! @search(by:[term]) 
 	profileImage: String 
 	biography: String 
 	social: UserSocial 

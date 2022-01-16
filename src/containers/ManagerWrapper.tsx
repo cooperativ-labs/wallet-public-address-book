@@ -31,7 +31,7 @@ const Manager: FC<ManagerProps> = ({ children }) => {
           <ManagerSideBar />
         </div>
         <div className="flex-grow h-full z-10">
-          <div className="h-full px-4 md:px-8 py-2 md:my-12">
+          <div className="h-full px-4 md:px-8 py-2 ">
             <div className={'mx-auto min-h-full'} style={{ maxWidth: '1580px' }}>
               {children}
             </div>
@@ -71,7 +71,6 @@ const ManagerWrapper: FC<ManagerWrapperProps> = ({ children, loadingComponent })
           <div className={cn(BackgroundGradient, 'min-h-full w-screen min-h-screen')}>
             <AlertPopup />
             <WalletChooserModal />
-            <WalletActionLockModel />
             <ManagerNavigationFrame loadingComponent={loadingComponent}>{children}</ManagerNavigationFrame>
           </div>
         </div>

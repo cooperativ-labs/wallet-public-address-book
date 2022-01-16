@@ -88,7 +88,7 @@ export default function MyApp({ Component, pageProps }): ReactElement {
       <ApolloProvider client={apolloClient}>
         <StateProvider>
           <AnalyticsContext.Provider value={analyticsContext}>
-            <div id="outer-container" className="bg-gray-200 flex flex-col">
+            <div id="outer-container" className="bg-gradient-to-b from-gray-100 to-blue-50 flex flex-col">
               <main id="page-wrap flex-grow h-full">
                 <Component {...pageProps} />
               </main>

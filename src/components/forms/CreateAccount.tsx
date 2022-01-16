@@ -12,6 +12,8 @@ import ChooseConnectorButton from '@src/containers/ChooseConnectorButton';
 import Input from '../form-components/Inputs';
 import MajorActionButton from '../buttons/MajorActionButton';
 import { MatchSupportedChains } from '@src/web3/connectors';
+import Checkbox from '../form-components/Checkbox';
+import Select from '../form-components/Select';
 
 const fieldDiv = 'pt-3 my-2 bg-opacity-0';
 
@@ -36,6 +38,8 @@ const CreateAccount: FC = () => {
         email: '',
         fullName: '',
         walletName: '',
+        chainId: `${chainId}`,
+        isContractAddress: false,
       }}
       validate={(values) => {
         const errors: any = {}; /** @TODO : Shape */
@@ -66,7 +70,7 @@ const CreateAccount: FC = () => {
               fullName: values.fullName,
               walletAddress: walletAddress,
               walletName: values.walletName,
-              chainId: chainId,
+              chainId: parseInt(values.chainId),
               protocol: MatchSupportedChains(chainId).protocol,
             },
           });
@@ -77,7 +81,7 @@ const CreateAccount: FC = () => {
         }
       }}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, values }) => (
         <Form className="flex flex-col gap relative">
           <div className="mt-5 md:p-10 md:rounded-lg md:bg-white md:shadow-xl">
             {walletAddress ? (
@@ -95,6 +99,32 @@ const CreateAccount: FC = () => {
                   type="text"
                   placeholder="e.g. Primary Wallet"
                 />
+                <Checkbox
+                  name="isContractAddress"
+                  checked={values.isContractAddress}
+                  labelText="This address only works on one network"
+                  sideLabel
+                />
+
+                {values.isContractAddress && (
+                  <Select
+                    className={`${fieldDiv} md:col-span-3`}
+                    required
+                    name="chainId"
+                    labelText="This address is only active on:"
+                  >
+                    <option value="">Select chain</option>
+                    <option value="1">Ethereum Mainnet</option>
+                    <option value="43114">Avalanche Mainnet</option>
+                    <option value="56">Binance Smart Chain</option>
+                    <option value="10">Optimism</option>
+                    <option value="100">xDAI</option>
+                    <option value="137">Polygon</option>
+                    <option value="3">Ropsten Testnet</option>
+                    <option value="4">Rinkeby Testnet</option>
+                    <option value="5">Görli Testnet</option>
+                  </Select>
+                )}
               </div>
             ) : (
               <ChooseConnectorButton buttonText="Connect your Ethereum wallet" large />

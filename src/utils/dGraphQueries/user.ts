@@ -22,6 +22,39 @@ export const CHECK_USER_EXIST = () => {
   `;
 };
 
+export const SEARCH_USERS = gql`
+  query QueryUsers($email: String, $fullName: String) {
+    queryUser(filter: { email: { eq: $email }, or: { fullName: { anyofterms: $fullName } } }) {
+      id
+      fullName
+      email
+      profileImage
+      biography
+      expertise
+      interests
+      walletAddresses {
+        address
+        name
+        type
+        chainId
+      }
+      social {
+        linkedin
+        github
+        discord
+        dribbble
+        instagram
+        facebook
+        twitter
+        medium
+        substack
+        youtube
+        soundcloud
+      }
+    }
+  }
+`;
+
 export const GET_USER_FROM_EMAIL = gql`
   query GetUser($email: String!) {
     getUser(email: $email) {
@@ -136,6 +169,7 @@ export const ADD_USER_WITH_WALLET = gql`
     $walletName: String!
     $chainId: Int!
     $protocol: CryptoAddressProtocol
+    $type: CryptoAddressType
   ) {
     addUser(
       input: [
@@ -148,7 +182,7 @@ export const ADD_USER_WITH_WALLET = gql`
             address: $walletAddress
             protocol: $protocol
             chainId: $chainId
-            type: WALLET
+            type: $type
           }
           organizations: { organization: { fullLegalName: $fullName, type: "Individual" } }
         }

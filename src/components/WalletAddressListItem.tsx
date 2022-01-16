@@ -1,6 +1,7 @@
 import { CryptoAddress, CryptoAddressType } from '/types';
 import React, { FC } from 'react';
 import { MatchSupportedChains } from '@src/web3/connectors';
+import FormattedCryptoAddress from './FormattedCryptoAddress';
 
 interface WalletAddressListItemProps {
   wallet: CryptoAddress;
@@ -29,7 +30,13 @@ const WalletAddressListItem: FC<WalletAddressListItemProps> = ({ wallet }) => {
         {name} {type === CryptoAddressType.Contract ? getChainLogo(chainId) : <div> all EVM chains</div>}{' '}
       </div>
       <div className="w-72 md:w-auto">
-        <div className="truncate md:ext-lg font-bold text-gray-600">{address} </div>
+        <FormattedCryptoAddress
+          chainId={chainId}
+          address={address}
+          className="text-large font-bold"
+          withCopy
+          showFull
+        />
       </div>
       {description && <div className="mt-1 text-sm text-gray-700">{description}</div>}
     </div>
