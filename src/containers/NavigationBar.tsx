@@ -5,6 +5,7 @@ import useWindowSize from '@hooks/useWindowSize';
 import { ApplicationStoreProps, store } from '@context/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LogoutButton from '@src/components/buttons/LogoutButton';
+import UserSearch from '@src/components/forms/UserSearch';
 
 interface NavBarProps {
   transparent?: boolean;
@@ -15,7 +16,6 @@ export const NavBar: FC<NavBarProps> = () => {
   const applicationStore: ApplicationStoreProps = useContext(store);
 
   const { dispatch } = applicationStore;
-  const windowSize = useWindowSize();
   return (
     <div
       className="py-2 px-2 pr-4 mt-1 md:mt-4 z-30 flex mx-auto justify-between self-center items-center "
@@ -32,6 +32,7 @@ export const NavBar: FC<NavBarProps> = () => {
           </Button>
           <div className="m-2" />
         </div>
+        <UserSearch setSearchText="meep" />
       </div>
       <div className="flex justify-end">
         <span className="hidden md:flex items-center mr-3">

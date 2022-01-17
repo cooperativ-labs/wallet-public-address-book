@@ -15,7 +15,7 @@ export interface InputProps {
 
 export interface CustomInputProps extends InputProps {
   labelText?: string;
-  className: string;
+  className?: string;
   fieldClass?: string;
   fieldLabelClass?: string;
   fieldHeight?: string;

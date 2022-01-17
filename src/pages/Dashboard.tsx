@@ -1,12 +1,13 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import UserList from '@src/components/UserList';
-import { LinkedAccount, User } from 'types';
 import UserSearch from '@src/components/forms/UserSearch';
 import { useQuery } from '@apollo/client';
 import { GET_USER_FROM_SOCIAL, SEARCH_USERS } from '@src/utils/dGraphQueries/user';
+import { ApplicationStoreProps, store } from '@context/store';
 
 const Dashboard: FC = () => {
-  const [searchText, setSearchText] = useState<string | undefined>(undefined);
+  const applicationStore: ApplicationStoreProps = useContext(store);
+  const { searchText } = applicationStore;
 
   const createSearchQuery = () => {
     if (searchText && searchText.length > 3) {
@@ -35,7 +36,6 @@ const Dashboard: FC = () => {
     <div data-test="component-landing" className="flex flex-col w-full h-full">
       <div className="md:mx-4">
         <div className="flex">
-          <UserSearch setSearchText={setSearchText} />
           <div className="mt-4">{totalResults && <UserList users={totalResults} />}</div>
         </div>
       </div>

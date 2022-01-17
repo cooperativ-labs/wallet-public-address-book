@@ -7,6 +7,7 @@ export interface ApplicationStoreProps {
   WalletActionLockModalOpen: boolean;
   sidebarOpen: boolean;
   noticesOpen: boolean;
+  searchText: string;
   project: any;
   dispatch: React.Dispatch<any>;
 }
@@ -18,6 +19,7 @@ const initialState: ApplicationStoreProps = {
   WalletActionLockModalOpen: false,
   sidebarOpen: false,
   noticesOpen: true,
+  searchText: undefined,
   dispatch: null,
 };
 const store = createContext(initialState);
@@ -35,8 +37,8 @@ const StateProvider = ({ children }) => {
         return { ...state, sidebarOpen: !state.sidebarOpen };
       case 'TOGGLE_NOTICES':
         return { ...state, noticesOpen: !state.noticesOpen };
-      case 'SET_PROJECT':
-        return { ...state, project: action.payload };
+      case 'SET_SEARCHTEXT':
+        return { ...state, searchText: action.payload };
       default:
         throw new Error();
     }

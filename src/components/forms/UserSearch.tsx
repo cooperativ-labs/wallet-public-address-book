@@ -1,12 +1,22 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { Form, Formik } from 'formik';
 
-import { useQuery } from '@apollo/client';
 import Input from '../form-components/Inputs';
+import { ApplicationStoreProps, store } from '@context/store';
+import { useRouter } from 'next/router';
 
-import { GET_USER_FROM_SOCIAL, SEARCH_USERS } from '@src/utils/dGraphQueries/user';
+const UserSearch: FC<any> = () => {
+  const applicationStore: ApplicationStoreProps = useContext(store);
+  const { dispatch } = applicationStore;
+  const router = useRouter();
 
-const UserSearch: FC<any> = ({ setSearchText }) => {
+  const handleSubmit = (submission) => {
+    dispatch({ type: 'SET_SEARCHTEXT', payload: submission });
+    if (router.route !== '/') {
+      router.push('/');
+    }
+  };
+
   return (
     <Formik
       initialValues={{
@@ -18,22 +28,22 @@ const UserSearch: FC<any> = ({ setSearchText }) => {
       }}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(true);
-        setSearchText(values.searchText);
+        handleSubmit(values.searchText);
         setSubmitting(false);
       }}
     >
       {({ isSubmitting }) => (
-        <Form className="flex flex-col relative">
+        <Form className="flex items-center h-14">
           <Input
-            className="h-14 border-1 border-cLightBlue rounded-xl md:w-96"
+            fieldClass="h-14 md:w-96 border-0"
             type="text"
             name="searchText"
-            placeholder="username"
+            placeholder="Search by name, email, or username"
           />
           <button
             type="submit"
             disabled={isSubmitting}
-            className="bg-blue-900 hover:bg-blue-800 text-white font-bold uppercase my-8 rounded p-4"
+            className="bg-blue-900 hover:bg-blue-800 text-white font-bold uppercase my-8  p-4"
           >
             Search
           </button>
