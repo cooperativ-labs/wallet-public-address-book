@@ -1,4 +1,4 @@
-import { CryptoAddress } from '/types';
+import { CryptoAddress } from 'types';
 import React, { FC } from 'react';
 import WalletAddressListItem from './WalletAddressListItem';
 

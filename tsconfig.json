@@ -26,8 +26,8 @@
       "@web3/*": [
         "src/web3/*"
       ],
-      "/types/*": [
-        "types/*"
+      "types/*": [
+        "/types/*"
       ],
      
     },
@@ -60,6 +60,7 @@
     "**/*.ts",
     "**/*.tsx",
     "context/store.tsx",
+    "types"
   ],
   "exclude": [
     "node_modules"

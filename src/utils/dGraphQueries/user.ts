@@ -38,18 +38,26 @@ export const SEARCH_USERS = gql`
         type
         chainId
       }
-      social {
-        linkedin
-        github
-        discord
-        dribbble
-        instagram
-        facebook
-        twitter
-        medium
-        substack
-        youtube
-        soundcloud
+      linkedAccounts {
+        id
+        username
+        type
+        verified
+        hidden
+        user {
+          id
+        }
+      }
+    }
+  }
+`;
+
+export const GET_USER_FROM_SOCIAL = gql`
+  query GetUserLinkedAccount($username: String!) {
+    getLinkedAccount(username: $username) {
+      id
+      user {
+        id
       }
     }
   }
@@ -76,18 +84,15 @@ export const GET_USER = gql`
       biography
       expertise
       interests
-      social {
-        linkedin
-        github
-        discord
-        dribbble
-        instagram
-        facebook
-        twitter
-        medium
-        substack
-        youtube
-        soundcloud
+      linkedAccounts {
+        id
+        username
+        type
+        verified
+        hidden
+        user {
+          id
+        }
       }
       walletAddresses {
         name
@@ -244,56 +249,22 @@ export const UPDATE_USER_INFORMATION = gql`
   }
 `;
 
-export const UPDATE_USER_SOCIAL_ACCOUNTS = gql`
-  mutation (
-    $userId: [ID!]
-    $linkedin: String
-    $github: String
-    $discord: String
-    $dribbble: String
-    $instagram: String
-    $facebook: String
-    $twitter: String
-    $medium: String
-    $substack: String
-    $youtube: String
-    $soundcloud: String
-  ) {
-    updateUser(
-      input: {
-        filter: { id: $userId }
-        set: {
-          social: {
-            linkedin: $linkedin
-            github: $github
-            discord: $discord
-            dribbble: $dribbble
-            instagram: $instagram
-            facebook: $facebook
-            twitter: $twitter
-            medium: $medium
-            substack: $substack
-            youtube: $youtube
-            soundcloud: $soundcloud
-          }
-        }
-      }
-    ) {
+export const ADD_USER_SOCIAL_ACCOUNTS = gql`
+  mutation ($userId: [ID!], $username: String!, $type: LinkedAccountType!) {
+    updateUser(input: { filter: { id: $userId }, set: { linkedAccounts: { username: $username, type: $type } } }) {
       user {
         id
         displayName
-        social {
-          linkedin
-          github
-          discord
-          dribbble
-          instagram
-          facebook
-          twitter
-          medium
-          substack
-          youtube
-          soundcloud
+        fullName
+        linkedAccounts {
+          id
+          username
+          type
+          verified
+          hidden
+          user {
+            id
+          }
         }
       }
     }

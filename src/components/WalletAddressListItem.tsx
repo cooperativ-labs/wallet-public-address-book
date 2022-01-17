@@ -1,11 +1,11 @@
-import { CryptoAddress, CryptoAddressType } from '/types';
+import { CryptoAddress, CryptoAddressType } from 'types';
 import React, { FC } from 'react';
 import { MatchSupportedChains } from '@src/web3/connectors';
 import FormattedCryptoAddress from './FormattedCryptoAddress';
 
-interface WalletAddressListItemProps {
+type WalletAddressListItemProps = {
   wallet: CryptoAddress;
-}
+};
 
 const WalletAddressListItem: FC<WalletAddressListItemProps> = ({ wallet }) => {
   const { name, type, chainId, address, description } = wallet;

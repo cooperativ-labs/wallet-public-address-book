@@ -286,6 +286,7 @@ type ProjectInfo  {
 	solution: String 
 	gtmStrategy: String 
 	investmentDescription: String
+	linkedAccounts: [LinkedAccount] @hasInverse(field:project) 
 	documents: [ProjectInfoDocument] 
 	mission: String 
 	vision: String 
@@ -409,35 +410,32 @@ type ProjectUser  {
 """
 USER MODEL 
 """
-type UserLinkedCustomAccounts  {
-	name: String 
-	value: String 
+
+enum LinkedAccountType {
+	LINKEDIN
+	FACEBOOK
+	TWITTER
+	INSTAGRAM
+	DISCORD
+	TELEGRAM
+	MEDIUM
+	MIRROR
+	SUBSTACK
+	YOUTUBE
+	SOUNDCLOUD
+	DRIBBBLE
+	GITHUB
+	OTHER
 }
 
-type UserLinkedAccounts  {
-	linkedin: String 
-	github: String 
-	discord: String 
-	dribbble: String 
-	instagram: String 
-	facebook: String 
-	medium: String 
-	youtube: String 
-	customAccounts: [UserLinkedCustomAccounts] 
-}
-
-type UserSocial  {
-	linkedin: String 
-	github: String 
-	discord: String 
-	dribbble: String 
-	instagram: String 
-	facebook: String 
-  twitter: String 
-  medium: String 
-  substack: String 
-  youtube: String
-  soundcloud: String
+type LinkedAccount  {
+	id: ID!
+	username: String! @id
+	type: LinkedAccountType 
+	verified: Boolean
+	hidden: Boolean
+	user: User @hasInverse(field:linkedAccounts) 
+	project: ProjectInfo @hasInverse(field:linkedAccounts) 
 }
 
 type User  {
@@ -447,8 +445,7 @@ type User  {
 	fullName: String! @search(by:[term]) 
 	profileImage: String 
 	biography: String 
-	social: UserSocial 
-	linkedAccounts: UserLinkedAccounts 
+	linkedAccounts: [LinkedAccount] @hasInverse(field:user) 
 	expertise: [String] 
 	interests: [String] 
 	projects: [ProjectUser] 

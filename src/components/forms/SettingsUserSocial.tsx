@@ -1,58 +1,45 @@
 import React from 'react';
 import { Form, Formik } from 'formik';
-import { UPDATE_USER_SOCIAL_ACCOUNTS } from '@src/utils/dGraphQueries/user';
+import { ADD_USER_SOCIAL_ACCOUNTS } from '@src/utils/dGraphQueries/user';
 import { useMutation } from '@apollo/client';
 import Input from '../form-components/Inputs';
+import Select from '../form-components/Select';
+import { socialAccountOptions } from '@src/utils/enumConverters';
+import LinkedAccountsList from '../LinkedAccountsList';
 
 const fieldDiv = 'pt-3 my-2 bg-opacity-0';
 
 const SettingsUserSocial = ({ user }) => {
-  const [updateSocials, { data, error }] = useMutation(UPDATE_USER_SOCIAL_ACCOUNTS);
+  const [addSocials, { data, error }] = useMutation(ADD_USER_SOCIAL_ACCOUNTS);
 
   if (error) {
     console.log(error);
     alert('Oops. Looks like something went wrong');
   }
 
-  if (data) {
-    alert(`${data.updateUser.user[0].displayName} was successfully updated!`);
-  }
-
   return (
     <Formik
       initialValues={{
-        linkedin: user.social?.linkedin,
-        github: user.social?.github,
-        dribbble: user.social?.dribbble,
-        discord: user.social?.discord,
-        youtube: user.social?.youtube,
-        soundcloud: user.social?.soundcloud,
-        twitter: user.social?.twitter,
-        facebook: user.social?.facebook,
-        instagram: user.social?.instagram,
-        medium: user.social?.medium,
-        substack: user.social?.substack,
+        username: '',
+        type: '',
       }}
       validate={(values) => {
         const errors: any = {}; /** @TODO : Shape */
+        if (!values.username) {
+          errors.username = 'Please include a username';
+        }
+        if (values.type) {
+          errors.type = 'Please select a platform';
+        }
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
         setSubmitting(true);
-        updateSocials({
+        addSocials({
           variables: {
-            userId: user.id,
-            linkedin: values.linkedin,
-            github: values.github,
-            dribbble: values.dribbble,
-            discord: values.discord,
-            youtube: values.youtube,
-            soundcloud: values.soundcloud,
-            twitter: values.twitter,
-            facebook: values.facebook,
-            instagram: values.instagram,
-            medium: values.medium,
-            substack: values.substack,
+            user: user.id,
+            username: values.username,
+            type: values.type,
           },
         });
         setSubmitting(false);
@@ -60,24 +47,26 @@ const SettingsUserSocial = ({ user }) => {
     >
       {({ isSubmitting }) => (
         <Form className="flex flex-col relative">
-          <h2 className="text-xl text-blue-900 font-semibold">Social Accounts</h2>
-          <Input className={fieldDiv} type="text" labelText="LinkedIn" name="linkedin" placeholder="username" />
-          <Input className={fieldDiv} type="text" labelText="Github" name="github" placeholder="username" />
-          <Input className={fieldDiv} type="text" labelText="Dribbble" name="dribbble" placeholder="username" />
-          <Input className={fieldDiv} type="text" labelText="Discord" name="discord" placeholder="username" />
-          <Input className={fieldDiv} type="text" labelText="Youtube" name="youtube" placeholder="username" />
-          <Input className={fieldDiv} type="text" labelText="Soundcloud" name="soundcloud" placeholder="username" />
-          <Input className={fieldDiv} type="text" labelText="Twitter" name="twitter" placeholder="username" />
-          <Input className={fieldDiv} type="text" labelText="Facebook" name="facebook" placeholder="username" />
-          <Input className={fieldDiv} type="text" labelText="Instagram" name="instagram" placeholder="username" />
-          <Input className={fieldDiv} type="text" labelText="Medium" name="medium" placeholder="username" />
-          <Input className={fieldDiv} type="text" labelText="Substack" name="substack" placeholder="username" />
+          <h2 className="text-xl text-blue-900 font-semibold mb-4">Social Accounts</h2>
+          <LinkedAccountsList linkedAccounts={user.linkedAccounts} />
+          <hr className="mt-6 mb-8 md:mb-4" />
+          <Select className={fieldDiv} labelText="Platform" name="type">
+            <option value="">select a platform</option>
+            {socialAccountOptions.map((option) => {
+              return (
+                <option key={option.value} value={option.value}>
+                  {option.name}
+                </option>
+              );
+            })}
+          </Select>
+          <Input className={fieldDiv} type="text" labelText="Username" name="username" placeholder="username" />
           <button
             type="submit"
             disabled={isSubmitting}
             className="bg-blue-900 hover:bg-blue-800 text-white font-bold uppercase my-8 rounded p-4"
           >
-            Save
+            Add
           </button>
         </Form>
       )}

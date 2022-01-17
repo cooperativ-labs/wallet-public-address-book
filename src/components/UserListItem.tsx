@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { User } from '/types';
+import { User } from 'types';
 import WalletAddressList from './WalletAddressList';
 import RoundedImage from './RoundedImage';
 import TwoColumnCard from './cards/TwoColumnCard';
@@ -10,7 +10,7 @@ type UserListItemProps = {
 };
 
 const UserListItem: FC<UserListItemProps> = ({ user }) => {
-  const { email, fullName, walletAddresses, profileImage, social } = user;
+  const { email, fullName, walletAddresses, profileImage, linkedAccounts } = user;
 
   return (
     <TwoColumnCard
@@ -27,7 +27,9 @@ const UserListItem: FC<UserListItemProps> = ({ user }) => {
           <div className="text-md text-gray-500 ">
             <div>{email}</div>
             <div className="flex mt-4">
-              <SocialLinkItem socialNetwork="discord" username={social?.discord} />
+              {linkedAccounts.map((account) => {
+                return <SocialLinkItem type={account.type} username={account.username} />;
+              })}
             </div>
           </div>
         </>

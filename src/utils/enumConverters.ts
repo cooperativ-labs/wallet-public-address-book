@@ -1,4 +1,4 @@
-import { CryptoAddressProtocol, ProjectInfoDocumentType, ProjectUserRole } from 'types';
+import { CryptoAddressProtocol, LinkedAccountType, ProjectInfoDocumentType, ProjectUserRole } from 'types';
 
 export const backerTypeOptions = [
   { value: 'VENTURE_CAPITALIST', name: 'Venture Capitalist' },
@@ -37,6 +37,28 @@ export const getCategoryOption = (category) => {
   const option = categoryOptions.find((cat) => (cat.value === category ? cat : null));
   return option.name;
 };
+
+export const socialAccountOptions = [
+  { value: LinkedAccountType.Linkedin, name: 'LinkedIn' },
+  { value: LinkedAccountType.Github, name: 'Github' },
+  { value: LinkedAccountType.Dribbble, name: 'Dribble' },
+  { value: LinkedAccountType.Discord, name: 'Discord' },
+  { value: LinkedAccountType.Youtube, name: 'Youtube' },
+  { value: LinkedAccountType.Soundcloud, name: 'SoundCloud' },
+  { value: LinkedAccountType.Twitter, name: 'Twitter' },
+  { value: LinkedAccountType.Facebook, name: 'Facebook' },
+  { value: LinkedAccountType.Instagram, name: 'Instagram' },
+  { value: LinkedAccountType.Medium, name: 'Medium' },
+  { value: LinkedAccountType.Substack, name: 'Substack' },
+  { value: LinkedAccountType.Mirror, name: 'Mirror' },
+  { value: LinkedAccountType.Telegram, name: 'Telegram' },
+  { value: LinkedAccountType.Other, name: 'Other' },
+];
+export const getSocialAccountOption = (type: LinkedAccountType) => {
+  const option = socialAccountOptions.find((account) => (account.value === type ? type : null));
+  return option.name;
+};
+
 export const intentionOptions = [
   { value: 'BUILDING_A_BUSINESS', name: 'Building a business 🔧' },
   { value: 'BUILDING_A_BETTER_WORLD', name: 'The world needs this' },

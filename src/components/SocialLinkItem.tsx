@@ -1,45 +1,51 @@
 import React, { FC } from 'react';
+import { LinkedAccountsType } from 'types';
 
 type SocialLinkItemProps = {
-  socialNetwork: string;
+  type: LinkedAccountsType;
   username: string;
 };
 
-const getSocialNetwork = (socialNetwork, username) => {
-  switch (socialNetwork) {
-    case 'linkedin':
+const getSocialNetwork = (type, username) => {
+  switch (type) {
+    case LinkedAccountsType.Linkedin:
       return { link: `https://linkedin.com/in/${username}`, icon: '' };
-    case 'github':
+    case LinkedAccountsType.Github:
       return { link: `https://github.com/${username}`, icon: '' };
-    case 'dribble':
+    case LinkedAccountsType.Dribbble:
       return { link: `https://dribbble.com/${username}`, icon: '' };
-    case 'discord':
-      return { link: `https://discordapp.com/users/${username}`, icon: '' };
-    case 'youtube':
+    case LinkedAccountsType.Discord:
+      return { link: ``, icon: '' };
+    case LinkedAccountsType.Youtube:
       return { link: `https://youtube.com/channel/2jdkHFKS2838Fwdd923`, icon: '' };
-    case 'soundcloud':
+    case LinkedAccountsType.Soundcloud:
       return { link: `https://soundcloud.com/${username}`, icon: '' };
-    case 'twitter':
+    case LinkedAccountsType.Twitter:
       return { link: `https://twitter.com/${username}`, icon: '' };
-    case 'facebook':
+    case LinkedAccountsType.Facebook:
       return { link: `https://facebook.com/${username}`, icon: '' };
-    case 'instagram':
+    case LinkedAccountsType.Instagram:
       return { link: `https://www.instagram.com/${username}`, icon: '' };
-    case 'medium':
+    case LinkedAccountsType.Medium:
       return { link: `https://www.medium.com/${username}`, icon: '' };
-    case 'substack':
+    case LinkedAccountsType.Substack:
       return { link: `https://${username}.substack.com`, icon: '' };
+    case LinkedAccountsType.Mirror:
+      return { link: ``, icon: '' };
+    case LinkedAccountsType.Telegram:
+      return { link: ``, icon: '' };
+    case LinkedAccountsType.Other:
+      return { link: ``, icon: '' };
     default:
       return { link: ``, icon: '' };
   }
 };
 
-const SocialLinkItem: FC<SocialLinkItemProps> = ({ socialNetwork, username }) => {
-  console.log(username);
+const SocialLinkItem: FC<SocialLinkItemProps> = ({ type, username }) => {
   if (username) {
     return (
       <div className="flex max-w-min p-1 px-2 m-1 bg-blue-700 text-xs text-gray-100 rounded-full">
-        <a href={getSocialNetwork(socialNetwork, username).link} target="_blank" rel="noreferrer">
+        <a href={getSocialNetwork(type, username).link} target="_blank" rel="noreferrer">
           {username}
         </a>
       </div>

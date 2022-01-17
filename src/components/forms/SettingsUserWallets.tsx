@@ -8,7 +8,7 @@ import Select from '../form-components/Select';
 import Checkbox from '../form-components/Checkbox';
 import { Web3Provider } from '@ethersproject/providers';
 import { useWeb3React } from '@web3-react/core';
-import { CryptoAddressType, CryptoAddressProtocol } from '/types';
+import { CryptoAddressType, CryptoAddressProtocol } from 'types';
 
 const fieldDiv = 'md:pt-3 md:my-2 bg-opacity-0';
 

@@ -1,10 +1,9 @@
-import { CryptoAddress } from '/types';
+import { User } from 'types';
 import React, { FC } from 'react';
-
 import UserListItem from './UserListItem';
 
 type UserListProps = {
-  users: CryptoAddress[];
+  users: User[];
 };
 
 const UserList: FC<UserListProps> = ({ users }) => {
