@@ -1,7 +1,7 @@
+import Button from '@src/components/Buttons/Button';
 import cn from 'classnames';
 import React, { FC, useContext } from 'react';
 import { ApplicationStoreProps, store } from '@context/store';
-import Button from '@src/components/Buttons/Button';
 
 const outlinedClass = `text-cLightBlue hover:text-white bg-opacity-100 hover:bg-opacity-1 hover:bg-cDarkBlue border-2 border-cLightBlue hover:border-white`;
 

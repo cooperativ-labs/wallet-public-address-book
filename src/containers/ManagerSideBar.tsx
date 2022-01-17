@@ -1,3 +1,4 @@
+import Button from '@src/components/Buttons/Button';
 import cn from 'classnames';
 import React, { FC, useContext } from 'react';
 import { ApplicationStoreProps, store } from '@context/store';
@@ -5,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { GET_USER } from '@src/utils/dGraphQueries/user';
 import { useQuery } from '@apollo/client';
 import { UserContext } from '@src/utils/SetUserContext';
-import Button from '@src/components/Buttons/Button';
 
 const ManagerSideBar: FC = () => {
   const applicationStore: ApplicationStoreProps = useContext(store);

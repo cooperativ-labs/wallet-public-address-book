@@ -1,6 +1,6 @@
 import ManagerWrapper from '@src/containers/ManagerWrapper';
-import UserSettings from '@src/pages/UserSettings';
 import React, { FC } from 'react';
+import UserSettings from '@src/pages/UserSettings';
 
 const UserSettingsPage: FC = () => {
   return (

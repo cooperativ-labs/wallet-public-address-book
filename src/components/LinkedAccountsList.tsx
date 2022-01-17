@@ -1,6 +1,6 @@
-import { LinkedAccount } from 'types';
-import React, { FC } from 'react';
 import LinkedAccountListItem from './LinkedAccountListItem';
+import React, { FC } from 'react';
+import { LinkedAccount } from 'types';
 
 type LinkedAccountsListProps = {
   linkedAccounts: LinkedAccount[];

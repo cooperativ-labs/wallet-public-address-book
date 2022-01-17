@@ -1,11 +1,11 @@
 import Button from '@src/components/Buttons/Button';
+import LogoutButton from '@src/components/buttons/LogoutButton';
 import React, { FC, useContext } from 'react';
 import UserMenu from './UserMenu';
+import UserSearch from '@src/components/forms/UserSearch';
 import useWindowSize from '@hooks/useWindowSize';
 import { ApplicationStoreProps, store } from '@context/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import LogoutButton from '@src/components/buttons/LogoutButton';
-import UserSearch from '@src/components/forms/UserSearch';
 
 interface NavBarProps {
   transparent?: boolean;

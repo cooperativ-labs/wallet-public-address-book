@@ -1,9 +1,9 @@
+import Input from '../form-components/Inputs';
 import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
 import { makeRemovalList, makeSubmissionList } from '@src/utils/dGraphQueries/gqlUtils';
 import { UPDATE_USER_INFORMATION } from '@src/utils/dGraphQueries/user';
 import { useMutation } from '@apollo/client';
-import Input from '../form-components/Inputs';
 
 const fieldDiv = 'pt-3 my-2 bg-opacity-0';
 
@@ -15,7 +15,6 @@ const SettingUserPersonalInfo = ({ user }) => {
   const [alerted, setAlerted] = useState<boolean>(false);
 
   if (error) {
-    console.log(error);
     alert('Oops. Looks like something went wrong');
   }
   if (data && !alerted) {

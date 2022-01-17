@@ -1,8 +1,8 @@
 import cn from 'classnames';
 import React, { FC, useState } from 'react';
+import useWindowSize from '@hooks/useWindowSize';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { MatchSupportedChains } from '@src/web3/connectors';
-import useWindowSize from '@hooks/useWindowSize';
 
 type FormattedCryptoAddressProps = {
   chainId: number;

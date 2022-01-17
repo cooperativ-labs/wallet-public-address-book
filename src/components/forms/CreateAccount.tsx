@@ -3,17 +3,17 @@ import { ADD_USER_WITH_WALLET } from '@src/utils/dGraphQueries/user';
 import { currentDate } from '@src/utils/dGraphQueries/gqlUtils';
 import { Form, Formik } from 'formik';
 
+import Checkbox from '../form-components/Checkbox';
+import ChooseConnectorButton from '@src/containers/ChooseConnectorButton';
+import FormattedCryptoAddress from '../FormattedCryptoAddress';
+import Input from '../form-components/Inputs';
+import MajorActionButton from '../buttons/MajorActionButton';
+import Select from '../form-components/Select';
+import { MatchSupportedChains } from '@src/web3/connectors';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
-import FormattedCryptoAddress from '../FormattedCryptoAddress';
-import ChooseConnectorButton from '@src/containers/ChooseConnectorButton';
-import Input from '../form-components/Inputs';
-import MajorActionButton from '../buttons/MajorActionButton';
-import { MatchSupportedChains } from '@src/web3/connectors';
-import Checkbox from '../form-components/Checkbox';
-import Select from '../form-components/Select';
 
 const fieldDiv = 'pt-3 my-2 bg-opacity-0';
 
@@ -24,7 +24,6 @@ const CreateAccount: FC = () => {
   const [addUser, { data, error }] = useMutation(ADD_USER_WITH_WALLET);
 
   if (error) {
-    console.log(error);
     alert('Oops. Looks like something went wrong');
   }
 

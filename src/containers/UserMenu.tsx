@@ -2,20 +2,20 @@ import Button from '@src/components/Buttons/Button';
 
 import Link from 'next/link';
 
+import BaseCard from '@src/components/cards/BaseCard';
+import FormattedCryptoAddress from '@src/components/FormattedCryptoAddress';
+import LogoutButton from '@src/components/buttons/LogoutButton';
+import NetworkIndicator, { NetworkIndicatorDot } from '@src/components/indicators/NetworkIndicator';
 import React, { FC, useContext, useState } from 'react';
 import { GET_USER } from '@src/utils/dGraphQueries/user';
 import { useQuery } from '@apollo/client';
 import { UserContext } from '@src/utils/SetUserContext';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
-import NetworkIndicator, { NetworkIndicatorDot } from '@src/components/indicators/NetworkIndicator';
-import LogoutButton from '@src/components/buttons/LogoutButton';
-import FormattedCryptoAddress from '@src/components/FormattedCryptoAddress';
-import BaseCard from '@src/components/cards/BaseCard';
 
 type UserMenuProps = {};
 
-const UserMenu: FC<UserMenuProps> = ({}) => {
+const UserMenu: FC<UserMenuProps> = () => {
   const { userId } = useContext(UserContext);
   const { data: userData } = useQuery(GET_USER, { variables: { userId: userId } });
   const user = userData?.getUser;

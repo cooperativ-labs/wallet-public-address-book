@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { User } from 'types';
-import WalletAddressList from './WalletAddressList';
 import RoundedImage from './RoundedImage';
-import TwoColumnCard from './cards/TwoColumnCard';
 import SocialLinkItem from './SocialLinkItem';
+import TwoColumnCard from './cards/TwoColumnCard';
+import WalletAddressList from './WalletAddressList';
+import { User } from 'types';
 
 type UserListItemProps = {
   user: User;
@@ -27,8 +27,8 @@ const UserListItem: FC<UserListItemProps> = ({ user }) => {
           <div className="text-md text-gray-500 ">
             <div>{email}</div>
             <div className="flex mt-4">
-              {linkedAccounts.map((account) => {
-                return <SocialLinkItem type={account.type} username={account.username} />;
+              {linkedAccounts.map((account, i) => {
+                return <SocialLinkItem type={account.type} username={account.username} key={i} />;
               })}
             </div>
           </div>

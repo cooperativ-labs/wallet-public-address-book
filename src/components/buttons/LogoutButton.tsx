@@ -1,9 +1,9 @@
+import Button from './Button';
 import cn from 'classnames';
 import React, { FC, useEffect, useState } from 'react';
 import router from 'next/router';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
-import Button from './Button';
 
 const LogoutButton: FC = () => {
   const { deactivate, connector } = useWeb3React<Web3Provider>();

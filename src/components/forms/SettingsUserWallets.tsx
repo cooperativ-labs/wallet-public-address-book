@@ -1,14 +1,14 @@
+import Checkbox from '../form-components/Checkbox';
+import Input from '../form-components/Inputs';
 import React, { useState } from 'react';
+import Select from '../form-components/Select';
 import { checkWalletTaken } from '@src/utils/dGraphQueries/gqlUtils';
+import { CryptoAddressProtocol, CryptoAddressType } from 'types';
 import { Form, Formik } from 'formik';
 import { UPDATE_USER_WALLETS } from '@src/utils/dGraphQueries/user';
 import { useMutation } from '@apollo/client';
-import Input from '../form-components/Inputs';
-import Select from '../form-components/Select';
-import Checkbox from '../form-components/Checkbox';
-import { Web3Provider } from '@ethersproject/providers';
 import { useWeb3React } from '@web3-react/core';
-import { CryptoAddressType, CryptoAddressProtocol } from 'types';
+import { Web3Provider } from '@ethersproject/providers';
 
 const fieldDiv = 'md:pt-3 md:my-2 bg-opacity-0';
 
@@ -18,7 +18,6 @@ const SettingsUserWallets = ({ user }) => {
   const [updateUserWallets, { error }] = useMutation(UPDATE_USER_WALLETS);
 
   if (error && !alerted) {
-    console.log(error);
     alert('Oops. Looks like something went wrong');
     setAlerted(true);
   }

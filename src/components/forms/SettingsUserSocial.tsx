@@ -1,11 +1,11 @@
-import React from 'react';
-import { Form, Formik } from 'formik';
-import { ADD_USER_SOCIAL_ACCOUNTS } from '@src/utils/dGraphQueries/user';
-import { useMutation } from '@apollo/client';
 import Input from '../form-components/Inputs';
-import Select from '../form-components/Select';
-import { socialAccountOptions } from '@src/utils/enumConverters';
 import LinkedAccountsList from '../LinkedAccountsList';
+import React from 'react';
+import Select from '../form-components/Select';
+import { ADD_USER_SOCIAL_ACCOUNTS } from '@src/utils/dGraphQueries/user';
+import { Form, Formik } from 'formik';
+import { socialAccountOptions } from '@src/utils/enumConverters';
+import { useMutation } from '@apollo/client';
 
 const fieldDiv = 'pt-3 my-2 bg-opacity-0';
 

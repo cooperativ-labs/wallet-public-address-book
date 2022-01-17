@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { LinkedAccount } from 'types';
 import { getSocialAccountOption } from '@src/utils/enumConverters';
+import { LinkedAccount } from 'types';
 
 type LinkedAccountListProps = {
   account: LinkedAccount;

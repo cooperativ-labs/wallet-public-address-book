@@ -1,6 +1,6 @@
-import { User } from 'types';
 import React, { FC } from 'react';
 import UserListItem from './UserListItem';
+import { User } from 'types';
 
 type UserListProps = {
   users: User[];

@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
 import ChooseConnector from './ChooseConnector';
+import React, { FC } from 'react';
 
 const SelectWallet: FC = () => {
   return (

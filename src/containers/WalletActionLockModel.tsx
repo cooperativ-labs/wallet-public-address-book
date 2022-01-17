@@ -1,8 +1,8 @@
+import BaseCard from '@src/components/cards/BaseCard';
 import cn from 'classnames';
 import React, { FC, useContext, useEffect } from 'react';
 import useWindowSize from '@hooks/useWindowSize';
 import { ApplicationStoreProps, store } from '@context/store';
-import BaseCard from '@src/components/cards/BaseCard';
 
 type WalletActionLockModelProps = {
   noModal?: boolean;

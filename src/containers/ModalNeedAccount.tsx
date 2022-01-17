@@ -2,7 +2,7 @@ import CreateAccount from '@src/components/forms/CreateAccount';
 import React, { FC } from 'react';
 
 interface NeedAccountProps {}
-const NeedAccount: FC<NeedAccountProps> = ({}) => {
+const NeedAccount: FC<NeedAccountProps> = () => {
   return (
     <div className="flex-grow z-10">
       <div className="h-full px-4 md:px-8 py-2 md:py-5">

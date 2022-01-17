@@ -3,13 +3,12 @@ import cn from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useWeb3React } from '@web3-react/core';
 
-
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { ApplicationStoreProps, store } from '@context/store';
 
-import { Web3Provider } from '@ethersproject/providers';
 import { connectors, GetConnector } from '@src/web3/connectors';
 import { WalletErrorCodes } from '@src/web3/helpersChain';
+import { Web3Provider } from '@ethersproject/providers';
 
 interface ConnectorProps {
   index: number;

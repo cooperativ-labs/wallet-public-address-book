@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
 import Loading from './Loading';
+import React, { FC } from 'react';
 
 interface LoadingModalProps {}
-const LoadingModal: FC<LoadingModalProps> = ({}) => {
+const LoadingModal: FC<LoadingModalProps> = () => {
   return (
     <div className="flex-grow h-full z-10">
       <div className="h-full px-4 md:px-8 py-2 md:py-5">

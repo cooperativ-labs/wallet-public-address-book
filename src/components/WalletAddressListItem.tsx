@@ -1,7 +1,7 @@
-import { CryptoAddress, CryptoAddressType } from 'types';
-import React, { FC } from 'react';
-import { MatchSupportedChains } from '@src/web3/connectors';
 import FormattedCryptoAddress from './FormattedCryptoAddress';
+import React, { FC } from 'react';
+import { CryptoAddress, CryptoAddressType } from 'types';
+import { MatchSupportedChains } from '@src/web3/connectors';
 
 type WalletAddressListItemProps = {
   wallet: CryptoAddress;

@@ -80,9 +80,7 @@ export async function checkSlugTaken(slug: string) {
       .then((res) => {
         return res.data.getProject ? true : false;
       });
-  } catch (err) {
-    console.log('checkslug', err);
-  }
+  } catch (err) {}
 }
 
 export function checkUserAdded(project: Project, userId: string) {
@@ -98,9 +96,7 @@ export async function checkEmailTaken(email: string) {
       query: CHECK_USER_EXIST(),
     });
     return result.data.getUser ? true : false;
-  } catch (err) {
-    console.log('checkslug', err);
-  }
+  } catch (err) {}
 }
 
 export async function checkWalletTaken(walletAddress: string) {

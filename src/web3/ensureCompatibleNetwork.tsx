@@ -1,8 +1,8 @@
+import BaseCard from '@src/components/cards/BaseCard';
 import React from 'react';
 import { MatchSupportedChains } from './connectors';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
-import BaseCard from '@src/components/cards/BaseCard';
 
 const EnsureCompatibleNetwork = ({ children }: { children: any }) => {
   const { active, chainId } = useWeb3React<Web3Provider>();

@@ -1,11 +1,10 @@
-
+import BaseCard from '@src/components/cards/BaseCard';
 import ChooseConnector from './ChooseConnector';
 import cn from 'classnames';
 import React, { FC, useContext, useEffect } from 'react';
 import useWindowSize from '@hooks/useWindowSize';
 import { ApplicationStoreProps, store } from '@context/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import BaseCard from '@src/components/cards/BaseCard';
 
 type WalletChooserModalProps = {
   noModal?: boolean;

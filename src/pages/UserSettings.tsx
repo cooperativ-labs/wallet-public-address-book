@@ -1,14 +1,14 @@
 import React, { FC, useContext } from 'react';
 
+import FormCard from '@src/components/cards/FormCard';
+import Loading from '@src/components/loading/Loading';
+import SettingsUserPersonalInfo from '@src/components/forms/SettingsUserPersonalInfo';
+import SettingsUserSocial from '@src/components/forms/SettingsUserSocial';
+import SettingsUserWallets from '@src/components/forms/SettingsUserWallets';
+import WalletAddressList from '@src/components/WalletAddressList';
 import { GET_USER } from '@src/utils/dGraphQueries/user';
 import { useQuery } from '@apollo/client';
 import { UserContext } from '@src/utils/SetUserContext';
-import Loading from '@src/components/loading/Loading';
-import FormCard from '@src/components/cards/FormCard';
-import SettingsUserPersonalInfo from '@src/components/forms/SettingsUserPersonalInfo';
-import SettingsUserWallets from '@src/components/forms/SettingsUserWallets';
-import SettingsUserSocial from '@src/components/forms/SettingsUserSocial';
-import WalletAddressList from '@src/components/WalletAddressList';
 
 const UserSettings: FC = () => {
   const { userId } = useContext(UserContext);

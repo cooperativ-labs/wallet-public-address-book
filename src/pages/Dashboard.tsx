@@ -1,9 +1,9 @@
 import React, { FC, useContext, useState } from 'react';
 import UserList from '@src/components/UserList';
 import UserSearch from '@src/components/forms/UserSearch';
-import { useQuery } from '@apollo/client';
-import { GET_USER_FROM_SOCIAL, SEARCH_USERS } from '@src/utils/dGraphQueries/user';
 import { ApplicationStoreProps, store } from '@context/store';
+import { GET_USER_FROM_SOCIAL, SEARCH_USERS } from '@src/utils/dGraphQueries/user';
+import { useQuery } from '@apollo/client';
 
 const Dashboard: FC = () => {
   const applicationStore: ApplicationStoreProps = useContext(store);
