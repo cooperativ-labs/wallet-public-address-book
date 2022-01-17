@@ -28,7 +28,7 @@ const SettingsUserSocial = ({ user }) => {
         if (!values.username) {
           errors.username = 'Please include a username';
         }
-        if (values.type) {
+        if (!values.type) {
           errors.type = 'Please select a platform';
         }
         return errors;

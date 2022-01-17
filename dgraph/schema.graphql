@@ -430,7 +430,7 @@ enum LinkedAccountType {
 
 type LinkedAccount  {
 	id: ID!
-	username: String! @id
+	username: String! @search(by:[term]) 
 	type: LinkedAccountType 
 	verified: Boolean
 	hidden: Boolean

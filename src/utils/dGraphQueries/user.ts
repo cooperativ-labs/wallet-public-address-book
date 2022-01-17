@@ -53,11 +53,32 @@ export const SEARCH_USERS = gql`
 `;
 
 export const GET_USER_FROM_SOCIAL = gql`
-  query GetUserLinkedAccount($username: String!) {
-    getLinkedAccount(username: $username) {
+  query QueryUserLinkedAccount($username: String!) {
+    queryLinkedAccount(filter: { username: { anyofterms: $username } }) {
       id
       user {
-        id
+        fullName
+        email
+        profileImage
+        biography
+        expertise
+        interests
+        walletAddresses {
+          address
+          name
+          type
+          chainId
+        }
+        linkedAccounts {
+          id
+          username
+          type
+          verified
+          hidden
+          user {
+            id
+          }
+        }
       }
     }
   }

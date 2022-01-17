@@ -1,40 +1,40 @@
 import React, { FC } from 'react';
-import { LinkedAccountsType } from 'types';
+import { LinkedAccountType } from 'types';
 
 type SocialLinkItemProps = {
-  type: LinkedAccountsType;
+  type: LinkedAccountType;
   username: string;
 };
 
 const getSocialNetwork = (type, username) => {
   switch (type) {
-    case LinkedAccountsType.Linkedin:
+    case LinkedAccountType.Linkedin:
       return { link: `https://linkedin.com/in/${username}`, icon: '' };
-    case LinkedAccountsType.Github:
+    case LinkedAccountType.Github:
       return { link: `https://github.com/${username}`, icon: '' };
-    case LinkedAccountsType.Dribbble:
+    case LinkedAccountType.Dribbble:
       return { link: `https://dribbble.com/${username}`, icon: '' };
-    case LinkedAccountsType.Discord:
+    case LinkedAccountType.Discord:
       return { link: ``, icon: '' };
-    case LinkedAccountsType.Youtube:
+    case LinkedAccountType.Youtube:
       return { link: `https://youtube.com/channel/2jdkHFKS2838Fwdd923`, icon: '' };
-    case LinkedAccountsType.Soundcloud:
+    case LinkedAccountType.Soundcloud:
       return { link: `https://soundcloud.com/${username}`, icon: '' };
-    case LinkedAccountsType.Twitter:
+    case LinkedAccountType.Twitter:
       return { link: `https://twitter.com/${username}`, icon: '' };
-    case LinkedAccountsType.Facebook:
+    case LinkedAccountType.Facebook:
       return { link: `https://facebook.com/${username}`, icon: '' };
-    case LinkedAccountsType.Instagram:
+    case LinkedAccountType.Instagram:
       return { link: `https://www.instagram.com/${username}`, icon: '' };
-    case LinkedAccountsType.Medium:
+    case LinkedAccountType.Medium:
       return { link: `https://www.medium.com/${username}`, icon: '' };
-    case LinkedAccountsType.Substack:
+    case LinkedAccountType.Substack:
       return { link: `https://${username}.substack.com`, icon: '' };
-    case LinkedAccountsType.Mirror:
+    case LinkedAccountType.Mirror:
       return { link: ``, icon: '' };
-    case LinkedAccountsType.Telegram:
+    case LinkedAccountType.Telegram:
       return { link: ``, icon: '' };
-    case LinkedAccountsType.Other:
+    case LinkedAccountType.Other:
       return { link: ``, icon: '' };
     default:
       return { link: ``, icon: '' };
