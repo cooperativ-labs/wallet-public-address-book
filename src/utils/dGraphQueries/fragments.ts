@@ -134,6 +134,7 @@ export const CORE_USER_FIELDS = gql`
 
 export const CORE_USER_SEARCH_FIELDS = gql`
   fragment userSearchData on User {
+    id
     fullName
     email
     profileImage
