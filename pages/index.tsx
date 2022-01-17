@@ -7,7 +7,7 @@ import Dashboard from '@src/pages/Dashboard';
 const DashboardPage: FC = () => {
   return (
     <div data-test="component-landing" className="h-full flex">
-      <ManagerWrapper>
+      <ManagerWrapper homePage>
         <Dashboard />
       </ManagerWrapper>
     </div>

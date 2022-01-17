@@ -4,8 +4,15 @@ import { Form, Formik } from 'formik';
 import Input from '../form-components/Inputs';
 import { ApplicationStoreProps, store } from '@context/store';
 import { useRouter } from 'next/router';
+import cn from 'classnames';
 
-const UserSearch: FC<any> = () => {
+type UserSearchProps = {
+  fieldClass?: string;
+  buttonClass?: string;
+  fullWidth?: boolean;
+};
+
+const UserSearch: FC<UserSearchProps> = ({ fieldClass, buttonClass, fullWidth }) => {
   const applicationStore: ApplicationStoreProps = useContext(store);
   const { dispatch } = applicationStore;
   const router = useRouter();
@@ -33,17 +40,19 @@ const UserSearch: FC<any> = () => {
       }}
     >
       {({ isSubmitting }) => (
-        <Form className="flex items-center h-14">
+        <Form className={cn(fullWidth && 'w-full', 'flex items-center h-14')}>
           <Input
-            fieldClass="h-14 md:w-96 border-0"
+            fieldClass={cn(fieldClass ? fieldClass : 'h-14 md:w-96 border-0')}
             type="text"
             name="searchText"
-            placeholder="Search by name, email, or username"
+            placeholder="  Search by name, email, or username"
           />
           <button
             type="submit"
             disabled={isSubmitting}
-            className="bg-blue-900 hover:bg-blue-800 text-white font-bold uppercase my-8  p-4"
+            className={cn(
+              buttonClass ? buttonClass : 'bg-blue-900 hover:bg-blue-800 text-white font-bold uppercase my-8  p-4'
+            )}
           >
             Search
           </button>

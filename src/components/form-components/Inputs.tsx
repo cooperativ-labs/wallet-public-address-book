@@ -36,7 +36,7 @@ export const Input: React.FC<CustomInputProps> = ({
   onBlur,
 }) => {
   return (
-    <div className={cn(className, 'flex flex-col')}>
+    <div className={cn(className, 'flex flex-col w-full')}>
       {labelText && (
         <label htmlFor={name} className={cn(fieldLabelClass ? fieldLabelClass : defaultFieldLabelClass)}>
           {labelText}

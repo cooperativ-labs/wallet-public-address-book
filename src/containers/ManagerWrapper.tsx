@@ -16,14 +16,17 @@ const BackgroundGradient = 'bg-gradient-to-b from-gray-100 to-blue-50';
 
 type ManagerProps = {
   children: React.ReactNode;
+  homePage?: boolean;
 };
 
-const Manager: FC<ManagerProps> = ({ children }) => {
+const Manager: FC<ManagerProps> = ({ children, homePage }) => {
   return (
     <div>
-      <div className="md:mx-8">
-        <NavBar />
-      </div>
+      {!homePage && (
+        <div className="md:mx-8">
+          <NavBar />
+        </div>
+      )}
       <div className="flex md:w-screen h-full">
         <div className="flex z-30 md:z-10 min-h-full min-h-screen">
           <ManagerSideBar />
@@ -33,10 +36,10 @@ const Manager: FC<ManagerProps> = ({ children }) => {
             <div className={'mx-auto min-h-full mt-8'} style={{ maxWidth: '1580px' }}>
               {children}
             </div>
-            <div className={'mx-auto min-h-full p-10'} style={{ maxWidth: '1580px' }}>
+            {/* <div className={'mx-auto min-h-full p-10'} style={{ maxWidth: '1580px' }}>
               We would love to hear your questions and suggestions. Please email us at{' '}
               <span className="font-bold">feedback@cooperativ.io</span>.
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -47,9 +50,10 @@ const Manager: FC<ManagerProps> = ({ children }) => {
 type ManagerWrapperProps = {
   children: React.ReactNode;
   loadingComponent?: boolean;
+  homePage?: boolean;
 };
 
-const ManagerNavigationFrame: FC<ManagerWrapperProps> = ({ children, loadingComponent }) => {
+const ManagerNavigationFrame: FC<ManagerWrapperProps> = ({ children, loadingComponent, homePage }) => {
   const { userId, loading: idLoading } = useContext(UserContext);
 
   if (idLoading || loadingComponent) {
@@ -58,18 +62,19 @@ const ManagerNavigationFrame: FC<ManagerWrapperProps> = ({ children, loadingComp
     return <NeedAccount />;
   }
 
-  return <Manager>{children}</Manager>;
+  return <Manager homePage={homePage}>{children}</Manager>;
 };
 
-const ManagerWrapper: FC<ManagerWrapperProps> = ({ children, loadingComponent }) => {
+const ManagerWrapper: FC<ManagerWrapperProps> = ({ children, loadingComponent, homePage }) => {
   return (
     <SetWalletContext>
       <SetUserContext>
         <div className="h-full">
           <div className={cn(BackgroundGradient, 'min-h-full w-screen min-h-screen')}>
-            <AlertPopup />
             <WalletChooserModal />
-            <ManagerNavigationFrame loadingComponent={loadingComponent}>{children}</ManagerNavigationFrame>
+            <ManagerNavigationFrame homePage={homePage} loadingComponent={loadingComponent}>
+              {children}
+            </ManagerNavigationFrame>
           </div>
         </div>
       </SetUserContext>

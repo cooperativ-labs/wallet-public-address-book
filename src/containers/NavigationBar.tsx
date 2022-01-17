@@ -6,14 +6,19 @@ import UserSearch from '@src/components/forms/UserSearch';
 import useWindowSize from '@hooks/useWindowSize';
 import { ApplicationStoreProps, store } from '@context/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import FormattedCryptoAddress from '@src/components/FormattedCryptoAddress';
+import { useWeb3React } from '@web3-react/core';
+import { Web3Provider } from '@ethersproject/providers';
 
-interface NavBarProps {
+type NavBarProps = {
   transparent?: boolean;
   gaming?: boolean;
-}
+  noSearch?: boolean;
+};
 
-export const NavBar: FC<NavBarProps> = () => {
+export const NavBar: FC<NavBarProps> = ({ noSearch }) => {
   const applicationStore: ApplicationStoreProps = useContext(store);
+  const { account, chainId } = useWeb3React<Web3Provider>();
 
   const { dispatch } = applicationStore;
   return (
@@ -32,8 +37,9 @@ export const NavBar: FC<NavBarProps> = () => {
           </Button>
           <div className="m-2" />
         </div>
-        <UserSearch setSearchText="meep" />
+        {!noSearch && <UserSearch />}
       </div>
+
       <div className="flex justify-end">
         <span className="hidden md:flex items-center mr-3">
           <LogoutButton />
