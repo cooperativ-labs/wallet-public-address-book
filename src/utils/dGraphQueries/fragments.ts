@@ -132,6 +132,33 @@ export const CORE_USER_FIELDS = gql`
   }
 `;
 
+export const CORE_USER_SEARCH_FIELDS = gql`
+  fragment userSearchData on User {
+    fullName
+    email
+    profileImage
+    biography
+    expertise
+    interests
+    walletAddresses {
+      address
+      name
+      type
+      chainId
+    }
+    linkedAccounts {
+      id
+      username
+      type
+      verified
+      hidden
+      user {
+        id
+      }
+    }
+  }
+`;
+
 export const CORE_PROJECT_USER_FIELDS = gql`
   ${CORE_USER_FIELDS}
   ${CORE_AGREEMENT_SIGNATORY_FIELDS}

@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import { CORE_USER_SEARCH_FIELDS } from './fragments';
 
 export const GET_USERS = () => {
   return gql`
@@ -23,62 +24,21 @@ export const CHECK_USER_EXIST = () => {
 };
 
 export const SEARCH_USERS = gql`
+  ${CORE_USER_SEARCH_FIELDS}
   query QueryUsers($email: String, $fullName: String) {
     queryUser(filter: { email: { eq: $email }, or: { fullName: { anyofterms: $fullName } } }) {
-      id
-      fullName
-      email
-      profileImage
-      biography
-      expertise
-      interests
-      walletAddresses {
-        address
-        name
-        type
-        chainId
-      }
-      linkedAccounts {
-        id
-        username
-        type
-        verified
-        hidden
-        user {
-          id
-        }
-      }
+      ...userSearchData
     }
   }
 `;
 
 export const GET_USER_FROM_SOCIAL = gql`
+  ${CORE_USER_SEARCH_FIELDS}
   query QueryUserLinkedAccount($username: String!) {
     queryLinkedAccount(filter: { username: { anyofterms: $username } }) {
       id
       user {
-        fullName
-        email
-        profileImage
-        biography
-        expertise
-        interests
-        walletAddresses {
-          address
-          name
-          type
-          chainId
-        }
-        linkedAccounts {
-          id
-          username
-          type
-          verified
-          hidden
-          user {
-            id
-          }
-        }
+        ...userSearchData
       }
     }
   }
