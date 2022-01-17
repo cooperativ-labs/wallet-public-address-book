@@ -252,6 +252,23 @@ export const ADD_USER_SOCIAL_ACCOUNTS = gql`
   }
 `;
 
+export const REMOVE_USER_SOCIAL_ACCOUNT = gql`
+  mutation RemoveUserSocialAccount($userId: [ID!], $socialId: ID!) {
+    updateUser(input: { filter: { id: $userId }, remove: { linkedAccounts: { id: $socialId } } }) {
+      numUids
+      user {
+        id
+        linkedAccounts {
+          id
+        }
+      }
+    }
+    deleteLinkedAccount(filter: { id: [$socialId] }) {
+      msg
+    }
+  }
+`;
+
 export const UPDATE_USER_WALLETS = gql`
   mutation UpdateUserWallets(
     $userId: [ID!]

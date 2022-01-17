@@ -3,12 +3,8 @@ import LogoutButton from '@src/components/buttons/LogoutButton';
 import React, { FC, useContext } from 'react';
 import UserMenu from './UserMenu';
 import UserSearch from '@src/components/forms/UserSearch';
-import useWindowSize from '@hooks/useWindowSize';
 import { ApplicationStoreProps, store } from '@context/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import FormattedCryptoAddress from '@src/components/FormattedCryptoAddress';
-import { useWeb3React } from '@web3-react/core';
-import { Web3Provider } from '@ethersproject/providers';
 
 type NavBarProps = {
   transparent?: boolean;
@@ -18,7 +14,6 @@ type NavBarProps = {
 
 export const NavBar: FC<NavBarProps> = ({ noSearch }) => {
   const applicationStore: ApplicationStoreProps = useContext(store);
-  const { account, chainId } = useWeb3React<Web3Provider>();
 
   const { dispatch } = applicationStore;
   return (

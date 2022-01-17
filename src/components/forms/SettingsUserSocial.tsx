@@ -10,10 +10,9 @@ import { useMutation } from '@apollo/client';
 const fieldDiv = 'pt-3 my-2 bg-opacity-0';
 
 const SettingsUserSocial = ({ user }) => {
-  const [addSocials, { data, error }] = useMutation(ADD_USER_SOCIAL_ACCOUNTS);
+  const [addSocials, { error }] = useMutation(ADD_USER_SOCIAL_ACCOUNTS);
 
   if (error) {
-    console.log(error);
     alert('Oops. Looks like something went wrong');
   }
 
@@ -47,8 +46,6 @@ const SettingsUserSocial = ({ user }) => {
     >
       {({ isSubmitting }) => (
         <Form className="flex flex-col relative">
-          <h2 className="text-xl text-blue-900 font-semibold mb-4">Social Accounts</h2>
-          <LinkedAccountsList linkedAccounts={user.linkedAccounts} />
           <hr className="mt-6 mb-8 md:mb-4" />
           <Select className={fieldDiv} labelText="Platform" name="type">
             <option value="">select a platform</option>
