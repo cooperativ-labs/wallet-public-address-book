@@ -22,7 +22,7 @@ const FormattedCryptoAddress: FC<FormattedCryptoAddressProps> = ({
   showFull,
 }) => {
   const [copied, setCopied] = useState<boolean>(false);
-  const blockExplorer = MatchSupportedChains(chainId).blockExplorer;
+  const blockExplorer = chainId && MatchSupportedChains(chainId).blockExplorer;
   const windowSize = useWindowSize();
   const isDesktop = windowSize.width > 768;
   return (
