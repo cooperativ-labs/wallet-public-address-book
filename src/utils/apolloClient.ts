@@ -14,7 +14,7 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   // const token = localStorage.getItem('token');
-  const key = process.env.NEXT_PUBLIC_NETLIFY_CLIENT_COOPERATIV_PRODUCTION;
+  const key = process.env.NEXT_PUBLIC_NETLIFY_CLIENT_WALLETBOOK_PRODUCTION;
   return {
     headers: {
       ...headers,
