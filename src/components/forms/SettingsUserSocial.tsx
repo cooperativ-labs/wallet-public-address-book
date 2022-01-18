@@ -1,5 +1,4 @@
 import Input from '../form-components/Inputs';
-import LinkedAccountsList from '../LinkedAccountsList';
 import React from 'react';
 import Select from '../form-components/Select';
 import { ADD_USER_SOCIAL_ACCOUNTS } from '@src/utils/dGraphQueries/user';
