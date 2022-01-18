@@ -47,6 +47,7 @@ const UserSearch: FC<UserSearchProps> = ({ fieldClass, buttonClass, fullWidth })
             name="searchText"
             placeholder="  Search by name, email, or username"
           />
+
           <button
             type="submit"
             disabled={isSubmitting}

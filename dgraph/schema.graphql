@@ -111,6 +111,7 @@ type CryptoAddress  {
 	protocol: CryptoAddressProtocol 
 	chainId: Int
 	type: CryptoAddressType 
+	public: Boolean @search
 	user: User @hasInverse(field:walletAddresses) 
 	project: Project @hasInverse(field:walletAddresses) 
 }
@@ -446,6 +447,7 @@ type User  {
 	profileImage: String 
 	biography: String 
 	linkedAccounts: [LinkedAccount] @hasInverse(field:user) 
+	public: Boolean @search
 	expertise: [String] 
 	interests: [String] 
 	projects: [ProjectUser] 

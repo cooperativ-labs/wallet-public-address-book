@@ -23,7 +23,7 @@ const LinkedAccountListItem: FC<LinkedAccountListProps> = ({ account }) => {
 
   return (
     <div className="grid grid-cols-3">
-      <div className="col-span-1">{getSocialAccountOption(type)}</div> <div className="col-span-1">{username}</div>
+      <div className="col-span-1">{getSocialAccountOption(type).name}</div> <div className="col-span-1">{username}</div>
       <button
         onClick={() => {
           deleteSocial({ variables: { userId: userId, username: username, socialId: id } });

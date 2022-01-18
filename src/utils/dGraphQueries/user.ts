@@ -25,19 +25,13 @@ export const CHECK_USER_EXIST = () => {
 
 export const SEARCH_USERS = gql`
   ${CORE_USER_SEARCH_FIELDS}
-  query QueryUsers($email: String, $fullName: String) {
-    queryUser(filter: { email: { eq: $email }, or: { fullName: { anyofterms: $fullName } } }) {
+  query QueryUsers($email: String, $fullName: String, $username: String!) {
+    queryUser(filter: { email: { eq: $email }, or: { fullName: { anyofterms: $fullName }, and: { public: true } } }) {
       ...userSearchData
     }
-  }
-`;
-
-export const GET_USER_FROM_SOCIAL = gql`
-  ${CORE_USER_SEARCH_FIELDS}
-  query QueryUserLinkedAccount($username: String!) {
     queryLinkedAccount(filter: { username: { anyofterms: $username } }) {
       id
-      user {
+      user(filter: { public: true }) {
         ...userSearchData
       }
     }
@@ -62,6 +56,7 @@ export const GET_USER = gql`
       displayName
       fullName
       profileImage
+      public
       biography
       expertise
       interests
@@ -163,12 +158,14 @@ export const ADD_USER_WITH_WALLET = gql`
           creationDate: $currentDate
           email: $email
           fullName: $fullName
+          public: true
           walletAddresses: {
             name: $walletName
             address: $walletAddress
             protocol: $protocol
             chainId: $chainId
             type: $type
+            public: true
           }
           organizations: { organization: { fullLegalName: $fullName, type: "Individual" } }
         }
@@ -197,6 +194,7 @@ export const UPDATE_USER_INFORMATION = gql`
     $fullName: String!
     $displayName: String
     $profileImage: String
+    $public: Boolean
     $biography: String
     $expertiseAdd: [String]
     $expertiseRemove: [String]
@@ -211,6 +209,7 @@ export const UPDATE_USER_INFORMATION = gql`
           displayName: $displayName
           fullName: $fullName
           profileImage: $profileImage
+          public: $public
           biography: $biography
           interests: $interestsAdd
           expertise: $expertiseAdd
@@ -222,6 +221,7 @@ export const UPDATE_USER_INFORMATION = gql`
         email
         fullName
         displayName
+        public
         biography
         expertise
         interests
@@ -282,7 +282,14 @@ export const UPDATE_USER_WALLETS = gql`
       input: {
         filter: { id: $userId }
         set: {
-          walletAddresses: { name: $name, address: $walletAddress, protocol: $protocol, type: $type, chainId: $chainId }
+          walletAddresses: {
+            name: $name
+            address: $walletAddress
+            protocol: $protocol
+            type: $type
+            chainId: $chainId
+            public: true
+          }
         }
       }
     ) {

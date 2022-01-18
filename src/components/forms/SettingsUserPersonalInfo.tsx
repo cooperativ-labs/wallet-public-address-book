@@ -4,6 +4,7 @@ import { Form, Formik } from 'formik';
 import { makeRemovalList, makeSubmissionList } from '@src/utils/dGraphQueries/gqlUtils';
 import { UPDATE_USER_INFORMATION } from '@src/utils/dGraphQueries/user';
 import { useMutation } from '@apollo/client';
+import Checkbox from '../form-components/Checkbox';
 
 const fieldDiv = 'pt-3 my-2 bg-opacity-0';
 
@@ -18,7 +19,7 @@ const SettingUserPersonalInfo = ({ user }) => {
     alert('Oops. Looks like something went wrong');
   }
   if (data && !alerted) {
-    alert(`${data.updateUser.user[0].displayName} was successfully updated!`);
+    alert(`${data.updateUser.user[0].fullName} was successfully updated!`);
     setIncomingExpertise(data.updateUser.user[0].expertise);
     setIncomingInterests(data.updateUser.user[0].interests);
     setAlerted(true);
@@ -27,28 +28,26 @@ const SettingUserPersonalInfo = ({ user }) => {
   return (
     <Formik
       initialValues={{
-        email: user.email,
+        // email: user.email,
         fullName: user.fullName,
         displayName: user.displayName,
         profileImage: user.profileImage,
-        biography: user.biography,
-        expertise: user.expertise,
-        interests: user.interests,
+        public: user.public,
+        // biography: user.biography,
+        // expertise: user.expertise,
+        // interests: user.interests,
       }}
       validate={(values) => {
         const errors: any = {}; /** @TODO : Shape */
-        if (!values.email) {
-          errors.email = 'Please include an email address.';
-        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-          errors.email = 'Invalid email address';
-        }
+        // if (!values.email) {
+        //   errors.email = 'Please include an email address.';
+        // } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+        //   errors.email = 'Invalid email address';
+        // }
         if (!values.fullName) {
           errors.fullName = 'Please include your full name.';
         } else if (!/^[a-z ,.'-]+$/i.test(values.fullName)) {
           errors.fullName = 'Please only use valid characters';
-        }
-        if (!values.displayName) {
-          errors.displayName = 'Please include a display name.';
         }
         // @ts-ignore - we turn these into strings, then turn them back into arrays before submission
         if (/[^a-z A-Z 0-9,.'-]/.test(values?.expertise)) {
@@ -61,10 +60,10 @@ const SettingUserPersonalInfo = ({ user }) => {
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        const expertiseAdd = makeSubmissionList(values.expertise);
-        const interestsAdd = makeSubmissionList(values.interests);
-        const expertiseRemove = makeRemovalList(incomingExpertise, expertiseAdd);
-        const interestsRemove = makeRemovalList(incomingInterests, interestsAdd);
+        // const expertiseAdd = makeSubmissionList(values.expertise);
+        // const interestsAdd = makeSubmissionList(values.interests);
+        // const expertiseRemove = makeRemovalList(incomingExpertise, expertiseAdd);
+        // const interestsRemove = makeRemovalList(incomingInterests, interestsAdd);
         setAlerted(false);
         setSubmitting(true);
         updateUser({
@@ -72,31 +71,31 @@ const SettingUserPersonalInfo = ({ user }) => {
             userId: userId,
             //email is used as an @id field, which is not currently mutable in dGraph
             //They will be updating this in July 21, so we should allow change of email after that update
-            email: values.email,
+            // email: values.email,
             fullName: values.fullName,
             displayName: values.displayName,
             profileImage: values.profileImage,
-            biography: values.biography,
-            expertiseAdd: expertiseAdd,
-            expertiseRemove: expertiseRemove,
-            interestsAdd: interestsAdd,
-            interestsRemove: interestsRemove,
+            public: values.public,
+            // biography: values.biography,
+            // expertiseAdd: expertiseAdd,
+            // expertiseRemove: expertiseRemove,
+            // interestsAdd: interestsAdd,
+            // interestsRemove: interestsRemove,
           },
         });
         setSubmitting(false);
       }}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, values }) => (
         <Form className="flex flex-col relative">
           <h2 className="text-xl mt-8 text-blue-900 font-semibold">Personal Information</h2>
-          <Input
-            className={fieldDiv}
-            required
-            labelText="Display name"
-            name="displayName"
-            type="text"
-            placeholder="Moritz"
-          />
+          <div className="flex items-end">
+            <Checkbox className="mt-2" name="public" checked={values.public} />
+            <p className="mb-2 ml-2 text-sm text-blue-900 font-semibold text-opacity-80 ">
+              Show my profile in the public address book
+            </p>
+          </div>
+          <Input className={fieldDiv} labelText="Display name" name="displayName" type="text" placeholder="Moritz" />
           <Input
             className={fieldDiv}
             required
@@ -120,7 +119,7 @@ const SettingUserPersonalInfo = ({ user }) => {
             type="text"
             placeholder="https://source.com/your-picture"
           />
-          <Input
+          {/* <Input
             className={fieldDiv}
             fieldHeight="h-24"
             textArea
@@ -141,7 +140,7 @@ const SettingUserPersonalInfo = ({ user }) => {
             labelText="Interests (comma-separated tags)"
             name="interests"
             placeholder="UX Design, React, Government Regulation, Early 20th Century Russian History"
-          />
+          /> */}
           <button
             type="submit"
             disabled={isSubmitting}

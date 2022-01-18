@@ -138,6 +138,7 @@ export const CORE_USER_SEARCH_FIELDS = gql`
     fullName
     email
     profileImage
+    public
     biography
     expertise
     interests

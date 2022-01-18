@@ -24,12 +24,12 @@ const UserSettings: FC = () => {
     <div data-test="component-landing" className="flex flex-col w-full h-full">
       <div>
         <FormCard center>
+          <SettingsUserPersonalInfo user={user} />
+        </FormCard>
+        <FormCard center>
           <h2 className="text-xl text-blue-900 font-semibold mb-4">Wallet Addresses</h2>
           <WalletAddressList walletAddresses={user.walletAddresses} />
           <SettingsUserWallets user={user} />
-        </FormCard>
-        <FormCard center>
-          <SettingsUserPersonalInfo user={user} />
         </FormCard>
         <FormCard center>
           <h2 className="text-xl text-blue-900 font-semibold mb-4">Social Accounts</h2>

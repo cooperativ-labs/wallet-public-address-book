@@ -1,3 +1,4 @@
+import { IconName } from '@fortawesome/fontawesome-svg-core';
 import { CryptoAddressProtocol, LinkedAccountType, ProjectInfoDocumentType, ProjectUserRole } from 'types';
 
 export const backerTypeOptions = [
@@ -39,24 +40,24 @@ export const getCategoryOption = (category) => {
 };
 
 export const socialAccountOptions = [
-  { value: LinkedAccountType.Linkedin, name: 'LinkedIn' },
-  { value: LinkedAccountType.Github, name: 'Github' },
-  { value: LinkedAccountType.Dribbble, name: 'Dribble' },
-  { value: LinkedAccountType.Discord, name: 'Discord' },
-  { value: LinkedAccountType.Youtube, name: 'Youtube' },
-  { value: LinkedAccountType.Soundcloud, name: 'SoundCloud' },
-  { value: LinkedAccountType.Twitter, name: 'Twitter' },
-  { value: LinkedAccountType.Facebook, name: 'Facebook' },
-  { value: LinkedAccountType.Instagram, name: 'Instagram' },
-  { value: LinkedAccountType.Medium, name: 'Medium' },
-  { value: LinkedAccountType.Substack, name: 'Substack' },
-  { value: LinkedAccountType.Mirror, name: 'Mirror' },
-  { value: LinkedAccountType.Telegram, name: 'Telegram' },
-  { value: LinkedAccountType.Other, name: 'Other' },
+  { value: LinkedAccountType.Linkedin, name: 'LinkedIn', icon: 'linkedin' },
+  { value: LinkedAccountType.Github, name: 'Github', icon: 'github' },
+  { value: LinkedAccountType.Dribbble, name: 'Dribble', icon: 'dribbble' },
+  { value: LinkedAccountType.Discord, name: 'Discord', icon: 'discord' },
+  { value: LinkedAccountType.Youtube, name: 'Youtube', icon: 'youtube' },
+  { value: LinkedAccountType.Soundcloud, name: 'SoundCloud', icon: 'soundcloud' },
+  { value: LinkedAccountType.Twitter, name: 'Twitter', icon: 'twitter' },
+  { value: LinkedAccountType.Facebook, name: 'Facebook', icon: 'facebook' },
+  { value: LinkedAccountType.Instagram, name: 'Instagram', icon: 'instagram' },
+  { value: LinkedAccountType.Medium, name: 'Medium', icon: 'medium' },
+  { value: LinkedAccountType.Substack, name: 'Substack', icon: '' },
+  { value: LinkedAccountType.Mirror, name: 'Mirror', icon: '' },
+  { value: LinkedAccountType.Telegram, name: 'Telegram', icon: 'telegram' },
+  { value: LinkedAccountType.Other, name: 'Other', icon: '' },
 ];
 export const getSocialAccountOption = (type: LinkedAccountType) => {
   const option = socialAccountOptions.find((account) => (account.value === type ? type : null));
-  return option.name;
+  return option;
 };
 
 export const intentionOptions = [
