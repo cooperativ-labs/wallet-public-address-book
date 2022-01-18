@@ -1,4 +1,4 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import UserList from '@src/components/UserList';
 import UserSearch from '@src/components/forms/UserSearch';
 import { ApplicationStoreProps, store } from '@context/store';
@@ -9,11 +9,14 @@ import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import FormattedCryptoAddress from '@src/components/FormattedCryptoAddress';
 import LogoutButton from '@src/components/buttons/LogoutButton';
+import { User } from 'types';
+import { onlyUnique } from '@src/utils/helpersGeneral';
 
 const Dashboard: FC = () => {
   const { account, chainId } = useWeb3React<Web3Provider>();
   const applicationStore: ApplicationStoreProps = useContext(store);
   const { searchText } = applicationStore;
+  const [results, setResults] = useState<User[] | undefined>(undefined);
 
   const createSearchQuery = () => {
     if (searchText && searchText.length > 3) {
@@ -30,20 +33,30 @@ const Dashboard: FC = () => {
   });
   const socialResult = socialResultData?.queryLinkedAccount;
 
-  const getUserFromSocial = (results) => {
-    return results?.map((account, i) => {
+  const getUserFromSocial = (socialResults) => {
+    return socialResults?.map((account, i) => {
       return account.user;
     });
   };
-  const socialResultPresent = socialResult && socialResult[0] && getUserFromSocial(socialResult);
-  const finalResults = socialResult && socialResult[0] ? [...socialResultPresent, ...userResult] : userResult;
+
+  useEffect(() => {
+    const socialResultPresent = getUserFromSocial(socialResult);
+    const finalResults = () => {
+      if (socialResultPresent && socialResultPresent[0]) {
+        return [...socialResultPresent, ...userResult];
+      }
+      return userResult;
+    };
+    const unique = finalResults() && finalResults().filter(onlyUnique);
+    setResults(unique);
+  }, [socialResult, userResult]);
 
   return (
     <div data-test="component-landing" className="flex flex-col w-full h-full">
       <div className="md:mx-4">
         <div className="flex justify-between mb-8">
           <div className="flex">
-            {finalResults ? (
+            {results ? (
               <UserSearch />
             ) : (
               <FormattedCryptoAddress
@@ -64,7 +77,7 @@ const Dashboard: FC = () => {
           </div>
         </div>
         <div className="flex">
-          {!finalResults && (
+          {!results && (
             <div className="flex mx-auto mt-64 w-full px-24">
               <UserSearch
                 fullWidth
@@ -73,7 +86,7 @@ const Dashboard: FC = () => {
               />
             </div>
           )}
-          <div className="mt-4">{finalResults && <UserList users={finalResults} />}</div>
+          <div className="mt-4">{results && <UserList users={results} />}</div>
         </div>
       </div>
     </div>
