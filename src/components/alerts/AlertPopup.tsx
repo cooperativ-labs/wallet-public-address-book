@@ -6,10 +6,10 @@ const AlertPopup: FC = () => {
   const [dismissed, setDismissed] = useState(false);
   useEffect(() => {
     setSelection(window.sessionStorage);
-  });
+  }, [setSelection]);
   useEffect(() => {
     setDismissed(selection?.getItem('DISMISS_ALERT_POPUP'));
-  });
+  }, [setDismissed]);
 
   return (
     <>

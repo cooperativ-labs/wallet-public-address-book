@@ -1,10 +1,10 @@
-import Button from '@src/components/buttons/Button';
+import FormattedCryptoAddress from '@src/components/FormattedCryptoAddress';
 import LogoutButton from '@src/components/buttons/LogoutButton';
-import React, { FC, useContext } from 'react';
+import React, { FC } from 'react';
 import UserMenu from './UserMenu';
 import UserSearch from '@src/components/forms/UserSearch';
-import { ApplicationStoreProps, store } from '@context/store';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useWeb3React } from '@web3-react/core';
+import { Web3Provider } from '@ethersproject/providers';
 
 type NavBarProps = {
   transparent?: boolean;
@@ -13,14 +13,26 @@ type NavBarProps = {
 };
 
 export const NavBar: FC<NavBarProps> = ({ noSearch }) => {
-  return (
-    <div
-      className="py-2 px-2 pr-4 md:mt-4 z-30 flex mx-auto justify-between self-center items-center "
-      style={{ maxWidth: '1580px' }}
-    >
-      <div className=" justify-start flex items-center">{!noSearch && <UserSearch />}</div>
+  const { account, chainId } = useWeb3React<Web3Provider>();
 
-      <div className="flex justify-end">
+  return (
+    <div className="flex py-2 px-2 pr-4 md:mt-4 z-30  mx-auto justify-between">
+      <div className=" justify-start flex items-center">
+        {!noSearch ? (
+          <UserSearch />
+        ) : (
+          <FormattedCryptoAddress
+            className="md:text-xl font-bold text-gray-700 items-center"
+            address={account}
+            chainId={chainId}
+            withCopy
+            showFull
+            label="My address:"
+          />
+        )}{' '}
+      </div>
+
+      <div className="flex justify-end items-center ">
         <span className="hidden md:flex items-center mr-3">
           <LogoutButton />
         </span>

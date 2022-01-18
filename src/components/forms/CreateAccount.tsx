@@ -69,7 +69,7 @@ const CreateAccount: FC = () => {
               fullName: values.fullName,
               walletAddress: walletAddress,
               walletName: values.walletName,
-              chainId: parseInt(values.chainId),
+              chainId: parseInt(values.chainId, 10),
               protocol: MatchSupportedChains(chainId).protocol,
             },
           });

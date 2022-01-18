@@ -4,9 +4,9 @@ import NavBar from './NavigationBar';
 import React, { FC, useContext } from 'react';
 import SetUserContext, { UserContext } from '@src/utils/SetUserContext';
 
-import AlertPopup from '@src/components/alerts/AlertPopup';
 import LoadingModal from '@src/components/loading/ModalLoading';
 import NeedAccount from './ModalNeedAccount';
+import SearchResults from '@src/utils/helpersSearch';
 import SetWalletContext from '@src/web3/SetWalletContext';
 import WalletChooserModal from './WalletChooserModal';
 
@@ -18,19 +18,15 @@ type ManagerProps = {
 };
 
 const Manager: FC<ManagerProps> = ({ children, homePage }) => {
+  const results = SearchResults();
   return (
-    <div>
-      {!homePage && (
-        <div className="md:mx-8">
-          <NavBar />
-        </div>
-      )}
-      <div className="flex md:w-screen h-full">
+    <div className="mx-auto" style={{ maxWidth: '1580px' }}>
+      <div className="md:mx-6">
+        <NavBar noSearch={homePage && !results} />
+        {/* <div className="flex md:w-screen h-full"> */}
         <div className="flex-grow h-full z-10">
-          <div className="h-full px-2 md:px-8 py-2 ">
-            <div className={'mx-auto min-h-full md:mt-12'} style={{ maxWidth: '1580px' }}>
-              {children}
-            </div>
+          <div className="h-full px-2 py-2 md:mt-4">
+            <div className="mx-auto min-h-full">{children}</div>
             {/* <div className={'mx-auto min-h-full p-10'} style={{ maxWidth: '1580px' }}>
               We would love to hear your questions and suggestions. Please email us at{' '}
               <span className="font-bold">feedback@cooperativ.io</span>.

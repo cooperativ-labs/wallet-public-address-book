@@ -54,7 +54,7 @@ const UserSearch: FC<UserSearchProps> = ({ fieldClass, buttonClass, fullWidth })
             className={cn(
               buttonClass
                 ? buttonClass
-                : 'h-10 md:h-14 bg-blue-900 hover:bg-blue-800 text-white text-sm md:text-base font-bold uppercase md:my-8  px-2 md:p-4'
+                : 'h-10 md:h-14 bg-blue-900 hover:bg-blue-800 text-white text-sm md:text-base font-bold uppercase  px-2 md:p-4'
             )}
           >
             Search
