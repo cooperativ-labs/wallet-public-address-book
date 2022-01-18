@@ -17,13 +17,13 @@ const Dashboard: FC = () => {
   return (
     <div data-test="component-landing" className="flex flex-col w-full h-full">
       <div className="md:mx-4">
-        <div className="flex justify-between mb-8">
+        <div className="flex justify-between mb-8 items-center">
           <div className="flex">
             {results ? (
               <UserSearch />
             ) : (
               <FormattedCryptoAddress
-                className="text-xl font-bold text-gray-700 items-center"
+                className="md:text-xl font-bold text-gray-700 items-center"
                 address={account}
                 chainId={chainId}
                 withCopy
@@ -32,8 +32,8 @@ const Dashboard: FC = () => {
               />
             )}
           </div>
-          <div className="flex justify-end">
-            <span className="hidden md:flex items-center mr-3">
+          <div className="flex justify-end mr-3">
+            <span className="hidden md:flex items-center mr-3 ">
               <LogoutButton />
             </span>
             <UserMenu />
@@ -41,15 +41,15 @@ const Dashboard: FC = () => {
         </div>
         <div className="flex">
           {!results && (
-            <div className="flex mx-auto mt-64 w-full px-24">
+            <div className="flex mx-auto mt-24 md:mt-64 w-full md:px-24">
               <UserSearch
                 fullWidth
-                fieldClass="md:h-24 md:w-full border-0"
-                buttonClass="bg-blue-900 hover:bg-blue-800 h-24 text-white font-bold uppercase md:w-32 p-4"
+                fieldClass="h-20 md:h-24 md:w-full border-0"
+                buttonClass="bg-blue-900 hover:bg-blue-800 h-20 md:h-24 text-white font-bold uppercase md:w-32 p-4"
               />
             </div>
           )}
-          <div className="mt-4">{results && <UserList users={results} />}</div>
+          <div className="mt-4 w-full md:w-min">{results && <UserList users={results} />}</div>
         </div>
       </div>
     </div>

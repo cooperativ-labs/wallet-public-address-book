@@ -13,27 +13,12 @@ type NavBarProps = {
 };
 
 export const NavBar: FC<NavBarProps> = ({ noSearch }) => {
-  const applicationStore: ApplicationStoreProps = useContext(store);
-
-  const { dispatch } = applicationStore;
   return (
     <div
-      className="py-2 px-2 pr-4 mt-1 md:mt-4 z-30 flex mx-auto justify-between self-center items-center "
+      className="py-2 px-2 pr-4 md:mt-4 z-30 flex mx-auto justify-between self-center items-center "
       style={{ maxWidth: '1580px' }}
     >
-      <div className="ml-1 justify-start flex items-center">
-        <div className="flex md:hidden">
-          <Button
-            onClick={() => {
-              dispatch({ type: 'TOGGLE_MANAGER_SIDEBAR' });
-            }}
-          >
-            <FontAwesomeIcon icon={['fas', 'bars']} size="lg" />
-          </Button>
-          <div className="m-2" />
-        </div>
-        {!noSearch && <UserSearch />}
-      </div>
+      <div className=" justify-start flex items-center">{!noSearch && <UserSearch />}</div>
 
       <div className="flex justify-end">
         <span className="hidden md:flex items-center mr-3">

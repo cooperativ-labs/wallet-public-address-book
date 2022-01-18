@@ -101,7 +101,7 @@ const CreateAccount: FC = () => {
                 <Checkbox
                   name="isContractAddress"
                   checked={values.isContractAddress}
-                  labelText="This address only works on one network"
+                  labelText="This address only works on one EVM network"
                   sideLabel
                 />
 

@@ -88,7 +88,7 @@ const SettingUserPersonalInfo = ({ user }) => {
     >
       {({ isSubmitting, values }) => (
         <Form className="flex flex-col relative">
-          <h2 className="text-xl mt-8 text-blue-900 font-semibold">Personal Information</h2>
+          <h2 className="text-xl md:mt-8 text-blue-900 font-semibold">Personal Information</h2>
           <div className="flex items-end">
             <Checkbox className="mt-2" name="public" checked={values.public} />
             <p className="mb-2 ml-2 text-sm text-blue-900 font-semibold text-opacity-80 ">

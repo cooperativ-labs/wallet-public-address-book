@@ -21,7 +21,7 @@ const UserSettings: FC = () => {
   }
 
   return (
-    <div data-test="component-landing" className="flex flex-col w-full h-full">
+    <div data-test="component-landing" className="flex flex-col w-full h-full mt-4">
       <div>
         <FormCard center>
           <SettingsUserPersonalInfo user={user} />

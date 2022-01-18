@@ -28,12 +28,9 @@ const Manager: FC<ManagerProps> = ({ children, homePage }) => {
         </div>
       )}
       <div className="flex md:w-screen h-full">
-        <div className="flex z-30 md:z-10 min-h-full min-h-screen">
-          <ManagerSideBar />
-        </div>
         <div className="flex-grow h-full z-10">
-          <div className="h-full px-4 md:px-8 py-2 ">
-            <div className={'mx-auto min-h-full mt-8'} style={{ maxWidth: '1580px' }}>
+          <div className="h-full px-2 md:px-8 py-2 ">
+            <div className={'mx-auto min-h-full md:mt-12'} style={{ maxWidth: '1580px' }}>
               {children}
             </div>
             {/* <div className={'mx-auto min-h-full p-10'} style={{ maxWidth: '1580px' }}>

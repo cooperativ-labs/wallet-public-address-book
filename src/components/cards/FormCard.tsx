@@ -10,8 +10,8 @@ const FormCard: React.FC<FormCardProps> = ({ children, center, maxWidth, small }
       className={cn(
         center && 'mx-auto',
         !maxWidth && 'max-w-2xl',
-        small ? 'pt-6 md:p-6' : 'pt-8 md:p-8',
-        'min-h-max md:mb-10 md:rounded-lg bg-opacity-0 md:bg-opacity-100 shadow-none md:shadow-xl'
+        small ? 'pt-6 md:p-6' : 'pt-8 p-4 md:p-8',
+        'min-h-max mb-6 md:mb-10 md:rounded-lg bg-opacity-100 shadow-none md:shadow-xl'
       )}
     >
       {children}

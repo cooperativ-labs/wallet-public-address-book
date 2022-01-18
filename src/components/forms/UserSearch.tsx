@@ -42,7 +42,7 @@ const UserSearch: FC<UserSearchProps> = ({ fieldClass, buttonClass, fullWidth })
       {({ isSubmitting }) => (
         <Form className={cn(fullWidth && 'w-full', 'flex items-center h-14')}>
           <Input
-            fieldClass={cn(fieldClass ? fieldClass : 'h-14 md:w-96 border-0')}
+            fieldClass={cn(fieldClass ? fieldClass : 'h-10 md:h-14 w-56 md:w-96 border-0')}
             type="text"
             name="searchText"
             placeholder="  Search by name, email, or username"
@@ -52,7 +52,9 @@ const UserSearch: FC<UserSearchProps> = ({ fieldClass, buttonClass, fullWidth })
             type="submit"
             disabled={isSubmitting}
             className={cn(
-              buttonClass ? buttonClass : 'bg-blue-900 hover:bg-blue-800 text-white font-bold uppercase my-8  p-4'
+              buttonClass
+                ? buttonClass
+                : 'h-10 md:h-14 bg-blue-900 hover:bg-blue-800 text-white text-sm md:text-base font-bold uppercase md:my-8  px-2 md:p-4'
             )}
           >
             Search
