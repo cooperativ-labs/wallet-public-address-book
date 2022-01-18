@@ -25,6 +25,8 @@
   "dependencies": {
     "@apollo/client": "^3.5.7",
     "@apollo/react-ssr": "^4.0.0",
+    "@babel/plugin-syntax-flow": "^7.16.7",
+    "@babel/plugin-transform-react-jsx": "^7.16.7",
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.13.0",
     "@ethersproject/bignumber": "^5.1.1",
@@ -54,8 +56,6 @@
     "axios": "^0.21.1",
     "babel-loader": "^8.2.2",
     "classnames": "^2.3.1",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.6",
     "ethers": "^5.5.3",
     "formik": "^2.2.9",
     "graphql": "^16.2.0",
