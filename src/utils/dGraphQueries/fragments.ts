@@ -122,6 +122,8 @@ export const CORE_USER_FIELDS = gql`
       id
       address
       name
+      chainId
+      description
     }
     projects {
       id
@@ -147,6 +149,7 @@ export const CORE_USER_SEARCH_FIELDS = gql`
       name
       type
       chainId
+      description
     }
     linkedAccounts {
       id

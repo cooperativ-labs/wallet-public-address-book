@@ -71,10 +71,12 @@ export const GET_USER = gql`
         }
       }
       walletAddresses {
+        id
         name
         address
         type
         chainId
+        description
       }
       organizations {
         organization {
