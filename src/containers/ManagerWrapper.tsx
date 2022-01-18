@@ -1,6 +1,4 @@
 import cn from 'classnames';
-
-import ManagerSideBar from './ManagerSideBar';
 import NavBar from './NavigationBar';
 
 import React, { FC, useContext } from 'react';

@@ -1,6 +1,7 @@
 import React, { FC, useContext } from 'react';
 
 import FormCard from '@src/components/cards/FormCard';
+import LinkedAccountsList from '@src/components/LinkedAccountsList';
 import Loading from '@src/components/loading/Loading';
 import SettingsUserPersonalInfo from '@src/components/forms/SettingsUserPersonalInfo';
 import SettingsUserSocial from '@src/components/forms/SettingsUserSocial';
@@ -9,7 +10,6 @@ import WalletAddressList from '@src/components/WalletAddressList';
 import { GET_USER } from '@src/utils/dGraphQueries/user';
 import { useQuery } from '@apollo/client';
 import { UserContext } from '@src/utils/SetUserContext';
-import LinkedAccountsList from '@src/components/LinkedAccountsList';
 
 const UserSettings: FC = () => {
   const { userId } = useContext(UserContext);

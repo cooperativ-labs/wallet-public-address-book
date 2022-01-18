@@ -1,4 +1,4 @@
-import Button from '@src/components/Buttons/Button';
+import Button from '@src/components/buttons/Button';
 import cn from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useWeb3React } from '@web3-react/core';
@@ -84,7 +84,7 @@ const ChooseConnector: FC = () => {
         );
       })}
       <h2 className="text-lg font-medium text-center text-gray-600 my-6">
-        <span>Don't have a wallet?</span>{' '}
+        <span>{`Dont have a wallet?`}</span>{' '}
         <span className="underline">
           <a href="https://metamask.io/">Download Here</a>
         </span>

@@ -1,4 +1,4 @@
-import Button from '@src/components/Buttons/Button';
+import Button from '@src/components/buttons/Button';
 import LogoutButton from '@src/components/buttons/LogoutButton';
 import React, { FC, useContext } from 'react';
 import UserMenu from './UserMenu';

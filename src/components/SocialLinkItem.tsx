@@ -1,7 +1,7 @@
-import { IconName } from '@fortawesome/fontawesome-svg-core';
+import React, { FC } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getSocialAccountOption } from '@src/utils/enumConverters';
-import React, { FC } from 'react';
+import { IconName } from '@fortawesome/fontawesome-svg-core';
 import { LinkedAccountType } from 'types';
 
 type SocialLinkItemProps = {

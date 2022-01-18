@@ -1,10 +1,10 @@
 import React, { FC, useContext } from 'react';
 import { Form, Formik } from 'formik';
 
+import cn from 'classnames';
 import Input from '../form-components/Inputs';
 import { ApplicationStoreProps, store } from '@context/store';
 import { useRouter } from 'next/router';
-import cn from 'classnames';
 
 type UserSearchProps = {
   fieldClass?: string;

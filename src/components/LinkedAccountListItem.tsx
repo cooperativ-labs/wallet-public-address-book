@@ -1,7 +1,7 @@
 import React, { FC, useContext, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getSocialAccountOption } from '@src/utils/enumConverters';
 import { LinkedAccount } from 'types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { REMOVE_USER_SOCIAL_ACCOUNT } from '@src/utils/dGraphQueries/user';
 import { useMutation } from '@apollo/client';
 import { UserContext } from '@src/utils/SetUserContext';

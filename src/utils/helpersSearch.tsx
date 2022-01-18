@@ -1,9 +1,9 @@
-import { useQuery } from '@apollo/client';
 import { ApplicationStoreProps, store } from '@context/store';
-import { useContext, useEffect, useState } from 'react';
-import { User } from 'types';
-import { SEARCH_USERS } from './dGraphQueries/user';
 import { onlyUnique } from './helpersGeneral';
+import { SEARCH_USERS } from './dGraphQueries/user';
+import { useContext, useEffect, useState } from 'react';
+import { useQuery } from '@apollo/client';
+import { User } from 'types';
 
 const SearchResults = () => {
   const applicationStore: ApplicationStoreProps = useContext(store);

@@ -53,7 +53,7 @@ const SettingsUserWallets = ({ user }) => {
             walletAddress: values.address,
             protocol: CryptoAddressProtocol.Eth,
             type: values.isContractAddress ? CryptoAddressType.Contract : CryptoAddressType.Wallet,
-            chainId: parseInt(values.chainId),
+            chainId: parseInt(values.chainId, 10),
           },
         });
 

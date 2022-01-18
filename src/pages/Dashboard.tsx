@@ -2,12 +2,12 @@ import React, { FC } from 'react';
 import UserList from '@src/components/UserList';
 import UserSearch from '@src/components/forms/UserSearch';
 
-import UserMenu from '@src/containers/UserMenu';
-import { useWeb3React } from '@web3-react/core';
-import { Web3Provider } from '@ethersproject/providers';
 import FormattedCryptoAddress from '@src/components/FormattedCryptoAddress';
 import LogoutButton from '@src/components/buttons/LogoutButton';
 import SearchResults from '@src/utils/helpersSearch';
+import UserMenu from '@src/containers/UserMenu';
+import { useWeb3React } from '@web3-react/core';
+import { Web3Provider } from '@ethersproject/providers';
 
 const Dashboard: FC = () => {
   const { account, chainId } = useWeb3React<Web3Provider>();

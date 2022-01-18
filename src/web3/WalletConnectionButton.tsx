@@ -1,4 +1,4 @@
-import Button from '@src/components/Buttons/Button';
+import Button from '@src/components/buttons/Button';
 import cn from 'classnames';
 import React, { FC, useEffect, useState } from 'react';
 import { GetConnector, MatchSupportedChains } from './connectors';
