@@ -6,6 +6,7 @@ import UserSearch from '@src/components/forms/UserSearch';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 import SearchResults, { NoResults } from '@src/utils/helpersSearch';
+import { useRouter } from 'next/router';
 
 type NavBarProps = {
   transparent?: boolean;
@@ -14,9 +15,10 @@ type NavBarProps = {
 
 export const NavBar: FC<NavBarProps> = () => {
   const { account, chainId } = useWeb3React<Web3Provider>();
+  const router = useRouter();
 
   const results = SearchResults();
-  const hideSearch = NoResults(results);
+  const hideSearch = NoResults(results) && router.route === '/';
 
   return (
     <div className="flex py-2 px-2 pr-4 md:mt-4 z-30  mx-auto justify-between">
