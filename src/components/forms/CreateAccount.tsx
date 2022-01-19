@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { ADD_USER_WITH_WALLET } from '@src/utils/dGraphQueries/user';
-import { currentDate } from '@src/utils/dGraphQueries/gqlUtils';
+import { checkEmailTaken, currentDate } from '@src/utils/dGraphQueries/gqlUtils';
 import { Form, Formik } from 'formik';
 
 import Checkbox from '../form-components/Checkbox';
@@ -40,7 +40,7 @@ const CreateAccount: FC = () => {
         chainId: `${chainId}`,
         isContractAddress: false,
       }}
-      validate={(values) => {
+      validate={async (values) => {
         const errors: any = {}; /** @TODO : Shape */
         if (!walletAddress) {
           alert('Use of Contributor Credits requires a wallet');
@@ -49,6 +49,9 @@ const CreateAccount: FC = () => {
           errors.email = 'Please include an email address';
         } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
           errors.email = 'Invalid email address';
+        }
+        if (await checkEmailTaken(values.email)) {
+          errors.email = 'That email is taken';
         }
         if (!values.fullName) {
           errors.fullName = 'Please include a first name';
