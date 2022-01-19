@@ -65,7 +65,7 @@ const CreateAccount: FC = () => {
           addUser({
             variables: {
               currentDate: currentDate,
-              email: values.email,
+              email: values.email.toLowerCase(),
               fullName: values.fullName,
               walletAddress: walletAddress,
               walletName: values.walletName,
