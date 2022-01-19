@@ -35,7 +35,7 @@ const SettingsUserSocial = ({ user }) => {
         setSubmitting(true);
         addSocials({
           variables: {
-            user: user.id,
+            userId: user.id,
             username: values.username,
             type: values.type,
           },
