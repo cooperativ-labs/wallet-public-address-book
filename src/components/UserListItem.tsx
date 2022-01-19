@@ -26,7 +26,7 @@ const UserListItem: FC<UserListItemProps> = ({ user }) => {
           </div>
           <div className="text-md text-gray-500 ">
             <div>{email}</div>
-            <div className="flex mt-4">
+            <div className="flex flex-wrap mt-4">
               {linkedAccounts.map((account, i) => {
                 return <SocialLinkItem type={account.type} username={account.username} key={i} />;
               })}

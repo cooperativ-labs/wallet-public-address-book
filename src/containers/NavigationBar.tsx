@@ -5,22 +5,23 @@ import UserMenu from './UserMenu';
 import UserSearch from '@src/components/forms/UserSearch';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
+import SearchResults, { NoResults } from '@src/utils/helpersSearch';
 
 type NavBarProps = {
   transparent?: boolean;
   gaming?: boolean;
-  noSearch?: boolean;
 };
 
-export const NavBar: FC<NavBarProps> = ({ noSearch }) => {
+export const NavBar: FC<NavBarProps> = () => {
   const { account, chainId } = useWeb3React<Web3Provider>();
+
+  const results = SearchResults();
+  const hideSearch = NoResults(results);
 
   return (
     <div className="flex py-2 px-2 pr-4 md:mt-4 z-30  mx-auto justify-between">
       <div className=" justify-start flex items-center">
-        {!noSearch ? (
-          <UserSearch />
-        ) : (
+        {hideSearch ? (
           <FormattedCryptoAddress
             className="md:text-xl font-bold text-gray-700 items-center"
             address={account}
@@ -29,7 +30,9 @@ export const NavBar: FC<NavBarProps> = ({ noSearch }) => {
             showFull
             label="My address:"
           />
-        )}{' '}
+        ) : (
+          <UserSearch />
+        )}
       </div>
 
       <div className="flex justify-end items-center ">

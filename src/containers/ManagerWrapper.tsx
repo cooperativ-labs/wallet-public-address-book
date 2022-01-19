@@ -22,7 +22,7 @@ const Manager: FC<ManagerProps> = ({ children, homePage }) => {
   return (
     <div className="mx-auto" style={{ maxWidth: '1580px' }}>
       <div className="md:mx-6">
-        <NavBar noSearch={homePage && !results} />
+        <NavBar />
         {/* <div className="flex md:w-screen h-full"> */}
         <div className="flex-grow h-full z-10">
           <div className="h-full px-2 py-2 md:mt-4">

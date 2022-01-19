@@ -5,6 +5,10 @@ import { useContext, useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { User } from 'types';
 
+export const NoResults = (results) => {
+  return !results || results.length < 1;
+};
+
 const SearchResults = () => {
   const applicationStore: ApplicationStoreProps = useContext(store);
   const { searchText } = applicationStore;

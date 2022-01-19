@@ -42,7 +42,7 @@ export const getCategoryOption = (category) => {
 export const socialAccountOptions = [
   { value: LinkedAccountType.Linkedin, name: 'LinkedIn', icon: 'linkedin' },
   { value: LinkedAccountType.Github, name: 'Github', icon: 'github' },
-  { value: LinkedAccountType.Dribbble, name: 'Dribble', icon: 'dribbble' },
+  { value: LinkedAccountType.Dribbble, name: 'Dribbble', icon: 'dribbble' },
   { value: LinkedAccountType.Discord, name: 'Discord', icon: 'discord' },
   { value: LinkedAccountType.Youtube, name: 'Youtube', icon: 'youtube' },
   { value: LinkedAccountType.Soundcloud, name: 'SoundCloud', icon: 'soundcloud' },
