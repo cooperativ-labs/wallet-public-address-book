@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
 import { UPDATE_USER_INFORMATION } from '@src/utils/dGraphQueries/user';
 import { useMutation } from '@apollo/client';
+import { makeSubmissionList, makeRemovalList } from '@src/utils/dGraphQueries/gqlUtils';
 
 const fieldDiv = 'pt-3 my-2 bg-opacity-0';
 
@@ -27,14 +28,14 @@ const SettingUserPersonalInfo = ({ user }) => {
   return (
     <Formik
       initialValues={{
-        // email: user.email,
+        email: user.email,
         fullName: user.fullName,
         displayName: user.displayName,
         profileImage: user.profileImage,
         public: user.public,
-        // biography: user.biography,
-        // expertise: user.expertise,
-        // interests: user.interests,
+        biography: user.biography,
+        expertise: user.expertise,
+        interests: user.interests,
       }}
       validate={(values) => {
         const errors: any = {}; /** @TODO : Shape */
@@ -59,10 +60,10 @@ const SettingUserPersonalInfo = ({ user }) => {
         return errors;
       }}
       onSubmit={(values, { setSubmitting }) => {
-        // const expertiseAdd = makeSubmissionList(values.expertise);
-        // const interestsAdd = makeSubmissionList(values.interests);
-        // const expertiseRemove = makeRemovalList(incomingExpertise, expertiseAdd);
-        // const interestsRemove = makeRemovalList(incomingInterests, interestsAdd);
+        const expertiseAdd = makeSubmissionList(values.expertise);
+        const interestsAdd = makeSubmissionList(values.interests);
+        const expertiseRemove = makeRemovalList(incomingExpertise, expertiseAdd);
+        const interestsRemove = makeRemovalList(incomingInterests, interestsAdd);
         setAlerted(false);
         setSubmitting(true);
         updateUser({
@@ -75,11 +76,11 @@ const SettingUserPersonalInfo = ({ user }) => {
             displayName: values.displayName,
             profileImage: values.profileImage,
             public: values.public,
-            // biography: values.biography,
-            // expertiseAdd: expertiseAdd,
-            // expertiseRemove: expertiseRemove,
-            // interestsAdd: interestsAdd,
-            // interestsRemove: interestsRemove,
+            biography: values.biography,
+            expertiseAdd: expertiseAdd,
+            expertiseRemove: expertiseRemove,
+            interestsAdd: interestsAdd,
+            interestsRemove: interestsRemove,
           },
         });
         setSubmitting(false);
@@ -118,14 +119,7 @@ const SettingUserPersonalInfo = ({ user }) => {
             type="text"
             placeholder="https://source.com/your-picture"
           />
-          {/* <Input
-            className={fieldDiv}
-            fieldHeight="h-24"
-            textArea
-            labelText="Biography"
-            name="biography"
-            placeholder=""
-          />
+          <Input className={fieldDiv} fieldHeight="h-24" textArea labelText="Biography" name="biography" />
           <Input
             className={fieldDiv}
             textArea
@@ -139,7 +133,7 @@ const SettingUserPersonalInfo = ({ user }) => {
             labelText="Interests (comma-separated tags)"
             name="interests"
             placeholder="UX Design, React, Government Regulation, Early 20th Century Russian History"
-          /> */}
+          />
           <button
             type="submit"
             disabled={isSubmitting}

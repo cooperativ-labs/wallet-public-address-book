@@ -77,6 +77,7 @@ export const GET_USER = gql`
         type
         chainId
         description
+        public
       }
       organizations {
         organization {
