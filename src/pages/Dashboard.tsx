@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
 import UserList from '@src/components/UserList';
 import UserSearch from '@src/components/forms/UserSearch';
-import SearchResults, { NoResults } from '@src/utils/helpersSearch';
+import SearchResults from '@src/utils/helpersSearch';
 
 const Dashboard: FC = () => {
-  const results = SearchResults();
+  const { searchTextPresent, hasResults, results } = SearchResults();
 
   return (
     <div data-test="component-landing" className="flex flex-col w-full h-full">
       <div className="flex">
-        {NoResults(results) && (
+        {!searchTextPresent && !hasResults && (
           <div className="flex mx-auto mt-24 md:mt-64 w-full md:px-24">
             <UserSearch
               fullWidth
@@ -18,8 +18,11 @@ const Dashboard: FC = () => {
             />
           </div>
         )}
-        {!NoResults(results) && (
-          <div className="mt-4 w-full md:w-min">
+        {searchTextPresent && !hasResults && (
+          <div className="flex mx-auto mt-24 md:mt-64 font-medium text-cLightBlue text-xl">{`Sorry, couldn't find anyone.`}</div>
+        )}
+        {searchTextPresent && hasResults && (
+          <div className="mt-4 w-full md:w-min ">
             <UserList users={results} />
           </div>
         )}

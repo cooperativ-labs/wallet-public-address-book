@@ -5,14 +5,10 @@ import { useContext, useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { User } from 'types';
 
-export const NoResults = (results) => {
-  return !results || results.length < 1;
-};
-
 const SearchResults = () => {
   const applicationStore: ApplicationStoreProps = useContext(store);
   const { searchText } = applicationStore;
-  const [results, setResults] = useState<User[] | undefined>(undefined);
+  const [resultsList, setResultsList] = useState<User[] | undefined>(undefined);
 
   const { data: userResultData } = useQuery(SEARCH_USERS, {
     variables: { fullName: searchText, email: searchText, username: searchText },
@@ -20,25 +16,29 @@ const SearchResults = () => {
   const userResult = userResultData?.queryUser;
   const socialResult = userResultData?.queryLinkedAccount;
 
-  const getUserFromSocial = (socialResults) => {
-    return socialResults?.map((account, i) => {
+  const getUserFromSocial = (socialResultsList) => {
+    return socialResultsList?.map((account, i) => {
       return account.user;
     });
   };
 
   useEffect(() => {
     const userFromSocialResult = getUserFromSocial(socialResult);
-    const finalResults = () => {
+    const finalResultsList = () => {
       if (userFromSocialResult && userFromSocialResult[0]) {
         return [...userFromSocialResult, ...userResult];
       }
       return userResult;
     };
-    const unique = finalResults() && finalResults().filter(onlyUnique);
-    setResults(unique);
+    const unique = finalResultsList() && finalResultsList().filter(onlyUnique);
+    setResultsList(unique);
   }, [socialResult, userResult]);
 
-  return results;
+  const searchTextPresent = !!searchText;
+  const hasResults = resultsList && resultsList.length > 0;
+  const results = resultsList;
+
+  return { searchTextPresent, hasResults, results };
 };
 
 export default SearchResults;
