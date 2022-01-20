@@ -145,7 +145,7 @@ export const CORE_USER_SEARCH_FIELDS = gql`
     biography
     expertise
     interests
-    walletAddresses {
+    walletAddresses(filter: { public: true }) {
       address
       name
       type

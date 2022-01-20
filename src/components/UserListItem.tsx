@@ -34,7 +34,13 @@ const UserListItem: FC<UserListItemProps> = ({ user }) => {
           </div>
         </>
       }
-      slot2={<WalletAddressList walletAddresses={walletAddresses} />}
+      slot2={
+        walletAddresses.length > 0 ? (
+          <WalletAddressList walletAddresses={walletAddresses} />
+        ) : (
+          <div className="w-64">This user does not have any public wallet addresses</div>
+        )
+      }
       slot2Class="flex w-full"
     />
   );

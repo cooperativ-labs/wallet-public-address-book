@@ -19,7 +19,7 @@ const WalletAddressListItem: FC<WalletAddressListItemProps> = ({ wallet, withEdi
   const { id, name, type, chainId, address, description, public: isPublic } = wallet;
   const [editOn, setEditOn] = useState<boolean>(false);
   const [alerted, setAlerted] = useState<boolean>(false);
-  const [updateCryptoAddress, { data, error }] = useMutation(UPDATE_CRYPTO_ADDRESS);
+  const [updateCryptoAddress, { error }] = useMutation(UPDATE_CRYPTO_ADDRESS);
 
   if (error && !alerted) {
     alert('Oops, looks like something went wrong.');
@@ -85,9 +85,9 @@ const WalletAddressListItem: FC<WalletAddressListItemProps> = ({ wallet, withEdi
             >
               {({ isSubmitting, values }) => (
                 <Form className="flex flex-col">
-                  <div className="grid grid-cols-3 gap-8 items-center">
+                  <div className="grid grid-cols-4 gap-3 md:gap-8 items-center">
                     <Input
-                      className={`bg-opacity-0 w-full md:col-span-2`}
+                      className={`bg-opacity-0 w-full col-span-3`}
                       required
                       labelText="Name"
                       name="name"
@@ -95,7 +95,7 @@ const WalletAddressListItem: FC<WalletAddressListItemProps> = ({ wallet, withEdi
                     />
 
                     <Checkbox
-                      className="md:col-span-1"
+                      className="col-span-1"
                       fieldClass="text-sm bg-opacity-0 my-1 p-3 border-2 border-gray-200 rounded-md focus:border-blue-900 mt-3 focus:outline-non"
                       name="public"
                       checked={values.public}
@@ -115,15 +115,17 @@ const WalletAddressListItem: FC<WalletAddressListItemProps> = ({ wallet, withEdi
           </div>
         )}
       </div>
-      <div className="flex col-span-1 justify-center">
-        <button aria-label="edit address info" onClick={() => setEditOn(!editOn)}>
-          {editOn ? (
-            <FontAwesomeIcon icon="times" className="text-xl text-gray-600 mr-2" />
-          ) : (
-            <FontAwesomeIcon icon="pen" className="text-xl text-gray-600 mr-2" />
-          )}
-        </button>
-      </div>
+      {withEdit && (
+        <div className="flex col-span-1 justify-center">
+          <button aria-label="edit address info" onClick={() => setEditOn(!editOn)}>
+            {editOn ? (
+              <FontAwesomeIcon icon="times" className="text-xl text-gray-600 mr-2" />
+            ) : (
+              <FontAwesomeIcon icon="pen" className="text-xl text-gray-600 mr-2" />
+            )}
+          </button>
+        </div>
+      )}
     </div>
   );
 };
