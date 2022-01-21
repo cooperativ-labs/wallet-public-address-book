@@ -10,6 +10,8 @@ import WalletAddressList from '@src/components/WalletAddressList';
 import { GET_USER } from '@src/utils/dGraphQueries/user';
 import { useQuery } from '@apollo/client';
 import { UserContext } from '@src/utils/SetUserContext';
+import EmailAddressList from '@src/components/EmailAddressList';
+import SettingsUserEmails from '@src/components/forms/SettingsUserEmails';
 
 const UserSettings: FC = () => {
   const { userId } = useContext(UserContext);
@@ -30,6 +32,11 @@ const UserSettings: FC = () => {
           <h2 className="text-xl text-blue-900 font-semibold mb-4">Wallet Addresses</h2>
           <WalletAddressList walletAddresses={user.walletAddresses} withEdit />
           <SettingsUserWallets user={user} />
+        </FormCard>
+        <FormCard center>
+          <h2 className="text-xl text-blue-900 font-semibold mb-4">Email Addresses </h2>
+          <EmailAddressList emailAddresses={user.emailAddresses} withEdit />
+          <SettingsUserEmails user={user} />
         </FormCard>
         <FormCard center>
           <h2 className="text-xl text-blue-900 font-semibold mb-4">Social Accounts</h2>

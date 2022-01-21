@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { ADD_USER_WITH_WALLET } from '@src/utils/dGraphQueries/user';
 import { checkEmailTaken, currentDate } from '@src/utils/dGraphQueries/gqlUtils';
 import { Form, Formik } from 'formik';

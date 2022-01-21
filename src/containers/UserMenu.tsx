@@ -13,9 +13,7 @@ import { UserContext } from '@src/utils/SetUserContext';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 
-type UserMenuProps = {};
-
-const UserMenu: FC<UserMenuProps> = () => {
+const UserMenu: FC = () => {
   const { userId } = useContext(UserContext);
   const { data: userData } = useQuery(GET_USER, { variables: { userId: userId } });
   const user = userData?.getUser;

@@ -2,7 +2,7 @@ import { Project } from 'types';
 import { initializeApollo } from '../apolloClient';
 import { CHECK_WALLET_EXIST } from './crypto';
 import { GET_ID_FROM_SLUG } from './project';
-import { CHECK_USER_EXIST } from './user';
+import { CHECK_EMAIL_TAKEN } from './user';
 
 const apolloClient = initializeApollo();
 
@@ -87,16 +87,18 @@ export function checkUserAdded(project: Project, userId: string) {
   return !!project.projectUsers.find((user) => user.user.id === userId);
 }
 
-export async function checkEmailTaken(email: string) {
+export async function checkEmailTaken(emailAddress: string) {
   try {
     const result = await apolloClient.query({
       variables: {
-        email: email,
+        address: emailAddress.toLowerCase(),
       },
-      query: CHECK_USER_EXIST(),
+      query: CHECK_EMAIL_TAKEN(),
     });
     return result.data.getUser ? true : false;
-  } catch (err) {}
+  } catch (err) {
+    console.log('checkemail', err);
+  }
 }
 
 export async function checkWalletTaken(walletAddress: string) {

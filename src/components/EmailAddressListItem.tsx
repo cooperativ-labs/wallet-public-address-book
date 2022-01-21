@@ -1,64 +1,56 @@
-import FormattedCryptoAddress from './FormattedCryptoAddress';
 import React, { FC, useState } from 'react';
-import { CryptoAddress, CryptoAddressType } from 'types';
-import { MatchSupportedChains } from '@src/web3/connectors';
+
 import cn from 'classnames';
-import Checkbox from './form-components/Checkbox';
 import { Form, Formik } from 'formik';
 import { useMutation } from '@apollo/client';
-import { UPDATE_CRYPTO_ADDRESS } from '@src/utils/dGraphQueries/crypto';
-import Input from './form-components/Inputs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { MarkPublic } from './form-components/ListItemButtons';
 
-type WalletAddressListItemProps = {
-  wallet: CryptoAddress;
+import { REMOVE_USER_EMAIL, UPDATE_EMAIL } from '@src/utils/dGraphQueries/user';
+import { EmailAddress } from 'types';
+import Input from './form-components/Inputs';
+import Checkbox from './form-components/Checkbox';
+import { EditButton, MarkPublic } from './form-components/ListItemButtons';
+
+type EmailAddressListItemProps = {
+  email: EmailAddress;
   withEdit?: boolean;
 };
 
-const WalletAddressListItem: FC<WalletAddressListItemProps> = ({ wallet, withEdit }) => {
-  const { id, name, type, chainId, address, description, public: isPublic } = wallet;
+const EmailAddressListItem: FC<EmailAddressListItemProps> = ({ email, withEdit }) => {
+  const { user, name, address, description, public: isPublic } = email;
   const [editOn, setEditOn] = useState<boolean>(false);
   const [alerted, setAlerted] = useState<boolean>(false);
-  const [updateCryptoAddress, { error }] = useMutation(UPDATE_CRYPTO_ADDRESS);
+  const [updateEmailAddress, { error: updateError }] = useMutation(UPDATE_EMAIL);
+  const [deleteEmail, { error: deleteError }] = useMutation(REMOVE_USER_EMAIL);
 
-  if (error && !alerted) {
+  if (updateError || (deleteError && !alerted)) {
     alert('Oops, looks like something went wrong.');
     setAlerted(true);
   }
-  const getChainLogo = (chainId) => {
-    return (
-      <div className="flex">
-        only:{' '}
-        {MatchSupportedChains(chainId).icon ? (
-          <div>
-            <img src={MatchSupportedChains(chainId).icon} className="ml-1 h-6" alt={name} />{' '}
-          </div>
-        ) : (
-          MatchSupportedChains(chainId).name
-        )}{' '}
-      </div>
-    );
-  };
+
   return (
     <div className={cn(withEdit && 'grid grid-cols-9 gap-3 items-center')}>
       <div className="p-3 border-2 rounded-lg col-span-8">
-        <div className="flex justify-between">
-          {name} {type === CryptoAddressType.Contract ? getChainLogo(chainId) : <div> all EVM chains</div>}{' '}
+        <div className="md:w-auto ">
+          <div className="text-large font-bold flex justify-between">
+            {address}
+            {withEdit && (
+              <div className="flex justify-between">
+                <div className="hidden md:flex">
+                  <MarkPublic isPublic={isPublic} />
+                </div>
+                <div className="ml-6 w-5">
+                  <EditButton toggle={editOn} setToggle={setEditOn} />
+                </div>
+              </div>
+            )}
+          </div>
+          {name && <div className="flex justify-between">{name}</div>}
           {withEdit && (
-            <div className="items-center">
-              <MarkPublic isPublic={isPublic} />
+            <div className="md:hidden">
+              <MarkPublic isPublic={isPublic} />{' '}
             </div>
           )}
-        </div>
-        <div className="md:w-auto mt-3">
-          <FormattedCryptoAddress
-            chainId={chainId}
-            address={address}
-            className="text-large font-bold"
-            withCopy
-            showFull
-          />
         </div>
         {description && <div className="mt-1 text-sm text-gray-700">{description}</div>}
 
@@ -70,10 +62,11 @@ const WalletAddressListItem: FC<WalletAddressListItemProps> = ({ wallet, withEdi
                 name: name,
               }}
               onSubmit={(values, { setSubmitting }) => {
+                console.log(values);
                 setSubmitting(true);
-                updateCryptoAddress({
+                updateEmailAddress({
                   variables: {
-                    id: id,
+                    address: address,
                     name: values.name,
                     public: values.public,
                   },
@@ -86,10 +79,9 @@ const WalletAddressListItem: FC<WalletAddressListItemProps> = ({ wallet, withEdi
                   <div className="grid grid-cols-4 gap-3 md:gap-8 items-center">
                     <Input
                       className={`bg-opacity-0 w-full col-span-3`}
-                      required
-                      labelText="Name"
+                      labelText="Label"
                       name="name"
-                      placeholder="Personal"
+                      placeholder="e.g. Personal"
                     />
 
                     <Checkbox
@@ -115,12 +107,11 @@ const WalletAddressListItem: FC<WalletAddressListItemProps> = ({ wallet, withEdi
       </div>
       {withEdit && (
         <div className="flex col-span-1 justify-center">
-          <button aria-label="edit address info" onClick={() => setEditOn(!editOn)}>
-            {editOn ? (
-              <FontAwesomeIcon icon="times" className="text-xl text-gray-600 mr-2" />
-            ) : (
-              <FontAwesomeIcon icon="pen" className="text-xl text-gray-600 mr-2" />
-            )}
+          <button
+            aria-label="edit address info"
+            onClick={() => deleteEmail({ variables: { userId: user.id, emailAddress: address } })}
+          >
+            <FontAwesomeIcon icon="trash" className="text-lg text-gray-600 mr-2" />
           </button>
         </div>
       )}
@@ -128,4 +119,4 @@ const WalletAddressListItem: FC<WalletAddressListItemProps> = ({ wallet, withEdi
   );
 };
 
-export default WalletAddressListItem;
+export default EmailAddressListItem;

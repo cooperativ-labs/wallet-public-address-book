@@ -7,21 +7,36 @@ export const GET_USERS = () => {
       queryUser {
         id
         fullName
-        email
+        emailAddresses {
+          address
+        }
       }
     }
   `;
 };
 
-export const CHECK_USER_EXIST = () => {
+export const CHECK_EMAIL_TAKEN = () => {
   return gql`
-    query ($email: String!) {
-      getUser(email: $email) {
-        email
+    query ($address: String!) {
+      getEmailAddress(address: $address) {
+        address
       }
     }
   `;
 };
+
+export const GET_USER_FROM_EMAIL = gql`
+  query GetUserFromEmail($emailAddress: String!) {
+    getEmailAddress(address: $address) {
+      address
+      user {
+        id
+        displayName
+        fullName
+      }
+    }
+  }
+`;
 
 export const SEARCH_USERS = gql`
   ${CORE_USER_SEARCH_FIELDS}
@@ -38,21 +53,19 @@ export const SEARCH_USERS = gql`
   }
 `;
 
-export const GET_USER_FROM_EMAIL = gql`
-  query GetUser($email: String!) {
-    getUser(email: $email) {
-      id
-      email
-      displayName
-    }
-  }
-`;
-
 export const GET_USER = gql`
   query GetUser($userId: ID!) {
     getUser(id: $userId) {
       id
-      email
+      emailAddresses {
+        address
+        name
+        description
+        public
+        user {
+          id
+        }
+      }
       displayName
       fullName
       profileImage
@@ -159,7 +172,7 @@ export const ADD_USER_WITH_WALLET = gql`
       input: [
         {
           creationDate: $currentDate
-          email: $email
+          emailAddresses: { address: $email, public: false }
           fullName: $fullName
           public: true
           walletAddresses: {
@@ -177,7 +190,9 @@ export const ADD_USER_WITH_WALLET = gql`
       user {
         id
         fullName
-        email
+        emailAddresses {
+          address
+        }
         profileImage
         walletAddresses {
           name
@@ -221,7 +236,11 @@ export const UPDATE_USER_INFORMATION = gql`
     ) {
       user {
         id
-        email
+        emailAddresses {
+          address
+          name
+          description
+        }
         fullName
         displayName
         public
@@ -232,6 +251,66 @@ export const UPDATE_USER_INFORMATION = gql`
     }
   }
 `;
+
+// USER EMAIL
+
+export const ADD_USER_EMAIL = gql`
+  mutation AddUserEmail($userId: ID!, $address: String!, $name: String, $description: String, $public: Boolean) {
+    addEmailAddress(
+      input: { address: $address, user: { id: $userId }, name: $name, description: $description, public: $public }
+    ) {
+      emailAddress {
+        address
+        user {
+          id
+          emailAddresses {
+            address
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const REMOVE_USER_EMAIL = gql`
+  mutation RemoveUserEmail($userId: [ID!], $emailAddress: String!) {
+    updateUser(input: { filter: { id: $userId }, remove: { emailAddresses: { address: $emailAddress } } }) {
+      numUids
+      user {
+        id
+        emailAddresses {
+          address
+        }
+      }
+    }
+    deleteEmailAddress(filter: { address: { eq: $emailAddress } }) {
+      msg
+    }
+  }
+`;
+
+export const UPDATE_EMAIL = gql`
+  mutation UpdateUserEmail($address: String!, $name: String, $description: String, $public: Boolean) {
+    updateEmailAddress(
+      input: { filter: { address: { eq: $address } }, set: { name: $name, description: $description, public: $public } }
+    ) {
+      emailAddress {
+        address
+        public
+        name
+        description
+        user {
+          id
+          walletAddresses {
+            address
+          }
+        }
+      }
+    }
+  }
+`;
+
+//USER SOCIAL
 
 export const ADD_USER_SOCIAL_ACCOUNTS = gql`
   mutation ($userId: [ID!], $username: String!, $type: LinkedAccountType!) {

@@ -10,7 +10,7 @@ type UserListItemProps = {
 };
 
 const UserListItem: FC<UserListItemProps> = ({ user }) => {
-  const { email, fullName, walletAddresses, profileImage, linkedAccounts } = user;
+  const { emailAddresses, fullName, walletAddresses, profileImage, linkedAccounts } = user;
 
   return (
     <TwoColumnCard
@@ -25,7 +25,9 @@ const UserListItem: FC<UserListItemProps> = ({ user }) => {
             <h1 className="font-bold text-lg mt-2">{fullName}</h1>
           </div>
           <div className="text-md text-gray-500 ">
-            <div>{email}</div>
+            {emailAddresses.map((email, i) => {
+              return <div key={i}>{email.address}</div>;
+            })}
             <div className="flex flex-wrap mt-4">
               {linkedAccounts.map((account, i) => {
                 return <SocialLinkItem type={account.type} username={account.username} key={i} />;
