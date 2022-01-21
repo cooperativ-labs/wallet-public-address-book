@@ -417,7 +417,7 @@ type EmailAddress {
 	address: String! @id
 	name: String
 	description: String
-	public: Boolean
+	public: Boolean @search
 	user: User @hasInverse(field:emailAddresses)
 }
 

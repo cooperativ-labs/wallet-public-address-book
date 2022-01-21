@@ -118,6 +118,15 @@ export const CORE_USER_FIELDS = gql`
     biography
     expertise
     interests
+    emailAddresses {
+      address
+      name
+      description
+      public
+      user {
+        id
+      }
+    }
     walletAddresses {
       id
       address
@@ -139,7 +148,15 @@ export const CORE_USER_SEARCH_FIELDS = gql`
   fragment userSearchData on User {
     id
     fullName
-    email
+    emailAddresses(filter: { public: true }) {
+      address
+      name
+      description
+      public
+      user {
+        id
+      }
+    }
     profileImage
     public
     biography

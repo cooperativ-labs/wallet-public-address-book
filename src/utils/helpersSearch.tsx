@@ -10,7 +10,7 @@ const SearchResults = () => {
   const { searchText } = applicationStore;
   const [resultsList, setResultsList] = useState<User[] | undefined>(undefined);
 
-  const { data: userResultData } = useQuery(SEARCH_USERS, {
+  const { data: userResultData, error } = useQuery(SEARCH_USERS, {
     variables: { fullName: searchText, email: searchText, username: searchText },
   });
   const userResult = userResultData?.queryUser;
@@ -21,7 +21,7 @@ const SearchResults = () => {
       return account.user;
     });
   };
-
+  console.log(userResultData, error);
   useEffect(() => {
     const userFromSocialResult = getUserFromSocial(socialResult);
     const finalResultsList = () => {
@@ -37,6 +37,8 @@ const SearchResults = () => {
   const searchTextPresent = !!searchText;
   const hasResults = resultsList && resultsList.length > 0;
   const results = resultsList;
+
+  // console.log(searchTextPresent, hasResults, results);
 
   return { searchTextPresent, hasResults, results };
 };

@@ -40,9 +40,15 @@ export const GET_USER_FROM_EMAIL = gql`
 
 export const SEARCH_USERS = gql`
   ${CORE_USER_SEARCH_FIELDS}
-  query QueryUsers($email: String, $fullName: String, $username: String!) {
-    queryUser(filter: { email: { eq: $email }, or: { fullName: { anyofterms: $fullName }, and: { public: true } } }) {
+  query QueryUsers($emailAddress: String, $fullName: String, $username: String!) {
+    queryUser(filter: { fullName: { anyofterms: $fullName }, and: { public: true } }) {
       ...userSearchData
+    }
+    queryEmailAddress(filter: { address: { eq: $emailAddress } }) {
+      address
+      user(filter: { public: true }) {
+        ...userSearchData
+      }
     }
     queryLinkedAccount(filter: { username: { anyofterms: $username } }) {
       id

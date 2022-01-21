@@ -43,7 +43,7 @@ const SettingsUserEmails = ({ user }) => {
               userId: user.id,
               name: values.name,
               address: values.address.toLowerCase(),
-              public: false,
+              public: true,
             },
           });
         } catch (err) {}
