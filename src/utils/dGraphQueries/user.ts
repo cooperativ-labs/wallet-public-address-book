@@ -63,6 +63,7 @@ export const GET_USER = gql`
   query GetUser($userId: ID!) {
     getUser(id: $userId) {
       id
+      email
       emailAddresses {
         address
         name
@@ -242,11 +243,6 @@ export const UPDATE_USER_INFORMATION = gql`
     ) {
       user {
         id
-        emailAddresses {
-          address
-          name
-          description
-        }
         fullName
         displayName
         public
