@@ -1,22 +1,22 @@
 import React, { FC, useContext } from 'react';
 
+import EmailAddressList from '@src/components/EmailAddressList';
 import FormCard from '@src/components/cards/FormCard';
 import LinkedAccountsList from '@src/components/LinkedAccountsList';
 import Loading from '@src/components/loading/Loading';
+import SettingsUserEmails from '@src/components/forms/SettingsUserEmails';
 import SettingsUserPersonalInfo from '@src/components/forms/SettingsUserPersonalInfo';
 import SettingsUserSocial from '@src/components/forms/SettingsUserSocial';
 import SettingsUserWallets from '@src/components/forms/SettingsUserWallets';
 import WalletAddressList from '@src/components/WalletAddressList';
 import { ADD_USER_EMAIL, GET_USER } from '@src/utils/dGraphQueries/user';
 import { useMutation, useQuery } from '@apollo/client';
-import { UserContext } from '@src/utils/SetUserContext';
-import EmailAddressList from '@src/components/EmailAddressList';
-import SettingsUserEmails from '@src/components/forms/SettingsUserEmails';
+import { WalletOwnerContext } from '@src/SetAppContext';
 
 const UserSettings: FC = () => {
-  const { userId } = useContext(UserContext);
-  const { data: userData } = useQuery(GET_USER, { variables: { userId: userId } });
-  const user = userData?.getUser;
+  const { uuid } = useContext(WalletOwnerContext);
+  const { data: userData } = useQuery(GET_USER, { variables: { uuid: uuid } });
+  const user = userData?.queryUser;
 
   ///FOR CONVERTING TO NEW EMAIL ADDRESS STRUCTURE
   const [addUserEmails, { data: emailData, error }] = useMutation(ADD_USER_EMAIL);
@@ -31,7 +31,7 @@ const UserSettings: FC = () => {
     try {
       addUserEmails({
         variables: {
-          userId: userId,
+          uuid: uuid,
           address: user.email,
           public: false,
         },

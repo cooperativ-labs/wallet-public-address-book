@@ -1,10 +1,6 @@
 import { Project } from 'types';
-import { initializeApollo } from '../apolloClient';
 import { CHECK_WALLET_EXIST } from './crypto';
 import { GET_ID_FROM_SLUG } from './project';
-import { CHECK_EMAIL_TAKEN } from './user';
-
-const apolloClient = initializeApollo();
 
 export const makeSubmissionList = (list) => {
   if (typeof list === 'string') {
@@ -71,44 +67,32 @@ export function formatSlug(text: string) {
     .replace(/[^\w-]+/g, '');
 }
 
-export async function checkSlugTaken(slug: string) {
-  try {
-    return await apolloClient
-      .query({
-        query: GET_ID_FROM_SLUG(slug),
-      })
-      .then((res) => {
-        return res.data.getProject ? true : false;
-      });
-  } catch (err) {}
-}
-
 export function checkUserAdded(project: Project, userId: string) {
   return !!project.projectUsers.find((user) => user.user.id === userId);
 }
 
-export async function checkEmailTaken(emailAddress: string) {
-  try {
-    const result = await apolloClient.query({
-      variables: {
-        address: emailAddress.toLowerCase(),
-      },
-      query: CHECK_EMAIL_TAKEN(),
-    });
-    return result.data.getUser ? true : false;
-  } catch (err) {
-    console.log('checkemail', err);
-  }
-}
+// export async function checkEmailTaken(emailAddress: string) {
+//   try {
+//     const result = await apolloClient.query({
+//       variables: {
+//         address: emailAddress.toLowerCase(),
+//       },
+//       query: CHECK_EMAIL_TAKEN(),
+//     });
+//     return result.data.getUser ? true : false;
+//   } catch (err) {
+//     console.log('checkemail', err);
+//   }
+// }
 
-export async function checkWalletTaken(walletAddress: string) {
-  try {
-    const result = await apolloClient.query({
-      variables: {
-        address: walletAddress,
-      },
-      query: CHECK_WALLET_EXIST(),
-    });
-    return result.data.getCryptoAddress ? true : false;
-  } catch (err) {}
-}
+// export async function checkWalletTaken(walletAddress: string) {
+//   try {
+//     const result = await apolloClient.query({
+//       variables: {
+//         address: walletAddress,
+//       },
+//       query: CHECK_WALLET_EXIST(),
+//     });
+//     return result.data.getCryptoAddress ? true : false;
+//   } catch (err) {}
+// }

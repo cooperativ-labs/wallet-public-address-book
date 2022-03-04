@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
+import SearchResults from '@src/utils/helpersSearch';
 import UserList from '@src/components/UserList';
 import UserSearch from '@src/components/forms/UserSearch';
-import SearchResults from '@src/utils/helpersSearch';
 
 const Dashboard: FC = () => {
   const { searchTextPresent, hasResults, results } = SearchResults();

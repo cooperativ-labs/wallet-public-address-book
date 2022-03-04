@@ -15,15 +15,13 @@ export const GET_USERS = () => {
   `;
 };
 
-export const CHECK_EMAIL_TAKEN = () => {
-  return gql`
-    query ($address: String!) {
-      getEmailAddress(address: $address) {
-        address
-      }
+export const CHECK_EMAIL_EXISTS = gql`
+  query ChechEmailExists($emailAddress: String!) {
+    getEmailAddress(address: $address) {
+      address
     }
-  `;
-};
+  }
+`;
 
 export const GET_USER_FROM_EMAIL = gql`
   query GetUserFromEmail($emailAddress: String!) {
@@ -60,10 +58,10 @@ export const SEARCH_USERS = gql`
 `;
 
 export const GET_USER = gql`
-  query GetUser($userId: ID!) {
-    getUser(id: $userId) {
+  query GetUser($uuid: String!) {
+    queryUser(filter: { uuid: { eq: $uuid } }) {
       id
-      email
+      uuid
       emailAddresses {
         address
         name
@@ -167,6 +165,7 @@ export const GET_USER = gql`
 export const ADD_USER_WITH_WALLET = gql`
   mutation AddUser(
     $currentDate: DateTime!
+    $uuid: String!
     $email: String!
     $fullName: String!
     $walletAddress: String!
@@ -179,6 +178,7 @@ export const ADD_USER_WITH_WALLET = gql`
       input: [
         {
           creationDate: $currentDate
+          uuid: $uuid
           emailAddresses: { address: $email, public: false }
           fullName: $fullName
           public: true
@@ -196,6 +196,7 @@ export const ADD_USER_WITH_WALLET = gql`
     ) {
       user {
         id
+        uuid
         fullName
         emailAddresses {
           address
@@ -257,9 +258,9 @@ export const UPDATE_USER_INFORMATION = gql`
 // USER EMAIL
 
 export const ADD_USER_EMAIL = gql`
-  mutation AddUserEmail($userId: ID!, $address: String!, $name: String, $description: String, $public: Boolean) {
+  mutation AddUserEmail($uuid: String!, $address: String!, $name: String, $description: String, $public: Boolean) {
     addEmailAddress(
-      input: { address: $address, user: { id: $userId }, name: $name, description: $description, public: $public }
+      input: { address: $address, user: { uuid: $uuid }, name: $name, description: $description, public: $public }
     ) {
       emailAddress {
         address
@@ -337,8 +338,8 @@ export const ADD_USER_SOCIAL_ACCOUNTS = gql`
 `;
 
 export const REMOVE_USER_SOCIAL_ACCOUNT = gql`
-  mutation RemoveUserSocialAccount($userId: [ID!], $socialId: ID!) {
-    updateUser(input: { filter: { id: $userId }, remove: { linkedAccounts: { id: $socialId } } }) {
+  mutation RemoveUserSocialAccount($uuid: String!, $socialId: ID!) {
+    updateUser(input: { filter: { uuid: $uuid }, remove: { linkedAccounts: { id: $socialId } } }) {
       numUids
       user {
         id

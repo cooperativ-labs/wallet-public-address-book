@@ -1,9 +1,9 @@
+import Input from '../../components/form-components/Inputs';
 import React, { useState } from 'react';
+import { ADD_USER_EMAIL } from '../../utils/dGraphQueries/user';
 import { checkEmailTaken } from '../../../src/utils/dGraphQueries/gqlUtils';
 import { Form, Formik } from 'formik';
-import Input from '../../components/form-components/Inputs';
 import { useMutation } from '@apollo/client';
-import { ADD_USER_EMAIL } from '../../utils/dGraphQueries/user';
 
 const fieldDiv = 'md:pt-3 md:my-2 bg-opacity-0';
 
@@ -40,7 +40,7 @@ const SettingsUserEmails = ({ user }) => {
         try {
           addUserEmails({
             variables: {
-              userId: user.id,
+              uuid: user.uuid,
               name: values.name,
               address: values.address.toLowerCase(),
               public: true,

@@ -1,4 +1,5 @@
 
+
 """
 AGREEMENT MODEL 
 """
@@ -450,7 +451,7 @@ type LinkedAccount  {
 
 type User  {
 	id: ID! 
-	email: String
+	uuid: String! @id
 	emailAddresses: [EmailAddress!] @hasInverse(field:user)
 	displayName: String @search(by:[term]) 
 	fullName: String! @search(by:[term]) 
@@ -491,3 +492,4 @@ enum CurrencyCode {
 	DAI_MATIC_TEST_
 }
 
+# Dgraph.Authorization {"Header":"X-Auth-Token","Namespace":"https://dgraph.io/jwt/claims","JWKURL":"https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com","Audience":["walletbook-f549a"]}

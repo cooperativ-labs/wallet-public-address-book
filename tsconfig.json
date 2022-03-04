@@ -61,7 +61,7 @@
     "**/*.tsx",
     "context/store.tsx",
     "types"
-  ],
+, "functions/src/index.js",   ],
   "exclude": [
     "node_modules"
   ]

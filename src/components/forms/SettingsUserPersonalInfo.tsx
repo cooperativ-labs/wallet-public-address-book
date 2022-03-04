@@ -2,9 +2,9 @@ import Checkbox from '../form-components/Checkbox';
 import Input from '../form-components/Inputs';
 import React, { useState } from 'react';
 import { Form, Formik } from 'formik';
+import { makeRemovalList, makeSubmissionList } from '@src/utils/dGraphQueries/gqlUtils';
 import { UPDATE_USER_INFORMATION } from '@src/utils/dGraphQueries/user';
 import { useMutation } from '@apollo/client';
-import { makeSubmissionList, makeRemovalList } from '@src/utils/dGraphQueries/gqlUtils';
 
 const fieldDiv = 'pt-3 my-2 bg-opacity-0';
 

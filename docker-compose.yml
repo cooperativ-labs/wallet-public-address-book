@@ -34,8 +34,17 @@ services:
       - 9080:9080
     restart: on-failure
     command: dgraph alpha --security whitelist=0.0.0.0/0 --my=alpha:7080 --zero=zero:5080
-
+    # environment: 
+    #   DGRAPH_ALPHA_GRAPHQL: "lambda-url=http://dgraph_lambda:8686/graphql-worker"
   ratel:
     image: fenos/ratel-ui:latest
     ports:
       - 8000:8000
+  # dgraph_lambda:
+  #   image: dgraph/dgraph-lambda:latest
+  #   ports:
+  #     - "8686:8686"
+  #   environment:
+  #     DGRAPH_URL: http://dgraph:8080
+  #   volumes:
+  #     - ./gql/script.js:/dgraph/script/script.js

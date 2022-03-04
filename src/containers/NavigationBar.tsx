@@ -1,12 +1,12 @@
 import FormattedCryptoAddress from '@src/components/FormattedCryptoAddress';
 import LogoutButton from '@src/components/buttons/LogoutButton';
 import React, { FC } from 'react';
+import SearchResults from '@src/utils/helpersSearch';
 import UserMenu from './UserMenu';
 import UserSearch from '@src/components/forms/UserSearch';
+import { useRouter } from 'next/router';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
-import SearchResults from '@src/utils/helpersSearch';
-import { useRouter } from 'next/router';
 
 type NavBarProps = {
   transparent?: boolean;

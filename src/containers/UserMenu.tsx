@@ -9,14 +9,14 @@ import NetworkIndicator, { NetworkIndicatorDot } from '@src/components/indicator
 import React, { FC, useContext, useState } from 'react';
 import { GET_USER } from '@src/utils/dGraphQueries/user';
 import { useQuery } from '@apollo/client';
-import { UserContext } from '@src/utils/SetUserContext';
 import { useWeb3React } from '@web3-react/core';
+import { WalletOwnerContext } from '@src/SetAppContext';
 import { Web3Provider } from '@ethersproject/providers';
 
 const UserMenu: FC = () => {
-  const { userId } = useContext(UserContext);
-  const { data: userData } = useQuery(GET_USER, { variables: { userId: userId } });
-  const user = userData?.getUser;
+  const { uuid } = useContext(WalletOwnerContext);
+  const { data: userData } = useQuery(GET_USER, { variables: { uuid: uuid } });
+  const user = userData?.queryUser;
 
   const { account: walletAddress, chainId, active } = useWeb3React<Web3Provider>();
   const [open, setOpen] = useState<boolean>(false);

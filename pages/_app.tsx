@@ -4,6 +4,7 @@ import 'tailwindcss/tailwind.css';
 import AnalyticsContext from '@context/analytics';
 import React, { ReactElement } from 'react';
 
+import SetAppContext from '@src/SetAppContext';
 import { ApolloProvider } from '@apollo/client';
 import {
   faArrowRight,
@@ -78,14 +79,13 @@ function getLibrary(provider: any): Web3Provider {
   return library;
 }
 
-export default function MyApp({ Component, pageProps }): ReactElement {
+export default function MyApp({ Component, pageProps: { session, ...pageProps } }): ReactElement {
   const [dynamicDimensions, setDynamicDimensions] = useAnalytics();
   const analyticsContext = { dynamicDimensions, setDynamicDimensions };
-  const apolloClient = useApollo(pageProps.initialApolloState);
 
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      <ApolloProvider client={apolloClient}>
+      <SetAppContext pageProps={pageProps}>
         <StateProvider>
           <AnalyticsContext.Provider value={analyticsContext}>
             <div id="outer-container" className="bg-gradient-to-b from-gray-100 to-blue-50 flex flex-col">
@@ -95,7 +95,7 @@ export default function MyApp({ Component, pageProps }): ReactElement {
             </div>
           </AnalyticsContext.Provider>
         </StateProvider>
-      </ApolloProvider>
+      </SetAppContext>
     </Web3ReactProvider>
   );
 }
