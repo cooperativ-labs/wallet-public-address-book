@@ -47,7 +47,7 @@ type ManagerWrapperProps = {
 const ManagerNavigationFrame: FC<ManagerWrapperProps> = ({ children, loadingComponent }) => {
   const { uuid } = useContext(WalletOwnerContext);
   const { account: walletAddress } = useWeb3React<Web3Provider>();
-  const { loading: userLoading, data: userData, error } = useQuery(GET_USER, { variables: { uuid: uuid } });
+  const { loading: userLoading, data: userData } = useQuery(GET_USER, { variables: { uuid: uuid } });
   const user = userData?.queryUser[0];
 
   if (loadingComponent || userLoading) {

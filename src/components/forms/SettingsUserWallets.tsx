@@ -20,17 +20,23 @@ const SettingsUserWallets = ({ user }) => {
     variables: { walletAddress: walletAddress },
   });
   const [alerted, setAlerted] = useState<Boolean>(false);
-  const [updateUserWallets, { error }] = useMutation(UPDATE_USER_WALLETS);
+  const [updateUserWallets, { data, error }] = useMutation(UPDATE_USER_WALLETS);
 
   if (error && !alerted) {
     alert('Oops. Looks like something went wrong');
     setAlerted(true);
   }
 
+  console.log(data?.updateUser);
+
+  if (data?.updateUser === null) {
+    alert('Oops. Looks like that wallet is already associated with an account');
+  }
+
   const walletVerificationString = 'Click sign below to confirm that this is your wallet';
   const existingWallet = walletData?.getCryptoAddress;
   const newWalletAddress = !user.walletAddresses.find((cryptoaddress) => cryptoaddress.address === walletAddress);
-
+  console.log(existingWallet);
   const handleWalletAddition = async (values) => {
     try {
       const signer = await library.getSigner();
@@ -76,7 +82,13 @@ const SettingsUserWallets = ({ user }) => {
       {({ values, isSubmitting }) => (
         <Form className="flex flex-col">
           <hr className="mt-6 mb-8 md:mb-4" />
-          {newWalletAddress || !existingWallet ? (
+          {!newWalletAddress || !!existingWallet ? (
+            existingWallet ? (
+              'The wallet you are currently using is already associated with another account.'
+            ) : (
+              'Connect another wallet to add it to this account.'
+            )
+          ) : (
             <>
               <div className="grid md:grid-cols-4 gap-4">
                 <Input
@@ -131,8 +143,6 @@ const SettingsUserWallets = ({ user }) => {
                 Add Wallet to my account
               </button>
             </>
-          ) : (
-            'Connect another wallet to add it to this account'
           )}
         </Form>
       )}

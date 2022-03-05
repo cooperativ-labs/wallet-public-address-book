@@ -114,54 +114,6 @@ export const GET_USER = gql`
           }
         }
       }
-      projects {
-        id
-        roles
-        title
-        agreements {
-          date
-          agreement {
-            title
-          }
-          payments {
-            id
-            amount
-            date
-            note
-            currency {
-              code
-              contributorCreditClass {
-                name
-                backingCurrency
-                currentFunding
-                cryptoAddress {
-                  address
-                  chainId
-                }
-              }
-            }
-          }
-        }
-        user {
-          id
-        }
-        project {
-          id
-          slug
-          name
-          lastUpdate
-          needs {
-            name
-            value
-            fill
-          }
-          info {
-            logo
-            shortDescription
-            brandColor
-          }
-        }
-      }
     }
   }
 `;

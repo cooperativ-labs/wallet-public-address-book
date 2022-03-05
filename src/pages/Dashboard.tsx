@@ -10,11 +10,10 @@ import { WalletOwnerContext } from '@src/SetAppContext';
 const Dashboard: FC = () => {
   const { searchTextPresent, hasResults, results } = SearchResults();
   const { uuid } = useContext(WalletOwnerContext);
-  const { loading: userLoading, data: userData, error } = useQuery(GET_USER, { variables: { uuid: uuid } });
+  const { data: userData } = useQuery(GET_USER, { variables: { uuid: uuid } });
   const user = userData?.queryUser[0];
 
   const hasEmail = user.emailAddresses.length > 0;
-  console.log(hasEmail);
 
   return (
     <div data-test="component-landing" className="flex flex-col w-full h-full">

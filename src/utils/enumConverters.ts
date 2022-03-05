@@ -1,5 +1,5 @@
 import { IconName } from '@fortawesome/fontawesome-svg-core';
-import { CryptoAddressProtocol, LinkedAccountType, ProjectInfoDocumentType, ProjectUserRole } from 'types';
+import { CryptoAddressProtocol, LinkedAccountType } from 'types';
 
 export const backerTypeOptions = [
   { value: 'VENTURE_CAPITALIST', name: 'Venture Capitalist' },
@@ -92,37 +92,6 @@ export const seekingOptions = [
 export const getSeekingOption = (sought) => {
   const option = seekingOptions.find((seek) => (seek.value === sought ? sought : null));
   return option.name;
-};
-
-export const roleOptions = [
-  { value: ProjectUserRole.Creator, name: 'Creator' },
-  { value: ProjectUserRole.Contributor, name: 'Contributor' },
-  { value: ProjectUserRole.Advisor, name: 'Advisor' },
-  { value: ProjectUserRole.Investor, name: 'Investor' },
-  { value: ProjectUserRole.Supporter, name: 'Supporter' },
-];
-
-export const docTypeOptions = [
-  { value: ProjectInfoDocumentType.GoogleDoc, name: 'Google Doc' },
-  { value: ProjectInfoDocumentType.GoogleDrive, name: 'Google Drive', icon: 'google-drive', subtitle: 'Google Drive' },
-  { value: ProjectInfoDocumentType.GoogleSheet, name: 'Google Sheet', icon: 'google-drive', subtitle: 'Google Drive' },
-  { value: ProjectInfoDocumentType.GoogleSlide, name: 'Google Slide', icon: 'google-drive', subtitle: 'Google Drive' },
-  { value: ProjectInfoDocumentType.Notion, name: 'Notion Page', icon: 'file-alt', subtitle: 'Notion Page' },
-  { value: ProjectInfoDocumentType.Pdf, name: 'PDF', icon: 'file-pdf', subtitle: 'PDF' },
-  { value: ProjectInfoDocumentType.Github, name: 'Github', icon: 'github', subtitle: 'Github' },
-  { value: ProjectInfoDocumentType.Excel, name: 'Microsoft Excel', icon: 'file-excel', subtitle: 'Microsoft Excel' },
-  {
-    value: ProjectInfoDocumentType.Powerpoint,
-    name: 'Microsoft Powerpoint',
-    icon: 'file-powerpoint',
-    subtitle: 'Powerpoint',
-  },
-  { value: ProjectInfoDocumentType.WordDoc, name: 'Microsoft Word', icon: 'file-word', subtitle: 'Microsoft Word' },
-  { value: ProjectInfoDocumentType.Other, name: 'Other', icon: 'file-alt', subtitle: 'Document' },
-];
-
-export const getDocTypeOption = (type: ProjectInfoDocumentType) => {
-  return docTypeOptions.find((option) => option.value === type);
 };
 
 export enum currencyType {
