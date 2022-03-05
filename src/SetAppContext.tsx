@@ -72,7 +72,7 @@ const SetAppContext: React.FC<SetAppContextProps> = ({ children }) => {
       headers: {
         ...headers,
         'X-Auth-Token': token ? token : '',
-        // 'DG-Auth': key ?? undefined,
+        'DG-Auth': key,
       },
     }))
   );
