@@ -52,11 +52,14 @@ export const CustomTokenService = async (signer, walletAddress) => {
   }
 };
 
+const AuthURL =
+  process.env.NODE_ENV === 'production' ? 'https://walletbook.netlify.app/account' : 'http://localhost:3000/account';
+
 export const handleAddEmailAddress = async (address) => {
   const actionCodeSettings = {
     // URL you want to redirect back to. The domain (www.example.com) for this
     // URL must be in the authorized domains list in the Firebase Console.
-    url: 'http://localhost:3000/account',
+    url: AuthURL,
     // url: 'https://walletbook.netlify.app/account',
     handleCodeInApp: true,
   };

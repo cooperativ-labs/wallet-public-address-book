@@ -59,7 +59,7 @@ const ChooseConnector: FC = () => {
   const { activate } = useWeb3React<Web3Provider>();
   const [selection, setSelection] = useState(undefined);
   useEffect(() => {
-    setSelection(window.sessionStorage);
+    setSelection(window.localStorage);
   });
 
   return (

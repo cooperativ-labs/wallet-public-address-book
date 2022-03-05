@@ -11,7 +11,7 @@ const LogoutButton: FC = () => {
   const [selectionStorage, setSelectionStorage] = useState(undefined);
   useEffect(() => {
     if (window) {
-      setSelectionStorage(window.sessionStorage);
+      setSelectionStorage(window.localStorage);
     }
   }, []);
 
@@ -22,8 +22,7 @@ const LogoutButton: FC = () => {
       .then(() => {
         connector && selectionStorage.CHOSEN_CONNECTOR !== 'injected' && (connector as any).close();
         deactivate();
-        selectionStorage?.removeItem('CHOSEN_CONNECTOR');
-        selectionStorage?.removeItem('USER_ID');
+        localStorage?.removeItem('CHOSEN_CONNECTOR');
         router.reload();
       })
       .catch((error) => {

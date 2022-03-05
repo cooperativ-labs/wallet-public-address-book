@@ -52,7 +52,7 @@ const ManagerNavigationFrame: FC<ManagerWrapperProps> = ({ children, loadingComp
 
   if (loadingComponent || userLoading) {
     return <LoadingModal />;
-  } else if (!user.fullName) {
+  } else if (!user?.fullName) {
     return <NeedAccount />;
   }
 

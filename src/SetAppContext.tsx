@@ -27,7 +27,7 @@ const SetAppContext: React.FC<SetAppContextProps> = ({ children }) => {
   const [selectedConnector, setSelectedConnector] = useState(undefined);
 
   useEffect(() => {
-    const selection = window.sessionStorage?.getItem('CHOSEN_CONNECTOR');
+    const selection = window.localStorage?.getItem('CHOSEN_CONNECTOR');
     setSelectedConnector(GetConnector(selection));
   }, [setSelectedConnector]);
 

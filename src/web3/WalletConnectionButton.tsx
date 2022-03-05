@@ -18,7 +18,7 @@ export const WalletConnectButton: FC<WalletConnectButtonProps> = ({ children, cl
   const [walletExists, setWalletExists] = useState<boolean>(false);
   const [selectedConnector, setSelectedConnector] = useState(undefined);
   useEffect(() => {
-    const selection = window.sessionStorage?.getItem('CHOSEN_CONNECTOR');
+    const selection = window.localStorage?.getItem('CHOSEN_CONNECTOR');
     setSelectedConnector(GetConnector(selection));
   }, [setSelectedConnector]);
   const router = useRouter();
