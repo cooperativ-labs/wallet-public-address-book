@@ -2,6 +2,7 @@ import Button from './Button';
 import cn from 'classnames';
 import React, { FC, useEffect, useState } from 'react';
 import router from 'next/router';
+import { getAuth, signOut } from 'firebase/auth';
 import { useWeb3React } from '@web3-react/core';
 import { Web3Provider } from '@ethersproject/providers';
 
@@ -15,13 +16,19 @@ const LogoutButton: FC = () => {
   }, []);
 
   const outlinedClass = `text-cLightBlue hover:text-white bg-opacity-100 hover:bg-opacity-1 hover:bg-cDarkBlue border-2 border-cLightBlue hover:border-white`;
-
+  const auth = getAuth();
   function handleDisconnect() {
-    connector && selectionStorage.CHOSEN_CONNECTOR !== 'injected' && (connector as any).close();
-    deactivate();
-    selectionStorage?.removeItem('CHOSEN_CONNECTOR');
-    selectionStorage?.removeItem('USER_ID');
-    router.reload();
+    signOut(auth)
+      .then(() => {
+        connector && selectionStorage.CHOSEN_CONNECTOR !== 'injected' && (connector as any).close();
+        deactivate();
+        selectionStorage?.removeItem('CHOSEN_CONNECTOR');
+        selectionStorage?.removeItem('USER_ID');
+        router.reload();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   return (
     <Button
