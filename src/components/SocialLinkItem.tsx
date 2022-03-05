@@ -12,7 +12,7 @@ type SocialLinkItemProps = {
 const SocialLinkItem: FC<SocialLinkItemProps> = ({ type, username }) => {
   if (username) {
     return (
-      <div className="flex max-w-min py-1 pl-1 pr-2 m-1 bg-cLightBlue text-xs text-gray-100 items-center rounded-full">
+      <div className="flex max-w-min py-1 pl-2 pr-2 m-1 bg-cLightBlue text-xs text-gray-100 items-center rounded-full">
         <FontAwesomeIcon
           icon={['fab', getSocialAccountOption(type).icon as IconName]}
           className="text-lg text-gray-100 mr-2"

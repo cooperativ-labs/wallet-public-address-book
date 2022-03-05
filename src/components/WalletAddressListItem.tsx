@@ -2,14 +2,16 @@ import Checkbox from './form-components/Checkbox';
 import cn from 'classnames';
 import FormattedCryptoAddress from './FormattedCryptoAddress';
 import Input from './form-components/Inputs';
-import React, { FC, useState } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { CryptoAddress, CryptoAddressType } from 'types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Form, Formik } from 'formik';
 import { MarkPublic } from './form-components/ListItemButtons';
 import { MatchSupportedChains } from '@src/web3/connectors';
+import { REMOVE_USER_WALLET } from '@src/utils/dGraphQueries/user';
 import { UPDATE_CRYPTO_ADDRESS } from '@src/utils/dGraphQueries/crypto';
 import { useMutation } from '@apollo/client';
+import { WalletOwnerContext } from '@src/SetAppContext';
 
 type WalletAddressListItemProps = {
   wallet: CryptoAddress;
@@ -17,12 +19,14 @@ type WalletAddressListItemProps = {
 };
 
 const WalletAddressListItem: FC<WalletAddressListItemProps> = ({ wallet, withEdit }) => {
-  const { id, name, type, chainId, address, description, public: isPublic } = wallet;
+  const { user, id, name, type, chainId, address, description, public: isPublic } = wallet;
+  const { uuid } = useContext(WalletOwnerContext);
   const [editOn, setEditOn] = useState<boolean>(false);
   const [alerted, setAlerted] = useState<boolean>(false);
   const [updateCryptoAddress, { error }] = useMutation(UPDATE_CRYPTO_ADDRESS);
+  const [deleteWallet, { error: deleteError }] = useMutation(REMOVE_USER_WALLET);
 
-  if (error && !alerted) {
+  if (error || (deleteError && !alerted)) {
     alert('Oops, looks like something went wrong.');
     setAlerted(true);
   }
@@ -40,6 +44,7 @@ const WalletAddressListItem: FC<WalletAddressListItemProps> = ({ wallet, withEdi
       </div>
     );
   };
+
   return (
     <div className={cn(withEdit && 'grid grid-cols-9 gap-3 items-center')}>
       <div className="p-3 border-2 rounded-lg col-span-8">
@@ -110,6 +115,21 @@ const WalletAddressListItem: FC<WalletAddressListItemProps> = ({ wallet, withEdi
                 </Form>
               )}
             </Formik>
+            <div>
+              <button
+                className={cn(
+                  uuid === wallet.address
+                    ? 'bg-gray-300 hover:bg-gray-300 text-gray-700'
+                    : 'bg-red-900 hover:bg-red-800 text-white',
+                  'font-bold uppercase mt-4 rounded p-2 w-full'
+                )}
+                disabled={uuid === wallet.address}
+                aria-label="remove wallet from account"
+                onClick={() => deleteWallet({ variables: { userId: user.id, walletAddress: wallet.address } })}
+              >
+                {uuid === wallet.address ? 'You cannot remove your login wallet' : 'Remove this wallet from my account'}
+              </button>
+            </div>
           </div>
         )}
       </div>

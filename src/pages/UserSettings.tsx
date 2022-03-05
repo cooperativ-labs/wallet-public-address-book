@@ -16,30 +16,11 @@ import { WalletOwnerContext } from '@src/SetAppContext';
 const UserSettings: FC = () => {
   const { uuid } = useContext(WalletOwnerContext);
   const { data: userData } = useQuery(GET_USER, { variables: { uuid: uuid } });
-  const user = userData?.queryUser;
-
-  ///FOR CONVERTING TO NEW EMAIL ADDRESS STRUCTURE
-  const [addUserEmails, { data: emailData, error }] = useMutation(ADD_USER_EMAIL);
+  const user = userData?.queryUser[0];
 
   if (!user) {
     return <Loading />;
   }
-
-  ///FOR CONVERTING TO NEW EMAIL ADDRESS STRUCTURE
-
-  if (!emailData && !error && user.emailAddresses.length < 1) {
-    try {
-      addUserEmails({
-        variables: {
-          uuid: uuid,
-          address: user.email,
-          public: false,
-        },
-      });
-    } catch (err) {}
-  }
-
-  ///-------------------------
 
   return (
     <div data-test="component-landing" className="flex flex-col w-full h-full mt-4">

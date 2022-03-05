@@ -1,7 +1,6 @@
 import Input from '../../components/form-components/Inputs';
 import React, { useState } from 'react';
 import { ADD_USER_EMAIL } from '../../utils/dGraphQueries/user';
-import { checkEmailTaken } from '../../../src/utils/dGraphQueries/gqlUtils';
 import { Form, Formik } from 'formik';
 import { useMutation } from '@apollo/client';
 
@@ -29,9 +28,6 @@ const SettingsUserEmails = ({ user }) => {
           errors.address = 'Please include an email address.';
         } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.address)) {
           errors.address = 'Invalid email address';
-        }
-        if (values.address && (await checkEmailTaken(values.address))) {
-          errors.address = 'That email address is already taken';
         }
         return errors;
       }}

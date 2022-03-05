@@ -53,7 +53,6 @@ const ManagerNavigationFrame: FC<ManagerWrapperProps> = ({ children, loadingComp
   const { account: walletAddress } = useWeb3React<Web3Provider>();
   const { loading: userLoading, data: userData, error } = useQuery(GET_USER, { variables: { uuid: uuid } });
   const user = userData?.queryUser;
-  console.log(error, user);
 
   if (loadingComponent || userLoading) {
     return <LoadingModal />;

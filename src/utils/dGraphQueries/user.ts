@@ -96,6 +96,10 @@ export const GET_USER = gql`
         chainId
         description
         public
+        user {
+          id
+          uuid
+        }
       }
       organizations {
         organization {
@@ -388,6 +392,23 @@ export const UPDATE_USER_WALLETS = gql`
           chainId
         }
       }
+    }
+  }
+`;
+
+export const REMOVE_USER_WALLET = gql`
+  mutation RemoveUserEmail($userId: [ID!], $walletAddress: String!) {
+    updateUser(input: { filter: { id: $userId }, remove: { walletAddresses: { address: $walletAddress } } }) {
+      numUids
+      user {
+        id
+        walletAddresses {
+          address
+        }
+      }
+    }
+    deleteCryptoAddress(filter: { address: { eq: $walletAddress } }) {
+      msg
     }
   }
 `;

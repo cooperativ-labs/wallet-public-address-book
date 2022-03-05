@@ -21,7 +21,6 @@ const SearchResults = () => {
       return account.user;
     });
   };
-  console.log(userResultData, error);
   useEffect(() => {
     const userFromSocialResult = getUserFromSocial(socialResult);
     const finalResultsList = () => {
