@@ -1,7 +1,3 @@
-import { Project } from 'types';
-import { CHECK_WALLET_EXIST } from './crypto';
-import { GET_ID_FROM_SLUG } from './project';
-
 export const makeSubmissionList = (list) => {
   if (typeof list === 'string') {
     return list.split(',').map((item) => {
@@ -65,10 +61,6 @@ export function formatSlug(text: string) {
     .trim()
     .replace(/ /g, '')
     .replace(/[^\w-]+/g, '');
-}
-
-export function checkUserAdded(project: Project, userId: string) {
-  return !!project.projectUsers.find((user) => user.user.id === userId);
 }
 
 // export async function checkEmailTaken(emailAddress: string) {

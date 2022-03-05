@@ -4,7 +4,6 @@ import 'tailwindcss/tailwind.css';
 import AnalyticsContext from '@context/analytics';
 import React, { ReactElement } from 'react';
 
-import SetAppContext from '@src/SetAppContext';
 import { ApolloProvider } from '@apollo/client';
 import {
   faArrowRight,
@@ -41,6 +40,7 @@ import { useAnalytics } from 'hooks/analytics';
 import { useApollo } from '@src/utils/apolloClient';
 import { Web3Provider } from '@ethersproject/providers';
 import { Web3ReactProvider } from '@web3-react/core';
+import SetAppContext from '@src/SetAppContext';
 
 library.add(fas, faCog);
 library.add(fas, faCommentDots);
@@ -85,7 +85,7 @@ export default function MyApp({ Component, pageProps: { session, ...pageProps } 
 
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      <SetAppContext pageProps={pageProps}>
+      <SetAppContext>
         <StateProvider>
           <AnalyticsContext.Provider value={analyticsContext}>
             <div id="outer-container" className="bg-gradient-to-b from-gray-100 to-blue-50 flex flex-col">
