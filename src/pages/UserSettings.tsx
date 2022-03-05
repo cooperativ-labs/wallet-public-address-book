@@ -36,6 +36,7 @@ const UserSettings: FC = () => {
         <FormCard center>
           <h2 className="text-xl text-blue-900 font-semibold mb-4">Email Addresses </h2>
           <EmailAddressList emailAddresses={user.emailAddresses} withEdit />
+
           <SettingsUserEmails user={user} />
         </FormCard>
         <FormCard center>

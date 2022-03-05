@@ -3,7 +3,7 @@ import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@ap
 import { auth } from 'firebaseConfig/firebaseConfig';
 import { GetConnector } from './web3/connectors';
 import { setContext } from '@apollo/client/link/context';
-import { useWeb3React, Web3ReactProvider } from '@web3-react/core';
+import { useWeb3React } from '@web3-react/core';
 import { WalletErrorCodes } from './web3/helpersChain';
 import { Web3Provider } from '@ethersproject/providers';
 

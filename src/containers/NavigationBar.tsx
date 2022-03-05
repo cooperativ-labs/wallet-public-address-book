@@ -1,3 +1,4 @@
+import ChooseConnectorButton from './ChooseConnectorButton';
 import FormattedCryptoAddress from '@src/components/FormattedCryptoAddress';
 import LogoutButton from '@src/components/buttons/LogoutButton';
 import React, { FC } from 'react';
@@ -23,17 +24,21 @@ export const NavBar: FC<NavBarProps> = () => {
   return (
     <div className="flex py-2 px-2 pr-4 md:mt-4 z-30  mx-auto justify-between">
       <div className=" justify-start flex items-center">
-        {hideSearch ? (
-          <FormattedCryptoAddress
-            className="md:text-xl font-bold text-gray-700 items-center"
-            address={account}
-            chainId={chainId}
-            withCopy
-            showFull
-            label="My address:"
-          />
+        {account ? (
+          hideSearch ? (
+            <FormattedCryptoAddress
+              className="md:text-xl font-bold text-gray-700 items-center"
+              address={account}
+              chainId={chainId}
+              withCopy
+              showFull
+              label="My address:"
+            />
+          ) : (
+            <UserSearch />
+          )
         ) : (
-          <UserSearch />
+          <ChooseConnectorButton buttonText={'Connect wallet'} />
         )}
       </div>
 

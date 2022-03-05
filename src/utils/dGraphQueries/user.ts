@@ -170,7 +170,6 @@ export const ADD_USER_WITH_WALLET = gql`
   mutation AddUser(
     $currentDate: DateTime!
     $uuid: String!
-    $email: String!
     $fullName: String!
     $walletAddress: String!
     $walletName: String!
@@ -183,7 +182,6 @@ export const ADD_USER_WITH_WALLET = gql`
         {
           creationDate: $currentDate
           uuid: $uuid
-          emailAddresses: { address: $email, public: false }
           fullName: $fullName
           public: true
           walletAddresses: {

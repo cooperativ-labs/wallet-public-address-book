@@ -1,46 +1,30 @@
 import Input from '../../components/form-components/Inputs';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { ADD_USER_EMAIL } from '../../utils/dGraphQueries/user';
 import { Form, Formik } from 'formik';
+import { handleAddEmailAddress } from 'firebaseConfig/firebaseConfig';
 import { useMutation } from '@apollo/client';
-import { getAuth, linkWithPopup, GoogleAuthProvider, sendSignInLinkToEmail } from 'firebase/auth';
+import { User } from 'types';
 
 const fieldDiv = 'md:pt-3 md:my-2 bg-opacity-0';
-const provider = new GoogleAuthProvider();
-const auth = getAuth();
 
-const SettingsUserEmails = ({ user }) => {
+type SettingsUserEmailsProps = {
+  user: User;
+};
+
+const SettingsUserEmails: FC<SettingsUserEmailsProps> = ({ user }) => {
   const [alerted, setAlerted] = useState<boolean>(false);
   const [addUserEmails, { error }] = useMutation(ADD_USER_EMAIL);
   const [localStorage, setLocalStorage] = useState(undefined);
   useEffect(() => {
     setLocalStorage(window.localStorage);
   });
+  //this gets the email address put in local storage by handleAddEmailAddress
   const emailForSignIn = localStorage?.getItem('emailForSignIn');
   if (error && !alerted) {
     alert('Oops. Looks like something went wrong');
     setAlerted(true);
   }
-
-  const handleAddEmailAddress = async (address) => {
-    const actionCodeSettings = {
-      // URL you want to redirect back to. The domain (www.example.com) for this
-      // URL must be in the authorized domains list in the Firebase Console.
-      url: 'http://localhost:3000/account',
-      // url: 'https://walletbook.netlify.app/account',
-      handleCodeInApp: true,
-    };
-    sendSignInLinkToEmail(auth, address, actionCodeSettings)
-      .then(() => {
-        window.localStorage.setItem('emailForSignIn', address);
-        alert('Check your inbox for an email confirmation');
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(error);
-      });
-  };
 
   const addEmailToDatabase = (email) => {
     try {
@@ -84,7 +68,6 @@ const SettingsUserEmails = ({ user }) => {
     >
       {({ isSubmitting }) => (
         <Form className="flex flex-col">
-          <hr className="mt-6 mb-8 md:mb-4" />
           <div className="grid md:grid-cols-4 gap-4">
             <Input
               className={`${fieldDiv} w-full md:col-span-3`}
@@ -108,17 +91,3 @@ const SettingsUserEmails = ({ user }) => {
 };
 
 export default SettingsUserEmails;
-// const handleAddGoogleAccount = () => {
-//   linkWithPopup(auth.currentUser, provider)
-//     .then((result) => {
-//       // Accounts successfully linked.
-//       const credential = GoogleAuthProvider.credentialFromResult(result);
-//       const user = result.user;
-//       console.log(user, credential);
-//       // ...
-//     })
-//     .catch((error) => {
-//       // Handle Errors here.
-//       // ...
-//     });
-// };

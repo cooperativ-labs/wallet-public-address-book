@@ -10,9 +10,8 @@ import Input from '../form-components/Inputs';
 import MajorActionButton from '../buttons/MajorActionButton';
 import Select from '../form-components/Select';
 import SignButton from '@src/containers/SignWalletButton';
-import { GET_CRYPTO_ADDRESS } from '@src/utils/dGraphQueries/crypto';
 import { MatchSupportedChains } from '@src/web3/connectors';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useWeb3React } from '@web3-react/core';
 import { WalletOwnerContext } from '@src/SetAppContext';
@@ -48,14 +47,6 @@ const CreateAccount: FC = () => {
         if (!walletAddress) {
           alert('Use of Contributor Credits requires a wallet');
         }
-        if (!values.email) {
-          errors.email = 'Please include an email address';
-        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-          errors.email = 'Invalid email address';
-        }
-        // if (await checkEmailTaken(values.email)) {
-        //   errors.email = 'That email is taken';
-        // }
         if (!values.fullName) {
           errors.fullName = 'Please include a first name';
         }
@@ -72,7 +63,6 @@ const CreateAccount: FC = () => {
             variables: {
               currentDate: currentDate,
               uuid: uuid,
-              email: values.email.toLowerCase(),
               fullName: values.fullName,
               walletAddress: walletAddress,
               walletName: values.walletName,
@@ -112,15 +102,12 @@ const CreateAccount: FC = () => {
                 <Form className="flex flex-col gap relative">
                   <div className="mt-5 md:p-10 md:rounded-lg md:bg-white md:shadow-xl">
                     <div className="text-sm">Linked wallet address:</div>
-
-                    <div className="">
-                      <FormattedCryptoAddress
-                        chainId={chainId}
-                        address={walletAddress}
-                        className="text-large font-bold"
-                        showFull
-                      />
-                    </div>
+                    <FormattedCryptoAddress
+                      chainId={chainId}
+                      address={walletAddress}
+                      className="text-large font-bold"
+                      showFull
+                    />
                     <Input
                       className={fieldDiv}
                       required
@@ -161,14 +148,6 @@ const CreateAccount: FC = () => {
                       <div className="font-semibold text-gray-700">
                         If you are logging in for the first time, we will also need:
                       </div>
-                      <Input
-                        className={fieldDiv}
-                        required
-                        labelText="Email"
-                        name="email"
-                        type="email"
-                        placeholder="e.g. moe@bonuslife.com"
-                      />
                       <Input
                         className={fieldDiv}
                         required

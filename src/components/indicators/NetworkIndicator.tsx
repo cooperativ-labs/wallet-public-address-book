@@ -38,12 +38,6 @@ export const NetworkIndicatorDot: FC<NetworkIndicatorDotProps> = ({ chainId, wal
 
 const NetworkIndicator: FC = () => {
   const { account: walletAddress, chainId } = useWeb3React<Web3Provider>();
-  const { uuid } = useContext(WalletOwnerContext);
-  const { loading: userLoading, data: userData } = useQuery(GET_USER, { variables: { uuid: uuid } });
-  const user = userData?.queryUser;
-  console.log(user);
-
-  // const whichWallet = `with ${user?.walletAddresses.find((userWallet) => userWallet.address === walletAddress)?.name}`;
 
   const hoverColor = `hover:${networkColor(chainId, walletAddress)}`;
   const ChainName = () => {

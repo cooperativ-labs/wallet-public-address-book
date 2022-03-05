@@ -17,6 +17,7 @@ const EmailAddressList: FC<EmailAddressListProps> = ({ emailAddresses, withEdit 
           </div>
         );
       })}
+      {emailAddresses.length > 0 && <hr className="mt-6 mb-8 md:mb-4" />}
     </div>
   );
 };

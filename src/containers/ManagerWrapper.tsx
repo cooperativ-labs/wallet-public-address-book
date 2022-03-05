@@ -1,11 +1,8 @@
 import cn from 'classnames';
-import NavBar from './NavigationBar';
-
-import React, { FC, useContext } from 'react';
-
 import LoadingModal from '@src/components/loading/ModalLoading';
+import NavBar from './NavigationBar';
 import NeedAccount from './ModalNeedAccount';
-import SearchResults from '@src/utils/helpersSearch';
+import React, { FC, useContext } from 'react';
 import WalletChooserModal from './WalletChooserModal';
 import WarningBanner from '@src/components/alerts/WarningBanner';
 import { GET_USER } from '@src/utils/dGraphQueries/user';
@@ -22,7 +19,6 @@ type ManagerProps = {
 };
 
 const Manager: FC<ManagerProps> = ({ children, homePage }) => {
-  const results = SearchResults();
   return (
     <div className="mx-auto" style={{ maxWidth: '1580px' }}>
       <div className="md:mx-6">
@@ -48,15 +44,15 @@ type ManagerWrapperProps = {
   homePage?: boolean;
 };
 
-const ManagerNavigationFrame: FC<ManagerWrapperProps> = ({ children, loadingComponent, homePage }) => {
+const ManagerNavigationFrame: FC<ManagerWrapperProps> = ({ children, loadingComponent }) => {
   const { uuid } = useContext(WalletOwnerContext);
   const { account: walletAddress } = useWeb3React<Web3Provider>();
   const { loading: userLoading, data: userData, error } = useQuery(GET_USER, { variables: { uuid: uuid } });
-  const user = userData?.queryUser;
+  const user = userData?.queryUser[0];
 
   if (loadingComponent || userLoading) {
     return <LoadingModal />;
-  } else if (!user) {
+  } else if (!user.fullName) {
     return <NeedAccount />;
   }
 

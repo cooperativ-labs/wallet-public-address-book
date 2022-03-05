@@ -1,5 +1,11 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithCustomToken } from 'firebase/auth';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  linkWithPopup,
+  sendSignInLinkToEmail,
+  signInWithCustomToken,
+} from 'firebase/auth';
 import { getFunctions, httpsCallable } from 'firebase/functions';
 
 const firebaseConfig = {
@@ -44,6 +50,41 @@ export const CustomTokenService = async (signer, walletAddress) => {
   } catch (err) {
     console.log(err);
   }
+};
+
+export const handleAddEmailAddress = async (address) => {
+  const actionCodeSettings = {
+    // URL you want to redirect back to. The domain (www.example.com) for this
+    // URL must be in the authorized domains list in the Firebase Console.
+    url: 'http://localhost:3000/account',
+    // url: 'https://walletbook.netlify.app/account',
+    handleCodeInApp: true,
+  };
+  sendSignInLinkToEmail(auth, address, actionCodeSettings)
+    .then(() => {
+      window.localStorage.setItem('emailForSignIn', address);
+      alert('Check your inbox for an email confirmation');
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(error);
+    });
+};
+
+const handleAddGoogleAccount = (provider) => {
+  linkWithPopup(auth.currentUser, provider)
+    .then((result) => {
+      // Accounts successfully linked.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const user = result.user;
+      console.log(user, credential);
+      // ...
+    })
+    .catch((error) => {
+      // Handle Errors here.
+      // ...
+    });
 };
 
 export default fireApp;
