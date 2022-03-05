@@ -25,6 +25,9 @@ const FormattedCryptoAddress: FC<FormattedCryptoAddressProps> = ({
   const blockExplorer = chainId && MatchSupportedChains(chainId).blockExplorer;
   const windowSize = useWindowSize();
   const isDesktop = windowSize.width > 768;
+  if (!address) {
+    return <></>;
+  }
   return (
     <span className={cn('flex', [className ? className : 'text-sm text-gray-700'])}>
       <a target="_blank" rel="noreferrer" href={`${blockExplorer}/address/${address}`}>

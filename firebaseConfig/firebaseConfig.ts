@@ -13,17 +13,6 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASURMENT_ID,
 };
 
-// const firebaseConfig = {
-//   apiKey: 'AIzaSyAmgx3yQ6jsAu3VZQGJamTs0FpEfXlGYio',
-//   authDomain: 'walletbook-f549a.firebaseapp.com',
-//   projectId: 'walletbook-f549a',
-//   databaseURL: 'https://walletbook-f549a-default-rtdb.firebaseio.com/',
-//   storageBucket: 'walletbook-f549a.appspot.com',
-//   messagingSenderId: '161609530348',
-//   appId: '1:161609530348:web:9af8dc15b7e6f2a1dd1ec9',
-//   measurementId: 'G-3HK495EZ93',
-// };
-
 const fireApp = initializeApp(firebaseConfig);
 export const auth = getAuth();
 

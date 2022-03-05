@@ -17,10 +17,9 @@ export const WalletOwnerContext = React.createContext<{
 
 type SetAppContextProps = {
   children: React.ReactNode;
-  pageProps: any;
 };
 
-const SetAppContext: React.FC<SetAppContextProps> = ({ children, pageProps }) => {
+const SetAppContext: React.FC<SetAppContextProps> = ({ children }) => {
   const { activate, active } = useWeb3React<Web3Provider>();
   const [tried, setTried] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);

@@ -97,18 +97,28 @@ const CreateAccount: FC = () => {
             <div>
               {!uuid ? (
                 <div className="mt-5 md:p-10 md:rounded-lg md:bg-white md:shadow-xl">
+                  <div className="mb-4">
+                    <div className="text-sm">Linked wallet address:</div>
+                    <FormattedCryptoAddress
+                      chainId={chainId}
+                      address={walletAddress}
+                      className="text-large font-bold"
+                      showFull
+                    />
+                  </div>
                   <SignButton />{' '}
                 </div>
               ) : (
                 <Form className="flex flex-col gap relative">
                   <div className="mt-5 md:p-10 md:rounded-lg md:bg-white md:shadow-xl">
                     <div className="text-sm">Linked wallet address:</div>
-                    <div className="hidden md:flex font-bold text-gray-600">{walletAddress} </div>
-                    <div className="md:hidden">
+
+                    <div className="">
                       <FormattedCryptoAddress
                         chainId={chainId}
                         address={walletAddress}
                         className="text-large font-bold"
+                        showFull
                       />
                     </div>
                     <Input
