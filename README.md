@@ -1,39 +1,43 @@
-# Next + Netlify Starter
+# Why I built this
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/46648482-644c-4c80-bafb-872057e51b6b/deploy-status)](https://app.netlify.com/sites/next-dev-starter/deploys)
+I got sick of asking people for their wallet addresses, then confirming they still use those addresses. I made this so people can publicly associate other known identities (email, Github, LinkedIn, etc.) with their wallets.
 
-This is a [Next.js](https://nextjs.org/) v12 project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) and set up to be instantly deployed to [Netlify](https://url.netlify.com/SyTBPVamO)!
+## Stack
+This project uses:
+* Dgraph
+* Next.js
+* Firebase v9 (for auth and verifying linked accounts)
+* [web3react](https://github.com/NoahZinsmeister/web3-react)
+* Tailwind.css
 
-This project is a very minimal starter that includes 2 sample components, a global stylesheet, a `netlify.toml` for deployment, and a `jsconfig.json` for setting up absolute imports and aliases. It also includes the [Essential Next.js Build Plugin](https://github.com/netlify/netlify-plugin-nextjs), which will allow for you to implement features like Preview Mode, server-side rendering/incremental static regeneration via Netlify Functions, and internationalized routing.
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-netlify-starter&utm_source=github&utm_medium=nextstarter-cs&utm_campaign=devex-cs)
-
-(If you click this button, it will create a new repo for you that looks exactly like this one, and sets that repo up immediately for deployment on Netlify)
 
 ## Getting Started
 
-First, run the development server:
+You can spin up the project using Docker. You will need to set up [Firebase Emulator](https://firebase.google.com/docs/emulator-suite) to handle authentication locally. 
 
-```bash
-npm run dev
-# or
-yarn dev
+```
+# run
+yarn up
+# fresh install, but keeping DB
+yarn new
+# fresh install, fresh DB
+yarn fresh
+# Update the dgraph schema
+yarn schema 
+# Sometimes this fails to show errors with the schema update, in which case
+ curl -X POST localhost:8080/admin/schema --data-binary '@dgraph/schema.graphql'
+# re-generate types
+yarn generate
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Note
+* The user logs in by signing a nonce with their wallet and receiving a JWT. They are allowed to then change which wallet they are using (in MetaMask, for example) without logging out. 
+* You can find the code for Firebase in the `/functions` folder.
 
-### Installation options
+## Areas that require improvement
 
-**Option one:** One-click deploy
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/netlify-templates/next-netlify-starter&utm_source=github&utm_medium=nextstarter-cs&utm_campaign=devex-cs)
-
-**Option two:** Manual clone
-
-1. Clone this repo: `git clone https://github.com/netlify-templates/next-netlify-starter.git`
-2. Navigate to the directory and run `npm install`
-3. Run `npm run dev`
-4. Make your changes
-5. Connect to [Netlify](https://url.netlify.com/Bk4UicocL) manually (the `netlify.toml` file is the one you'll need to make sure stays intact to make sure the export is done and pointed to the right stuff)
+**Authentication & account verification**: 
+* I currently verify wallet and email addresses using Firebase. The frontend then submits the associated date to the backend. It would probably be more secure to have Firebase update the backend directly in this case.
+* It would be great to use something more decentralized than Firebase.
