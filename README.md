@@ -41,3 +41,6 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 **Authentication & account verification**: 
 * I currently verify wallet and email addresses using Firebase. The frontend then submits the associated date to the backend. It would probably be more secure to have Firebase update the backend directly in this case.
 * It would be great to use something more decentralized than Firebase.
+
+**Documentation**: 
+This is a prototype, not an open-source project, so I haven't put that much time into document it. Better documentation would be helpful, however.
