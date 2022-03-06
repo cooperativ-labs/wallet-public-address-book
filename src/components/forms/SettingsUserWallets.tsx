@@ -27,8 +27,6 @@ const SettingsUserWallets = ({ user }) => {
     setAlerted(true);
   }
 
-  console.log(data?.updateUser);
-
   if (data?.updateUser === null) {
     alert('Oops. Looks like that wallet is already associated with an account');
   }

@@ -67,15 +67,34 @@ const SetAppContext: React.FC<SetAppContextProps> = ({ children }) => {
   });
 
   const key = process.env.NEXT_PUBLIC_DGRAPH_WALLETBOOK;
-  const asyncMiddleware = setContext((_, { headers }) =>
-    getToken().then((token) => ({
+
+  const setHeaders = (headers, token) => {
+    if (process.env.NODE_ENV === 'production')
+      return {
+        headers: {
+          ...headers,
+          'X-Auth-Token': token ? token : '',
+          'DG-Auth': key,
+        },
+      };
+    return {
       headers: {
         ...headers,
         'X-Auth-Token': token ? token : '',
-        'DG-Auth': key,
       },
-    }))
-  );
+    };
+  };
+
+  // const setHeaders = (headers, token) => {
+  //   return {
+  //     headers: {
+  //       ...headers,
+  //       'X-Auth-Token': token ? token : '',
+  //     },
+  //   };
+  // };
+
+  const asyncMiddleware = setContext((_, { headers }) => getToken().then((token) => setHeaders(headers, token)));
 
   const createApolloClient = new ApolloClient({
     link: asyncMiddleware.concat(httpLink),
