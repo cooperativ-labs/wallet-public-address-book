@@ -85,15 +85,6 @@ const SetAppContext: React.FC<SetAppContextProps> = ({ children }) => {
     };
   };
 
-  // const setHeaders = (headers, token) => {
-  //   return {
-  //     headers: {
-  //       ...headers,
-  //       'X-Auth-Token': token ? token : '',
-  //     },
-  //   };
-  // };
-
   const asyncMiddleware = setContext((_, { headers }) => getToken().then((token) => setHeaders(headers, token)));
 
   const createApolloClient = new ApolloClient({
