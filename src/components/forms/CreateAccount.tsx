@@ -119,7 +119,7 @@ const CreateAccount: FC = () => {
                     <Checkbox
                       name="isContractAddress"
                       checked={values.isContractAddress}
-                      labelText="This is a synthetic addresses that only works on one network, such as a multi-sig wallet"
+                      labelText="This is a synthetic address that only works on one network, such as a multi-sig wallet"
                       sideLabel
                     />
 
